@@ -636,9 +636,15 @@
                     e.key.toLowerCase() === "c" ||
                     e.key.toLowerCase() === "x" ||
                     e.key.toLowerCase() === "s" ||
-                    e.key.toLowerCase() === "u"
+                    e.key.toLowerCase() === "u" ||
+                    e.key.toLowerCase() === "p"
                 )
-            ) {
+        ) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+}
+            {
                 e.preventDefault();
             }
 
