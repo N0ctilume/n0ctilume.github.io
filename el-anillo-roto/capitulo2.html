@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Capítulo 2</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f7f4ee;
+            color: #252525;
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.85;
+
+            /* Protección básica */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+
+            transition: background 0.3s, color 0.3s;
+        }
+/* =========================
+   FONDO DE AGUA
+========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url("noctilume.png");
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    opacity: 0.01;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+        /* =========================
+           CONTENEDOR
+        ========================== */
+
+       .contenedor {
+    position: relative;
+    z-index: 1;
+
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 50px 25px 100px;
+}
+
+
+        /* =========================
+           TÍTULO DEL CAPÍTULO
+        ========================== */
+
+        .encabezado {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           TEXTO
+        ========================== */
+
+        .contenido {
+            font-size: 18px;
+            line-height: 1.85;
+        }
+
+        .contenido p {
+            margin: 0 0 1.3em;
+            text-align: justify;
+            text-indent: 2em;
+        }
+
+
+        /* =========================
+           CONTROLES
+        ========================== */
+
+        .controles {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+
+            z-index: 1000;
+
+            display: flex;
+            gap: 6px;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+        }
+
+
+        /* Botones */
+
+        .control {
+            height: 36px;
+            min-width: 40px;
+
+            padding: 0 8px;
+
+            border: 1px solid #aaa;
+            border-radius: 5px;
+
+            background: white;
+            color: #333;
+
+            cursor: pointer;
+
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .control:hover {
+            background: #eeeeee;
+        }
+
+
+        /* Selector de fuente */
+
+        #fuente {
+            height: 36px;
+
+            border: 1px solid #aaa;
+            border-radius: 5px;
+
+            padding: 0 8px;
+
+            background: white;
+            color: #333;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MODO OSCURO
+        ========================== */
+
+        body.oscuro {
+            background: #181818;
+            color: #dddddd;
+        }
+
+        body.oscuro .controles {
+            background: rgba(35, 35, 35, 0.95);
+            border-color: #555;
+        }
+
+        body.oscuro .control,
+        body.oscuro #fuente {
+            background: #303030;
+            color: #eeeeee;
+            border-color: #555;
+        }
+
+
+        /* =========================
+           CELULARES
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .contenedor {
+                padding: 30px 18px 100px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .contenido {
+                font-size: 17px;
+                line-height: 1.78;
+            }
+
+            .controles {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                z-index: 1000;
+
+                max-width: calc(100% - 20px);
+
+                overflow-x: auto;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body
+    oncontextmenu="return false"
+    onselectstart="return false"
+    ondragstart="return false">
+
+
+    <main class="contenedor">
+
+
+        <!-- =========================
+             ENCABEZADO
+        ========================== -->
+
+        <header class="encabezado">
+
+            <h1>CAPÍTULO 1</h1>
+
+        </header>
+
+
+        <!-- =========================
+             CONTENIDO
+        ========================== -->
+
+        <article class="contenido" id="contenido">
+
+
+            <p>
+
+━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+Era justo después de que hubiera pasado la breve temporada de lluvias.
+
+La calle Santalaria, que atraviesa la capital, Mendoza, normalmente estaría repleta de todo tipo de carruajes pomposos y gente, pero tal vez debido al clima bastante desagradable, no era como de costumbre.
+
+Solo los monótonos carruajes oficiales utilizados por las oficinas gubernamentales, unas pocas carretas cargadas de mercancías y varios carruajes privados que iban con prisa avanzaban con cautela por la amplia carretera.
+
+Era el tipo de clima en el que, tras un breve paseo, la humedad se adhería a cada pliegue de la ropa. ¿Y qué decir de los charcos esparcidos por la amplia carretera? Si el cochero apartaba la vista aunque fuera por un momento, el carruaje se tambaleaba como si estuviera borracho.
+
+El carruaje de la familia de Escalante no era una excepción.
+
+—...
+
+Pum. Las ruedas del carruaje se hundieron en otro charco, luego golpearon una piedra y rebotaron; la sacudida se sintió en todo el carruaje. Cárcel, como si pagara el precio por haberse quitado el uniforme, murmuró maldiciones entre dientes, sin cambiar su elegante expresión.
+
+Sin embargo, la mente del futuro Duque, que había maldecido brevemente al cochero incompetente, volvió rápidamente a aquel día.
+
+Aquel día, la repentina sensación de alienación había sido quizás el instinto del tramposo.
+
+Había una razón por la que el recuerdo de Inés Valeztena había sido tan vívido. Porque era real.
+
+Cárcel dio unos golpecitos al cojín que rodaba junto a su pierna mientras reflexionaba. A diferencia de su postura relajada, con el pelo revuelto y recostado, su mente estaba confusa al recordar aquella inquietante escena.
+
+Aquel día, aquel día…
+
+Cárcel recordó algunas palabras más que había dicho la Condesa y que antes le habían pasado desapercibidas.
+
+—Pero fíjese en el atuendo de monja de su prometida. Incluso en un banquete real... Cualquiera que la viera por primera vez no la asociaría con el prestigio del Ducado Valeztena.
+
+Un ojo observador habría notado que su atuendo de monja costaba más que su propio collar. El Duque Valeztena no escatimaba en gastos para su única hija.
+
+—Además, qué arrogante es con las otras damas. Si fuera testigo de ese comportamiento…
+
+No era una persona bondadosa. Tampoco era de las que hacían amigos.
+
+—... Así que lo ha oído todo.
+
+Él solo tenía intención de escuchar. Lo que había visto era peor. Y así, de forma poco habitual en él, Cárcel se sintió abrumado por la culpa.
+
+Culpa. Culpa hacia Inés Valeztena, esa misma mujer que era la raíz de todos sus males.
+
+Entrecerró los ojos y miró fijamente al espacio vacío frente a él, pero, por alguna razón, no conseguía recordar la expresión de Inés.
+
+El recuerdo era tan borroso como la incómoda sensación de aquel momento. Su rostro aquel día, su expresión aquel día.
+
+Era de los que olvidaban rápidamente los recuerdos desagradables, pero esto... no era tanto desagradable como…
+
+—... Capitán, hemos llegado.
+
+Cárcel negó ligeramente con la cabeza y bajó del carruaje. Era la finca Valeztena. Una magnífica mansión, una miniatura perfecta de la vasta finca de la región de Pérez gobernada por el Duque.
+
+La residencia del Duque Valeztena se erigía como un castillo que dominaba la finca, encaramada en un terreno elevado con vistas a la sección sur de la calle Santalaria.
+
+En consecuencia, cualquier invitado que llegara aquí disfrutaba de una vista panorámica de Mendoza en el momento en que bajaba del carruaje, como si fuera el propio Emperador. Un lujo impresionante. Sin embargo, Cárcel se dio la vuelta sin mostrar la más mínima emoción.
+
+Su padre, el Duque Escalante, había comentado en privado que la mansión era tan grandiosa que rayaba en lo vulgar. Sin embargo, cada vez que Cárcel se encontraba allí, no sentía más que un nudo en la garganta. Sus visitas aquí eran principalmente para acompañar a Inés Valeztena, o en ocasiones para desempeñar el papel de su prometido, y nada le recordaba más crudamente su futuro que eso.
+
+Momentos en los que no podía evitar imaginar las horas sofocantes que le esperaban, o la vasta extensión de una vida entera a su lado. Cosas que le oprimían la garganta con solo imaginarlas.
+
+—Capitán Escalante, la señorita Inés lo espera en el salón.
+
+Ahí lo tenía. Ya le costaba respirar.
+
+Aunque ya había llevado una vida completamente promiscua, Cárcel seguía atrapado en una mentalidad bastante conservadora que, después de casarse, tendría prohibido ver a ninguna otra mujer que no fuera su esposa.
+
+Era una especie de fibra moral irreversible que iba directamente en contra de la tendencia vulgar de “hazlo” de la sociedad de Mendoza; irónicamente, ahora se había convertido en su propia motivación vulgar. Al mismo tiempo, había convertido su matrimonio en una tumba.
+
+Después del matrimonio, no podía morir. Por lo tanto, ahora tenía que revolcarse aún más diligentemente.
+
+Solo así podría vivir el resto de su vida como un monje sin remordimientos.
+
+Cárcel Escalante necesitaba un recuerdo miserable que atesorar algún día.
+
+Una prometida anunciada unilateralmente con solo seis años era una cosa, pero una esposa con la que había intercambiado votos ante el cardenal era otra muy distinta. Esta vida de perro pronto se convertiría en pasado. Y así tenía que ser.
+
+Cada vez que Cárcel recordaba a la hija de seis años del Duque Valeztena, que lo había elegido por capricho y había descarrilado el curso de toda su vida, sentía una rabia indescriptible, irritación y otras emociones molestas. Sin embargo, hacia la Inés Valeztena de veintitrés años, sentía un deber tan sólido como una celda de prisión.
+
+La realidad que había pospuesto durante más de seis años —ingresar en la academia naval, alistarse en la marina— se acercaba cada vez más.
+
+Ella era ahora una mujer más cercana al día en que se arrodillara a los pies del cardenal junto a él para recibir su bendición de lo que había estado diecisiete años antes.
+
+—Lord Escalante.
+
+—... Inés.
+
+Y así, se encontró enfrentándose a este sentimiento de culpa totalmente desconocido. Una culpa y una vergüenza a medio formar por no haber sido al menos sorprendido por ella.
+
+—Pase.
+
+Una voz, tranquila y serena, le dio la bienvenida. Cárcel se acercó a ella y besó el dorso de su mano elegantemente extendida.
+
+Lo que volvió a encontrar ante sus ojos fue el mismo atuendo impecablemente modesto, que la cubría hasta la nuca sin dejar nada al descubierto.
+
+Por encima, un rostro sencillo, sin rasgos marcados, pero tampoco especialmente bello, con ojos siempre rectos y recatados, y cabello negro azabache medio peinado hacia atrás y recogido. En el recuerdo difuso en el que las expresiones nunca se habían formado del todo, su rostro se volvió nítido.
+
+Sí. Incluso entonces, su expresión había sido así. La expresión de alguien que parecía incapaz de enfadarse o reír, simplemente mirando a la gente en silencio.
+
+—Entiendo que tiene asuntos que discutir.
+
+—Tenía asuntos que atender ayer, hace cuatro días, hace medio mes…
+
+—Era temporada de lluvias. Esperaba que Su Excelencia no se esforzara demasiado por mi culpa.
+
+Las palabras transmitían una apariencia de consideración cortés, pero ignoraban casualmente el hecho de que ella misma había ignorado sus intentos de ponerse en contacto con ella.
+
+Era la primera vez que Inés lo trataba con tal desprecio. Y era natural. ¿Qué prometida no se enfadaría? Al ver a su prometido envuelto con una noble semidesnuda por primera vez.
+
+Cárcel torció los labios.
+
+—Sé lo que debiste haber pensado ese día.
+
+Volvió a abandonar el tono formal tras solo una frase, como si estuviera exasperado. Al fin y al cabo, nunca había habido formalidad entre ellos, ni hace diecinueve años cuando eran compañeros de juegos. Por supuesto, al final, no quedaba ni juego ni amistad... porque Inés odiaba jugar, odiaba a los amigos y también lo odiaba a él.
+
+Y, sin embargo, con un simple gesto de señalar con el dedo, ella había elegido a Cárcel, y no a su primo, el Príncipe Heredero, y lo había empujado a su tediosa vida. Cárcel se obligó a recordar ese hecho.
+
+Sí, tenía que recordar por qué se vería obligado a vivir el resto de su vida como un monje. Nunca había querido casarse. Tenía que alejar esa culpa con ese sentimiento irritante y exasperante, para resolver esta situación…
+
+—Me temo que no le sigo, Lord Escalante.
+
+—Sabes perfectamente de lo que estoy hablando.
+
+—En absoluto.
+
+Sus palabras fueron interrumpidas una vez más por la voz sumisa de Inés. Si fuera realmente sumisa, no interrumpiría a los demás. ¿Y la idea de que Inés fuera sumisa con él? Era una completa tontería, viniendo de alguien que podía influir en la vida de otra persona con solo señalar con el dedo.
+
+—Inés.
+
+—No es precisamente una conversación agradable para ninguno de los dos. ¿De verdad tenemos que tenerla?
+
+Pero Inés Valeztena lo amaba.
+
+Porque lo amaba, lo eligió a él. Porque lo amaba, renunció a la voluntad de la Familia Imperial. Renunció al estatus imperial que le habían prometido antes de nacer. Renunció a las pocas oportunidades que tenía de volver a empezar desde cero.
+
+Porque lo amaba, lo esperó. Hace diecisiete años, y ahora. Siempre. En el mismo lugar.
+
+Y para Cárcel, ese siempre había sido el problema.
+
+Que Inés Valeztena lo amara, y que él no amara a Inés Valeztena en absoluto.
+
+Quizás lo que le ahogaba no eran sus vestidos sofocantes ni su rostro inexpresivo. Tampoco era del todo su sentido de victimismo, que la vida le había jugado una mala pasada.
+
+Él no tenía nada que darle a cambio. En el mejor de los casos, un engaño para no herir sus sentimientos, una confusión insaciable... y una culpa que arrastraba desde hacía mucho tiempo.
+
+—Puedo explicarlo.
+
+Por supuesto, era una excusa que ni siquiera se acercaba a una explicación. Inés había construido un muro obstinado a su alrededor y, a pesar de su actitud rígida, tenía muchos rincones ingenuos. No necesitaba saberlo todo. Se iban a casar pronto y, en este mundo, había cosas que era mejor dejar en el desconocimiento.
+
+Eso no quería decir que ella no supiera realmente nada, pero incluso si lo supiera…
+
+—Haberlo visto con mis propios ojos es explicación suficiente. Así que no hay ningún problema.
+
+Antes de que Cárcel pudiera siquiera empezar a soltar una excusa decente, ella se encogió de hombros. Él se rió entre dientes y le preguntó:
+
+—... ¿Eso es todo lo que tienes que decir?
+
+—Lord Escalante.
+
+—¿Eso es todo lo que tienes que decir? ¿Eso es todo lo que puedes reunir? Entonces enfádate de verdad conmigo, Inés.
+
+—No estoy enfadada en absoluto.
+
+Incluso sonreía. Una sonrisa que él podría ver una vez al año, si acaso. Cárcel la miró fijamente, completamente atónito, antes de lograr espetar:
+
+—Estás enfadada.
+
+—No lo estoy.
+
+—Y por eso no has querido verme en quince días.
+
+—Era temporada de lluvias. No quería que viniera empapado.
+
+Incluso en medio de todo esto, la sinceridad era palpable.
+
+—Y este tipo de conversaciones me cansan, Lord Escalante. No somos de los que tienen este tipo de conversaciones.
+
+—...
+
+—De todos modos, hay más de una mujer que se le pega en la corte.
+
+—...
+
+—...¿De verdad creía que no me daría cuenta?
+
+Su voz, preguntándole a Cárcel como si estuviera genuinamente sorprendida, se parecía a la de su yo infantil. La familiaridad de una amiga de la infancia con la que había peleado, nada más.
+
+Al fin y al cabo, no era tonta. Cárcel entrecerró los ojos.
+
+—... ¿Y sin embargo no estás enfadada?
+
+—No hay motivo para estarlo. Con quién se reúna es asunto suyo.
+
+—Soy tu prometido, Inés. Nos vamos a casar pronto.
+
+Al darse cuenta de que lo había soltado como un loco, como si sus papeles se hubieran invertido, se echó el pelo hacia atrás nerviosamente. Como si fuera él quien se hubiera enfadado.
+
+En lugar de señalar su contradicción, Inés habló suavemente.
+
+—Eso no significa que ahora esté perdiendo su libertad. Aún no estamos casados.
+
+—...
+
+—Así que siga haciendo lo que le plazca. No se preocupe por mí. Tampoco tiene que darme explicaciones.
+
+—...¿Por qué eres tan “tolerante” con los problemas amorosos de tu hombre?
+
+Preguntó Cárcel con tono sarcástico.
+
+—No es gracioso. Inés, ese tipo de cosas…
+
+—Sí, esto no es tolerancia. Tiene razón.
+
+En lugar de negar con la cabeza, Inés levantó sus suaves ojos verdes. Una brisa húmeda que entraba por la ventana le hizo ondear suavemente el cabello oscuro. Habló en voz baja.
+
+—Significa que no tengo ningún interés en ti. Escalante.
+
+El verano de sus veintitrés años.
+
+Eso fue lo que dijo. Que todo lo que había pasado hasta ese momento no había sido más que una ilusión.
+
+
+        </article>
+
+    </main>
+
+
+    <!-- =========================
+         CONTROLES DE LECTURA
+    ========================== -->
+
+    <div class="controles">
+
+        <select id="fuente" onchange="cambiarFuente(this.value)">
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+        </select>
+
+
+        <button class="control"
+                onclick="cambiarTamano(-1)"
+                title="Disminuir tamaño">
+            A−
+        </button>
+
+
+        <button class="control"
+                onclick="cambiarTamano(1)"
+                title="Aumentar tamaño">
+            A+
+        </button>
+
+
+        <button class="control"
+                onclick="modoOscuro()"
+                title="Modo oscuro">
+            ☾
+        </button>
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           PROTECCIÓN BÁSICA
+        ========================== */
+
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("selectstart", function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("dragstart", function(e) {
+            e.preventDefault();
+        });
+
+
+        /* Bloqueo de atajos habituales */
+
+        document.addEventListener("keydown", function(e) {
+
+            if (
+                (e.ctrlKey || e.metaKey) &&
+                (
+                    e.key.toLowerCase() === "c" ||
+                    e.key.toLowerCase() === "x" ||
+                    e.key.toLowerCase() === "s" ||
+                    e.key.toLowerCase() === "u" ||
+                    e.key.toLowerCase() === "p"
+                )
+        ) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+}
+            {
+                e.preventDefault();
+            }
+
+        });
+
+
+        /* =========================
+           CAMBIO DE FUENTE
+        ========================== */
+
+        function cambiarFuente(fuente) {
+
+            document.getElementById("contenido").style.fontFamily =
+                '"' + fuente + '", serif';
+
+            localStorage.setItem("fuenteLectura", fuente);
+        }
+
+
+        /* =========================
+           TAMAÑO DE LETRA
+        ========================== */
+
+        let tamano = 18;
+
+        function cambiarTamano(valor) {
+
+            tamano += valor;
+
+            if (tamano < 14) {
+                tamano = 14;
+            }
+
+            if (tamano > 26) {
+                tamano = 26;
+            }
+
+            document.getElementById("contenido").style.fontSize =
+                tamano + "px";
+
+            localStorage.setItem("tamanoLectura", tamano);
+        }
+
+
+        /* =========================
+           MODO OSCURO
+        ========================== */
+
+        function modoOscuro() {
+
+            document.body.classList.toggle("oscuro");
+
+            if (document.body.classList.contains("oscuro")) {
+
+                localStorage.setItem("modoLectura", "oscuro");
+
+            } else {
+
+                localStorage.setItem("modoLectura", "claro");
+
+            }
+
+        }
+
+
+        /* =========================
+           RECUPERAR PREFERENCIAS
+        ========================== */
+
+        window.addEventListener("DOMContentLoaded", function() {
+
+            const fuenteGuardada =
+                localStorage.getItem("fuenteLectura");
+
+            const tamanoGuardado =
+                localStorage.getItem("tamanoLectura");
+
+            const modoGuardado =
+                localStorage.getItem("modoLectura");
+
+
+            if (fuenteGuardada) {
+
+                document.getElementById("fuente").value =
+                    fuenteGuardada;
+
+                cambiarFuente(fuenteGuardada);
+
+            }
+
+
+            if (tamanoGuardado) {
+
+                tamano = parseInt(tamanoGuardado);
+
+                document.getElementById("contenido").style.fontSize =
+                    tamano + "px";
+
+            }
+
+
+            if (modoGuardado === "oscuro") {
+
+                document.body.classList.add("oscuro");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
