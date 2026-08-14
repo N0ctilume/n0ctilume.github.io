@@ -7,7 +7,27 @@
     <title>Capítulo 2</title>
  
     <style>
+.separador-escena {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5em auto;
+    box-sizing: border-box;
+}
 
+.separador-escena .linea {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+}
+
+.separador-escena .simbolo {
+    flex: 0 0 auto;
+    padding: 0 10px;
+    white-space: nowrap;
+    font-size: 1rem;
+}
         * {
             box-sizing: border-box;
         }
@@ -280,26 +300,14 @@ body::before {
         <article class="contenido" id="contenido">
 
 
-            <p>
+            <p> </p>
+<div class="separador-escena">
+    <span class="linea"></span>
+    <span class="simbolo">━━━━━ ◦ ❖ ◦ ━━━━━</span>
+    <span class="linea"></span>
+</div> 
 
-                ```html
-<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
-```
-
-Y en tu CSS:
-
-```css
-.separador {
-    text-align: center;
-    margin: 2em 0;
-    font-size: 1.2em;
-    letter-spacing: 0.15em;
-}
-```
-                
-
-
-            <p> 
+            <p> </p>
                 
 <p> Era justo después de que hubiera pasado la breve temporada de lluvias.
 
