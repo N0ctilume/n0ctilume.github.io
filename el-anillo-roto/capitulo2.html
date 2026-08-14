@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Capítulo 2</title>
-
+        .separador-escena {
+        width: 100%;
+        text-align: center;
+        margin: 2em 0;
+        font-size: 1rem;
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+}
     <style>
 
         * {
@@ -228,6 +236,25 @@ body::before {
                 overflow-x: auto;
             }
 
+            .separador-escena {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 2em 0;
+}
+
+.separador-escena span {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+}
+
+.separador-escena b {
+    flex-shrink: 0;
+    font-weight: normal;
+    white-space: nowrap;
+}
         }
 
     </style>
@@ -262,16 +289,15 @@ body::before {
 
 
             <p>
+                
+<div class="separador-escena">
+    <span></span>
+    <b>◦ ❖ ◦</b>
+    <span></span>
+</div>
 
-            <div class="separador">━━━━━━━ ❖ ◦ ⚓ ◦ ❖ ━━━━━━━</div>
-.separador {
-    text-align: center;
-    margin: 2.5em 0;
-    font-size: 1em;
-    line-height: 1;
-    letter-spacing: 0.05em;
-}
-
+            <p> 
+                
 <p> Era justo después de que hubiera pasado la breve temporada de lluvias.
 
 <p>La calle Santalaria, que atraviesa la capital, Mendoza, normalmente estaría repleta de todo tipo de carruajes pomposos y gente, pero tal vez debido al clima bastante desagradable, no era como de costumbre.
