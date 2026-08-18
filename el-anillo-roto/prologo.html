@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>prologo</title>
+<title>Prólogo</title>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -24,7 +25,6 @@ body {
     transition: background .3s, color .3s;
 }
 
-/* Fondo de agua */
 body::before {
     content: "";
     position: fixed;
@@ -72,7 +72,6 @@ h1 {
     text-indent: 2em;
 }
 
-/* Separador de escenas: no lleva sangría */
 .separador {
     text-align: center;
     text-indent: 0;
@@ -81,7 +80,22 @@ h1 {
     line-height: 1.4;
 }
 
-/* Controles */
+#acceso-denegado {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f4ee;
+    color: #252525;
+    font-family: Georgia, serif;
+    text-align: center;
+    padding: 30px;
+}
+
+#acceso-denegado div {
+    max-width: 500px;
+}
+
 .controles {
     position: fixed;
     right: 20px;
@@ -109,7 +123,9 @@ h1 {
     font-size: 14px;
 }
 
-.control:hover { background: #eeeeee; }
+.control:hover {
+    background: #eeeeee;
+}
 
 #fuente {
     height: 36px;
@@ -122,7 +138,6 @@ h1 {
     cursor: pointer;
 }
 
-/* Modo oscuro */
 body.oscuro {
     background: #181818;
     color: #dddddd;
@@ -145,14 +160,18 @@ body.oscuro #fuente {
         padding: 30px 18px 100px;
     }
 
-    h1 { font-size: 26px; }
+    h1 {
+        font-size: 26px;
+    }
 
     .contenido {
         font-size: 17px;
         line-height: 1.78;
     }
 
-    .separador { font-size: 16px; }
+    .separador {
+        font-size: 16px;
+    }
 
     .controles {
         right: 10px;
@@ -164,46 +183,45 @@ body.oscuro #fuente {
 </style>
 </head>
 
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+<body>
+
+<div id="app"></div>
 
 <script>
-    const TOKEN_CORRECTO = "7fK9xP2mQ8";
 
-    const parametros = new URLSearchParams(window.location.search);
-    const token = parametros.get("access");
+const TOKEN_CORRECTO = "7fK9xP2mQ8";
 
-    if (token !== TOKEN_CORRECTO) {
-        document.body.innerHTML = `
-            <div style="
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                min-height:100vh;
-                background:#f7f4ee;
-                color:#252525;
-                font-family:Georgia, serif;
-                text-align:center;
-                padding:30px;
-            ">
-                <div>
-                    <h1>Acceso denegado</h1>
-                    <p>Necesitas un enlace válido para acceder a este capítulo.</p>
-                </div>
+const parametros = new URLSearchParams(window.location.search);
+const token = parametros.get("access");
+
+if (token !== TOKEN_CORRECTO) {
+
+    document.getElementById("app").innerHTML = `
+        <div id="acceso-denegado">
+            <div>
+                <h1>Acceso denegado</h1>
+                <p>Necesitas un enlace válido para acceder a este capítulo.</p>
             </div>
-        `;
-    }
-</script>
+        </div>
+    `;
 
-<main class="contenedor" id="pagina"></main>
+} else {
 
-    <header class="encabezado">
-        <h1>Prólogo</h1>
-    </header>
+    document.getElementById("app").innerHTML = `
 
-    <article class="contenido" id="contenido">
-<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+        <main class="contenedor">
 
-            <p>
+            <header class="encabezado">
+                <h1>Prólogo</h1>
+            </header>
+
+            <article class="contenido" id="contenido">
+
+                <div class="separador">
+                    ━━━━━━ ◦ ❖ ◦ ━━━━━━
+                </div>
+
+                            <p>
                     —¡Mi Lord, Lord Escalante…!
             </p>
 
@@ -757,34 +775,41 @@ body.oscuro #fuente {
 <p>El verano de sus veintitrés años.</p>
 
 <p>Eso fue lo que dijo. Que todo lo que había pasado hasta ese momento no había sido más que una ilusión.</p>
+            </article>
 
-    </article>
-</main>
+        </main>
 
-<div class="controles">
-    <select id="fuente" onchange="cambiarFuente(this.value)">
-        <option value="Lora">Lora</option>
-        <option value="Georgia">Georgia</option>
-        <option value="Garamond">Garamond</option>
-        <option value="Times New Roman">Times New Roman</option>
-        <option value="Arial">Arial</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Trebuchet MS">Trebuchet MS</option>
-    </select>
+        <div class="controles">
 
-    <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
-    <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
-    <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
-</div>
+            <select id="fuente" onchange="cambiarFuente(this.value)">
+                <option value="Lora">Lora</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+            </select>
 
-<script>
+            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
+
+            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
+
+            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
+
+        </div>
+    `;
+}
+
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 document.addEventListener("dragstart", e => e.preventDefault());
 
 document.addEventListener("keydown", function(e) {
-    if ((e.ctrlKey || e.metaKey) &&
-        ["c","x","s","u","p"].includes(e.key.toLowerCase())) {
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
+    ) {
         e.preventDefault();
         e.stopPropagation();
         return false;
@@ -794,46 +819,63 @@ document.addEventListener("keydown", function(e) {
 let tamano = 18;
 
 function cambiarFuente(fuente) {
-    document.getElementById("contenido").style.fontFamily =
-        '"' + fuente + '", serif';
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
+    contenido.style.fontFamily = '"' + fuente + '", serif';
     localStorage.setItem("fuenteLectura", fuente);
 }
 
 function cambiarTamano(valor) {
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
     tamano += valor;
+
     if (tamano < 14) tamano = 14;
     if (tamano > 26) tamano = 26;
-    document.getElementById("contenido").style.fontSize = tamano + "px";
+
+    contenido.style.fontSize = tamano + "px";
     localStorage.setItem("tamanoLectura", tamano);
 }
 
 function modoOscuro() {
     document.body.classList.toggle("oscuro");
+
     localStorage.setItem(
         "modoLectura",
-        document.body.classList.contains("oscuro") ? "oscuro" : "claro"
+        document.body.classList.contains("oscuro")
+            ? "oscuro"
+            : "claro"
     );
 }
 
 window.addEventListener("DOMContentLoaded", function() {
+
+    const contenido = document.getElementById("contenido");
+    const fuente = document.getElementById("fuente");
+
+    if (!contenido || !fuente) return;
+
     const fuenteGuardada = localStorage.getItem("fuenteLectura");
     const tamanoGuardado = localStorage.getItem("tamanoLectura");
     const modoGuardado = localStorage.getItem("modoLectura");
 
     if (fuenteGuardada) {
-        document.getElementById("fuente").value = fuenteGuardada;
+        fuente.value = fuenteGuardada;
         cambiarFuente(fuenteGuardada);
     }
 
     if (tamanoGuardado) {
         tamano = parseInt(tamanoGuardado);
-        document.getElementById("contenido").style.fontSize = tamano + "px";
+        contenido.style.fontSize = tamano + "px";
     }
 
     if (modoGuardado === "oscuro") {
         document.body.classList.add("oscuro");
     }
 });
+
 </script>
 
 </body>
