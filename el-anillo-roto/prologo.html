@@ -23,6 +23,33 @@ body {
     -ms-user-select: none;
     transition: background .3s, color .3s;
 }
+    
+<script>
+    const TOKEN_CORRECTO = "7fK9xP2mQ8";
+
+    const parametros = new URLSearchParams(window.location.search);
+    const token = parametros.get("access");
+
+    if (token !== TOKEN_CORRECTO) {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                background:#111;
+                color:white;
+                font-family:Arial,sans-serif;
+                text-align:center;
+            ">
+                <div>
+                    <h1>Acceso denegado</h1>
+                    <p>Necesitas un enlace válido para acceder a este capítulo.</p>
+                </div>
+            </div>
+        `;
+    }
+</script>
 
 /* Fondo de agua */
 body::before {
