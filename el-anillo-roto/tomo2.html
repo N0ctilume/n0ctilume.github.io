@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomo 2</title>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+	
+body {
+    margin: 0;
+    background: #f7f4ee;
+    color: #252525;
+    font-family: "Lora", Georgia, "Times New Roman", serif;
+    line-height: 1.85;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: background .3s, color .3s;
+}
+.subtitulo {
+    margin-top: 8px;
+    font-family: "Lora", Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #080808;
+    letter-spacing: 0.5px;
+}
+
+body.oscuro .subtitulo {
+    color: #aaaaaa;
+}
+    
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("noctilume.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.01;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contenedor {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 50px 25px 100px;
+}
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.contenido {
+    font-size: 18px;
+    line-height: 1.85;
+}
+
+.contenido p {
+    margin: 0 0 1.3em;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.separador {
+    text-align: center;
+    text-indent: 0;
+    margin: 0 0 1.8em;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+#acceso-denegado {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f4ee;
+    color: #252525;
+    font-family: Georgia, serif;
+    text-align: center;
+    padding: 30px;
+}
+
+#acceso-denegado div {
+    max-width: 500px;
+}
+
+.controles {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 6px;
+    background: rgba(255,255,255,.92);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.10);
+}
+
+.control {
+    height: 36px;
+    min-width: 40px;
+    padding: 0 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.control:hover {
+    background: #eeeeee;
+}
+
+#fuente {
+    height: 36px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 0 8px;
+    background: white;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+body.oscuro {
+    background: #181818;
+    color: #dddddd;
+}
+
+body.oscuro .controles {
+    background: rgba(35,35,35,.95);
+    border-color: #555;
+
+}
+	
+	{
+body.oscuro .control,
+body.oscuro #fuente {
+    background: #303030;
+    color: #eeeeee;
+    border-color: #555;
+}
+
+@media (max-width: 600px) {
+    .contenedor {
+        padding: 30px 18px 100px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .contenido {
+        font-size: 17px;
+        line-height: 1.78;
+    }
+
+    .separador {
+        font-size: 16px;
+    }
+
+    .controles {
+        right: 10px;
+        bottom: 10px;
+        max-width: calc(100% - 20px);
+        overflow-x: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+const TOKEN_CORRECTO = "M1kPg95fbi";
+
+const parametros = new URLSearchParams(window.location.search);
+const token = parametros.get("access");
+
+if (token !== TOKEN_CORRECTO) {
+
+    document.getElementById("app").innerHTML = `
+        <div id="acceso-denegado">
+            <div>
+                <h1>Acceso denegado</h1>
+                <p>Agrega la clave de acceso luego de “=” para ver.</p>
+            </div>
+        </div>
+    `;
+
+} else {
+
+    document.getElementById("app").innerHTML = `
+
+        <main class="contenedor">
+
+            <header class="encabezado">
+                <h1>Tomo 2</h1>
+                <div class="subtitulo">Punto de vista de Inés Valeztena</div>
+            </header>
+
+            <article class="contenido" id="contenido">
+
+
+                <div class="separador">
+                    ━━━━━━ ◦ ❖ ◦ ━━━━━━
+                </div>
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━
+
+<p> La primera vida de Inés terminó a los veintiséis años.
+
+<p> Solo aquellos que han muerto conocen la duración de una vida. Inés conocía esa duración insignificante y finita. Naturalmente, lo sabía porque había muerto, pero no era algo que hubiera aprendido solo después de la muerte. Después de todo, fue decisión propia de Inés poner fin a su vida tras apenas veintiséis años.
+
+<p> Ella misma puso fin a su primera vida con sus propias manos.
+
+<p> Habían sido veintiséis años miserables. Aunque los recuerdos de aquella época eran ahora lejanos, la desesperación del momento en que abrió la boca y se introdujo el cañón seguía siendo vívida. También lo era la cara de tonto del Príncipe Heredero, lo último que había visto.
+
+<p> —Inés, por favor, baja esa arma. Haré lo que sea. Haré lo que me digas hasta que se calme tu ira. Por favor, bájala... Soy tu marido. Ahora soy tu única familia.
+
+<p> Su marido, que tenía la osadía de afirmar que era su única familia, a pesar de que toda su familia estaba viva y bien en el Ducado de Pérez, se arrodilló en el momento en que ella soltó el seguro del rifle de caza.
+
+<p> Cuando le regaló personalmente este rifle a su prometida, a quien le encantaba cazar, nunca imaginó que él mismo se convertiría en su primer objetivo.
+
+<p> —Pase lo que pase, debemos permanecer juntos toda la vida. Lo sabes, ¿verdad? Estabas destinada a ser la Emperatriz de Ortega hace más de veinte años. Debes saber, Inés, que siempre serás mi primera prioridad... Así que baja ese rifle y reconsidéralo.
+
+<p> —Lo he considerado detenidamente.
+
+<p> —Qué serena estás. Muy tranquila. Claro que lo estás... Eres una mujer de pensamiento profundo. Pero yo, antes que tu marido, soy el Príncipe Heredero de una nación. Lo que estás intentando ahora es socavar los cimientos mismos de la Familia Imperial.
+
+<p> —Los cimientos de la Familia Imperial son Su Majestad Imperial el Emperador.
+
+<p> —... Es solo cuestión de tiempo que eso ocurra. Por fin te convertirás en Emperatriz...
+
+<p> —Tu devoción filial por Su Majestad el Emperador es verdaderamente profunda, Óscar. ¿Puedo sugerirte que demuestres esa devoción poniendo fin a tu vida antes de que sea demasiado tarde?
+
+<p> —Matarme es matar a Ortega. Ortega soy yo, y yo soy Ortega...
+
+<p> —Su Majestad es Ortega. No una criatura repulsiva como tú, Óscar.
+
+<p> —Muy acertado. Pero es lo mismo. Es lo mismo. Como Su Majestad es Ortega, y Ortega soy yo, Su Majestad no es diferente de mí. Somos uno.
+
+<p> —¿Tú y Su Majestad son una trinidad o algo así?
+
+<p> —No estás en tu sano juicio, Inés. Por lo tanto, de verdad, por tu propio bien, por el bien de la familia Valeztena, incluso ahora, reconsidera lo que significa servirles...
+
+<p> Después de toda esa postura altiva, la patética imagen de él balbuceando sin cesar en el momento en que le apuntaron con una pistola a la frente... Era tan lamentable que le hizo olvidar momentáneamente su odio hacia Óscar.
+
+<p> Desde niño, Óscar se había amado a sí mismo en exceso, armando un escándalo por el más mínimo rasguño al tensar la cuerda de un arco, como si el Imperio fuera a derrumbarse. Sin embargo, la dignidad que invocaba, agotando cada gramo de su alma para proyectarla, era completamente grotesca...
+
+<p> La conmoción que debió sentir el Príncipe Heredero, que trataba su propio cuerpo como un adorno de cristal, cuando su enfurecida esposa por primera vez le dió una bofetada y le dio una patada en la espinilla, superaba la imaginación de cualquiera. Sin embargo, como la dignidad era más importante que la propia vida, Óscar ni siquiera pudo castigarla.
+
+<p> Para castigarla por sus transgresiones, habría tenido que convertirse en un hombre maltratado por su esposa. No está claro si ese era el problema en sí mismo o si el problema radicaba en convertirse en el primer Príncipe Heredero maltratado por su consorte y divorciado.
+
+<p> En cualquier caso, Óscar soportó la tiranía unilateral de Inés mucho más tiempo del que ella podría haber imaginado. Aguantó los repetidos golpes con objetos que ella le lanzaba, aferrándose a la absurda convicción de que ninguna pareja imperial se había divorciado jamás.
+
+<p> Su oferta de concederle el divorcio como gesto de buena voluntad fue rechazada. Más tarde, incluso sus súplicas para que ella se divorciara de él cayeron en saco roto.
+
+<p> Así que, ¿qué otra cosa podía hacer sino golpearlo? Las palabras eran inútiles con este hombre. Intentó apretar los puños, llevando varios de los grandes anillos que le había regalado personalmente la madre de Óscar. Sintiendo que una simple bofetada en la mejilla no era suficiente humillación para una persona tan noble, incluso intentó aplastarle el cráneo.
+
+<p> Sin embargo, Óscar permaneció impasible. Era tan odioso que le revolvió el estómago.
+
+<p> Óscar siempre fue un hombre para quien su propia dignidad era lo más importante. En su interior, albergaba todo tipo de deseos sexuales pervertidos, que alimentaba en secreto. Tenía planes de reunirse con prostitutos masculinos y cortesanas de alto estándar para satisfacer esas fantasías pervertidas a su antojo. Amante ocultas bajo la ilusión de que nadie lo sabría jamás, orgías de todo tipo y un cuerpo plagado de todas las enfermedades venéreas imaginables... Sin embargo, exteriormente fingía de la forma más repugnante ser el hombre más noble y grandioso del mundo.
+
+<p> De hecho, la actuación de Óscar era bastante espléndida; las mujeres de Ortega envidiaban a Inés únicamente porque era su esposa. Tan magistral, de hecho, que incluso ella misma se había dejado engañar por completo en una ocasión.
+
+<p> Desde los seis años, cuando se comprometió con Óscar tras su cortejo unilateral, hasta su matrimonio aquella primavera, cuando cumplió dieciséis, él fue el hombre más cariñoso del mundo.
+
+<p> —Nunca habrá otro hombre como Su Alteza Real el Príncipe Heredero. Mira esa espléndida sonrisa... Está mirando a Su Alteza Real otra vez. Solo con la mirada transmite un afecto tan profundo.
+
+<p> —¿Cómo debe ser vivir como la mujer que Óscar ama por encima de todas las demás? Vivir como la mujer a la que el futuro Emperador juró que le daría todo en el mundo... No puedo ni imaginarlo. ¿No parece cada día un sueño?
+
+<p> —En el sombrío mundo de Mendoza, donde todos se casan sin amor, que dos almas tan nobles se aprecien y se amen es un modelo para la sociedad.
+
+<p> —¿Hay alguien más espléndido que Su Alteza Imperial el Príncipe Heredero? Por supuesto, su primo, el Duque Escalante, es incomparablemente más esculpido y apuesto en apariencia, pero su conducta...
+
+<p> —Cárcel Escalante es un imprudente al que no le importa lo más mínimo el matrimonio. No se puede comparar con Su Alteza Real, que vive con devoción, amando solo a su amor de la infancia. Por muy bien esculpidos que sean sus rasgos...
+
+<p> Por supuesto, al ser la única hija del Duque Valeztena, que ostentaba el título de Grande de Ortega, Inés ya se contaba entre los orígenes más nobles de Ortega. Su afición por los adornos brillantes y extravagantes, respaldada por la generosa inversión del Duque, la convirtió en la creadora de tendencias en Mendoza. Su excesiva afición por los viajes hizo que su piel bronceada fuera elogiada como “naturalmente saludable”.
+
+<p> De hecho, todo lo que hacía era alabado. Su piel naturalmente oscura y bronceada, que antes se consideraba un símbolo de la clase trabajadora, ahora era celebrada por las mujeres nobles que, creyendo que solo la piel pálida era bella para una dama, se aplicaban polvos tan tóxicos como el veneno, hasta el punto de que alababan su tez bronceada y pecosa.
+
+<p> Al cabo de unos años, todo había cambiado. La piel bronceada, que antes era un símbolo de la clase trabajadora, se convirtió en prueba de aventuras y ocio. Cuando apenas había pasado el invierno, se convirtió en prueba de riqueza, lo que significaba que se poseía una villa en el cálido sur. Incluso si, al llegar la primavera, se volvía a aplicar el maquillaje pálido.
+
+<p> Inés vivía la vida en la cima. Si un día hubiera empezado a caminar hacia atrás, al día siguiente todo el mundo la habría imitado. Era un mundo en el que una mujer que llevaba pantalones era considerada más vulgar que una mujer desnuda, pero ¿qué pasaba cuando montaba a caballo con pantalones de montar? Las revistas semanales publicadas en Mendoza elogiaban unánimemente el porte digno de la Princesa Heredera, acallando cualquier crítica dentro de la Familia Imperial, y las jóvenes nobles mostraban el valor de imitarla.
+
+<p> Su vida: nacida como la única hija de Valeztena, un linaje noble de la más alta categoría; criada como la amada prometida del Príncipe Heredero, objeto de envidia; viviendo como una joven y bella Princesa Heredera. Llevaba vestidos más caros que los de la hija del Emperador y se adornaba con joyas más preciosas.
+
+<p> Aunque no era excepcionalmente hermosa, su rostro era sutilmente como un lienzo en blanco; con solo un poco de esfuerzo en el maquillaje, se volvía sorprendentemente hermosa, y su figura era, por supuesto, perfecta. Entonces, ¿qué podía faltarle?
+
+<p> En un momento dado, estaba tan satisfecha con esa vida perfecta que se esforzó por vivirla aún más perfectamente. Molestaba a los modistos extranjeros a diario para que crearan nuevos diseños, examinaba innumerables invitaciones y reflexionaba sobre qué eventos elevarían su prestigio y garantizarían que fuera el centro de atención. Se mataba de hambre todo el día para conseguir la cintura esbelta que complementara sus hermosos vestidos, pero en los banquetes comía con ganas, más libremente que las otras mujeres, para aparentar que le salía de forma natural, solo para esconderse después en secreto y vomitarlo todo...
+
+<p> ¿Era esa una vida normal?
+
+<p> No sabía decirlo. En aquel momento estaba sumida en una profunda duda, hastiada de su propia mentalidad cruel: si había deseado convertirse en una mujer más perfecta para el Príncipe Heredero o si lo había utilizado para tener una vida más perfecta.
+
+<p> Aun así, amaba a su marido. Aunque solo fuera por unos años, aunque hubiera sido engañada por esa repugnante farsa por un momento, aunque fuera simplemente su propia vanidad la que amaba su estatus... Amor, amor de verdad.
+
+<p> ¿Cómo había podido amar a un hombre así, aunque fuera por un momento?
+
+<p> —Inés, por favor, contrólate.
+
+<p> —Ya lo he hecho, si es eso lo que quieres decir.
+
+<p> —No estás en tu sano juicio. No estás en condiciones de pensar con claridad.
+
+<p> Inés había abortado espontáneamente a cuatro hijos de Óscar, era atormentada por la familia Imperial, que la culpaba cada vez que perdía un hijo, y por la Emperatriz, que manifestaba abiertamente su furia contra ella ante todos.
+
+<p> Así habían sido sus once años de matrimonio.
+
+<p> Óscar nunca se había puesto de su parte dentro de la casa Imperial. Siempre hacía caso omiso de sus súplicas, incluso de las más mínimas muestras de consuelo. Al final, él mismo llegó a la conclusión de que debía de estar maldita con un útero infértil, incapaz de dar a luz a un hijo vivo.
+
+<p> Por muy espléndida que pareciera por fuera, por dentro se estaba marchitando. ¿Y ahora era cuando se consideraba que no estaba en su sano juicio? Nunca había sido normal desde su matrimonio. No podía vivir con normalidad.
+
+<p> Entonces llegó el momento en que se enteró de que todas las enfermedades venéreas que se arrastraban por el cuerpo fino y limpio de su marido habían matado a todos sus hijos. El momento en que recordó todas las noches horribles que él había pasado, ignorando las negativas de su esposa embarazada, penetrándola para satisfacer sus propios deseos con esa inmundicia...
+
+<p> Su cuerpo, que no había conocido a ningún otro hombre en toda su vida, llevaba la marca indeleble de cada acto inmundo que él había cometido. Aunque nunca había hecho nada vergonzoso en su vida, estaba siendo castigada. Por el único delito de haberse casado con esa criatura vil.
+
+<p> Sin embargo, más inmundo que la enfermedad es el deseo.
+
+<p> Sabía que padecía una terrible enfermedad, pero abrazaba a su desprevenida esposa sin restricciones. La hacía tumbarse como a un perro, incluso cuando llevaba en su vientre a su heredero. Incluso cuando ella le suplicaba que la perdonara solo por esta vez, él se montaba sobre ella como una bestia.
+
+<p> Debía de parecerle absolutamente adorable, temiendo otro aborto espontáneo por el mero hecho de mantener relaciones sexuales. ¿Podría una excusa tan débil haber sido suficiente para un hombre que no sentía ningún remordimiento especial, ni siquiera por propagar su repugnante enfermedad?
+
+<p> Para satisfacer un impulso momentáneo, no le importaba su bienestar, ni el de su hijo. Para él, no tenía ningún valor desde el principio. De hecho, ni siquiera albergaba la malicia de destruirla. Realmente lo hizo sin pensarlo dos veces. Ni siquiera la odió por un momento. No sintió ningún tipo de odio. Sin embargo, fue capaz de hacer algo así.
+
+<p> Y luego, durante tres años, no fue más que esa mierda de que la amaba y no podía dejarla ir.
+
+<p> Mirando atrás, los cuatro abortos espontáneos fueron una bendición. Una semilla como esta era mejor que estuviera muerta. Nunca debería haber nacido en este mundo. A un ser humano como este nunca se le debería haber permitido dejar descendencia. Debería haber muerto como si nunca hubiera existido en este mundo. Sin dejar rastro de haber vivido.
+
+<p> Si tan solo un hijo hubiera nacido sano y salvo, habría sido un pecado imperdonable. Ella apartó el dolor, la profunda sensación de pérdida, con un rápido movimiento. Si ese niño hubiera nacido entonces... Rompió los lazos con todas esas innumerables noches pasadas llorando.
+
+<p> Cuando se lo proponía, podía cambiar de actitud más rápido que nadie. Sí, en esta vida miserable, no haber tenido hijos era su único consuelo.
+
+<p> Desde el momento en que Inés se casó con Óscar, su vida se había sumido irremediablemente en un pozo negro. Un hijo podría haber sido precioso para ella, pero nunca la habría salvado. Haber deseado una vida diferente y haber querido un hijo. Haber creído que tener un hijo le traería la felicidad...
+
+<p> Mató el anhelo persistente, como un vestigio, y las esperanzas frustradas una y otra vez, con la misma determinación con la que le habría roto el cuello a Óscar. Y antes de que se le pudiera atribuir el estigma de que la Princesa Heredera había muerto de sífilis, decidió optar por una muerte un poco prematura, pero mucho más eficaz.
+
+<p> —Puedo ver todo con claridad ahora.
+
+<p> Nunca había tenido la intención de matarlo ni de acabar con la familia Valeztena. Él no merecía la pena.
+
+<p> —Dijiste que nunca hubo una pareja divorciada en la familia imperial de Ortega, ¿no? Que no podías convertirte en el primer fracaso de la línea imperial.
+
+<p> Un trapo, un pedazo de basura, un bastardo... Lo llamaras como lo llamaras, era un eufemismo para ese bulto plagado de enfermedades venéreas... Retiró la mordaza de la inmundicia. El Príncipe Heredero, aún receloso de las acciones de su esposa, no mostró inmediatamente su alegría, sino que la miró con compostura contenida.
+
+<p> —Te convertiré en el verdadero fracaso.
+
+<p> Era de los que se quejaban de miedo ante un simple divorcio.
+
+<p> —Te convertirás en el primer Príncipe Heredero que lleva a su esposa al suicidio.
+
+<p> —...
+
+<p> —La razón es que vivir en este mundo contigo es repugnante e insoportable.
+
+<p> —Inés. No me digas que... No...
+
+<p> —No puedo soportar estar ni un minuto más, ni un segundo más junto a un hombre como tú.
+
+<p> La mañana luego de su muerte, todos las portadas de los periódicos de Mendoza publicarán la nota de suicidio de la Princesa Heredera. “No tuve más remedio que morir, ya que no me concediste el divorcio”. Ella misma había decidido el titular.
+
+<p> Revelaría todos los detalles viles de los que solo podía escapar mediante la muerte, revelando a todos sus súbditos que el Príncipe Heredero destinado a gobernar el Imperio no era más que un pervertido asqueroso, que buscaba indiscriminadamente la gratificación sexual tanto de hombres como de mujeres.
+
+<p> Se introdujo el cañón en la boca y preguntó. El cuerpo de Óscar pareció levantarse con una lentitud agonizante. La satisfacción la invadió.
+
+<p> Óscar Valenza de Ortega, el marido más perfecto del Imperio, no sería más que un montón de basura al final del día.
+
+<p> Y así murió, en un ataque de ira.
+
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+<p> Su primera muerte fue una elección muy racional, pero al mismo tiempo muy irracional.
+
+<p> Inés era una persona de sangre caliente por naturaleza. Por decirlo de forma suave, era ese temperamento característico de la gente de Ortega, a menudo descrito como “apasionado” en climas más cálidos.
+
+<p> Ni siquiera la noble hija de un Duque, a la que se le había concedido el estatus de Grandes de Ortega, era una excepción.
+
+<p> Apenas había otra nación en la que se produjeran tantas muertes por venganzas privadas y duelos, independientemente de la edad, el sexo o el rango. Teniendo en cuenta su propensión a provocar incidentes accidentales, los Emperadores de Ortega, a lo largo de varias generaciones, ya habían perfeccionado un estricto código penal.
+
+<p> Sin embargo, la naturaleza apasionada del pueblo de Ortega no era del tipo racional que temía las repercusiones o consideraba las consecuencias. Si pensaban “quiero venganza”, la mayoría la tomaba; si pensaban “quiero matarlo”, la mayoría lo mataba.
+
+<p> Lo que sucedía después les importaba poco. Porque si uno no mataba a la persona que merecía la muerte, vivir no era vivir. Si uno no podía vengarse, respirar no era diferente a estar muerto.
+
+<p> Sin embargo, Inés era una mujer noble, educada en las mejores tradiciones, una mujer que había pasado su vida aprendiendo a soportar y a ocultar sus sentimientos. No era exagerado decir que las cosas que había reprimido en su ajetreada vida para mantener la elegancia habían estallado de repente. Sin embargo, incluso cuando arriesgó su vida, ¿no pensó en las consecuencias?
+
+<p> No era ella quien debía desaparecer de este mundo, sino su marido, esa alimaña. Pero no podía enviar a toda su familia a la guillotina solo para deshacerse de esa alimaña. Siempre había sido la hija y hermana normal y querida.
+
+<p> Ellos no tenían ninguna culpa. Por lo tanto, tenía la intención de enterrar al Príncipe Heredero vivo —socialmente, claro está— sin hacer daño a nadie más. Inés no veía ningún error en ese juicio. Era una conclusión moralmente irreprochable. Es cierto que él parecía haber muerto algo enfurecido. Quizás pereció en un ataque de ira... Pero ¿quién, de pie en ese precipicio, podría haber llegado a una conclusión más pacífica?
+
+<p> Su muerte no perjudicó a nadie. Ni siquiera a esa rata del Príncipe Heredero del burdel. Aunque había sido golpeado hasta quedar inconsciente en vida, ¿no había terminado sin un solo dedo roto?
+
+<p> Nada más que todas sus extrañas paredes quedaran al descubierto para que el mundo las viera...
+
+<p> Incluso después de reflexionar, fue una decisión sumamente virtuosa. No había buscado ninguna gran recompensa. Simplemente cerró los ojos, esperando humildemente que, si existía un Dios, la llevara a un lugar un poco mejor, o que no importara de cualquier manera.
+
+<p> Eso era todo. Dado que su cráneo se habría destrozado en el momento en que sonó el disparo, la única satisfacción que sintió fue una insignificante, al recordar la débil constitución del Príncipe Heredero.
+
+<p> —...
+
+<p> Así que simplemente no había forma de saberlo. En el momento en que cerró los ojos, Inés se encontró reabriéndolos en medio del coto de caza, sosteniendo un pesado rifle de caza que le presionaba ambas manos.
+
+<p> Su peso era exactamente el mismo que antes de morir, lo que le hizo creer por un momento que todavía estaba en proceso de morir. Que aún no estaba muerta, sino simplemente esperando a que le volaran la cabeza en ese terrible estado.
+
+<p> Sin embargo, a diferencia de la sensación de haberse metido impulsivamente el cañón en la garganta y haberse disparado, Inés ahora sostenía el rifle en una postura perfectamente erguida, como en cualquier otra cacería. Lista para atrapar cualquier presa que se elevara hacia el cielo en cualquier momento.
+
+<p> Inés miró a su alrededor, como si el entorno le resultara desconocido. No era un recuerdo muy reciente, pero era un lugar familiar. El Ducado de Pérez, el coto de caza cerrado donde ella y su hermano Luciano solían cazar.
+
+<p> —... Esto es absurdo.
+
+<p> Desde que se había casado a los dieciséis años, nunca había vuelto aquí. Bajo la estricta administración de la Corte Imperial —y la vigilancia disfrazada de administración— había poco que pudiera hacer por su cuenta. Entre esas pocas cosas, visitar el Ducado de Pérez o ir a cazar a solas con su hermano eran actividades para las que nunca podría esperar obtener permiso.
+
+<p> Así que esto significaba...
+
+<p> Inés buscó instintivamente en su memoria y encontró inmediatamente el estanque. A diferencia de sus lejanos recuerdos, no era tanto un estanque como un pequeño pantano escondido entre la espesura, pero su superficie era lo suficientemente clara como para reflejar objetos.
+
+<p> Se agachó, colocando torpemente el largo rifle bajo el brazo como si fuera una molestia.
+
+<p> El agua del bosque, sin que la tocara ni una pizca de viento, reflejaba a la Inés de dieciséis años sin la más mínima alteración.
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+<p> Es un sueño. Esto es un sueño. Un sueño muy largo, sin duda... Inés le había pedido a Luciano que le diera unas bofetadas, pero él le había respondido con cariño: “¿Te estás volviendo loca de felicidad justo antes de la boda?”
+
+<p> En lugar de seguir molestando a su hermano, intentó golpearse el brazo con el rifle, pero Luciano la detuvo horrorizado. Entonces se abalanzó contra un árbol cercano y se estrelló contra él con el hombro, mostrando un comportamiento muy extraño. Luciano la miró como si estuviera loca, pero no importaba.
+
+<p> El dolor era agudo. Excesivamente agudo... Parecía demasiado largo para ser un último flashback antes de la muerte, y parecía que había pasado una eternidad desde que había apretado el gatillo. Si era así, al menos no se trataba de un sueño.
+
+<p> Entonces, ¿qué había sido de la Inés de veintiséis años? Su último año, soportado día a día con el pensamiento de querer matar a Óscar, toda la persecución y el desprecio de la familia real... eso era demasiado prolongado y angustiante como para llamarlo sueño.
+
+<p> Los once años vividos con Óscar. Todos esos recuerdos estaban esparcidos a lo largo del tiempo. Recuerdos lejanos en lugares lejanos. Recuerdos recientes en lugares cercanos... Claramente había vivido diez años más allá de su forma actual. Esa sensación de realidad tampoco podía negarse.
+
+<p> ¿Cómo podía ser que esa larga y terrible experiencia fuera solo un sueño?
+
+<p> Inés, acurrucada en los brazos de Luciano mientras abandonaban los terrenos de caza, no dejaba de tocarle la mejilla. Su hermano, apenas tres años mayor que ella, había sido un joven de veintinueve años antes de su muerte, pero no podía compararse con el vigor fresco y juvenil de los diecinueve.
+
+<p> Diecinueve años. En su mundo, Luciano había sido un simple joven de diecinueve años...
+
+<p> —... Inés, no puedo evitar pensar. ¿Has intercambiado tus medicinas con las de mamá esta mañana?
+
+<p> Incluso después de regresar al castillo de Pérez, su comportamiento excéntrico persistió. Amasaba los rostros juveniles de sus sirvientas más cercanas como si fueran masa, con los ojos extraños y desenfocados. Cada vez que algo la confundía, daba patadas a las patas desiguales de la mesa consola o se golpeaba el dorso de la mano con un pesado tintero, sin cesar en su autolesión.
+
+<p> Finalmente, a altas horas de la noche, arrastrada por Luciano y prácticamente encarcelada, enroscada en las sábanas, miraba fijamente al techo como un cadáver en un ataúd antes de llamar a su hermano, que la observaba con preocupación.
+
+<p> —Luciano, ven aquí.
+
+<p> —¿Para qué?
+
+<p> —Ven, ven.
+
+<p> Él miró a su hermana con recelo antes de inclinarse sobre la cama. Inés luchó por liberar su brazo atrapado dentro de la colcha, y finalmente consiguió sacar una mano.
+
+<p> —Inés Valeztena, tú otra vez.
+
+<p> —... Tan, tan fresco. Luciano.
+
+<p> Jugó con la cara de su fornido hermano mayor, murmurando durante un buen rato que estaba fresco y verde, o tan joven que daba asco. Para cualquiera que la observara, no parecía normal. Luciano se echó hacia atrás, liberando su cara del agarre de Inés.
+
+<p> Juana, la criada que la había servido desde su infancia en el Ducado, asomó de repente la cabeza a su lado y murmuró.
+
+<p> —Señor, ¿podría ser que la señorita esté actuando así por el matrimonio?
+
+<p> —Esa sería la única razón. Dijo que sentía que podría salir volando.
+
+<p> —Juana, ven aquí tú también.
+
+<p> —Ya has tenido suficiente con mi cara, ¿no?
+
+<p> —Eres realmente hermosa... ¿Te lo he dicho alguna vez?
+
+<p> —No desde esta tarde, ya me cansé de oírlo.
+
+<p> —Hermosa y tan joven... Mira qué piel tan fresca... Este año cumples diecisiete, ¿verdad?
+
+<p> —Eres como un viejo pervertido obsesionado con las chicas jóvenes. Para, Inés.
+
+<p> Luciano agarró la mano de Inés y la metió debajo de las sábanas. Pero Inés no podía apartar los ojos del rostro de Juana.
+
+<p> Como en el coto de caza, todo lo relacionado con Pérez se había detenido a los dieciséis años... En sus sueños, nunca volvió a poner un pie en el castillo de Pérez hasta que murió.
+
+<p> Las criadas a las que tanto quería, el hermoso patio donde jugaba con Luciano, el punto más alto de la torre del castillo... Todo se convirtió en cosas que nunca volvería a ver, alejándose en la distancia.
+
+<p> No sabía cómo habían pasado los años allí, ni en qué se habían convertido Juana y las criadas. Pérez hacía once años. La gente de Valeztena en aquel entonces...
+
+<p> Todo permanecía absurdamente igual. Tal y como había sido durante la última primavera que pasó aquí.
+
+<p> —... Primavera. Era primavera.
+
+<p> —¿Qué?
+
+<p> —Sigue siendo... primavera. La primavera aún no ha pasado...
+
+<p> —Bueno, es primavera y...
+
+<p> Los ojos de Luciano volvieron a adoptar esa mirada que le dirigía cuando pensaba que estaba loca, pero ella se acarició la cara con manos temblorosas.
+
+<p> —En cuatro meses te casarás con el Príncipe Heredero. En quince días debes partir hacia Mendoza. Si allí te comportas como una loca, tal y como haces aquí...
+
+<p> —No lo haré.
+
+<p> —Mamá lo ha dicho una y otra vez. ¿Recuerdas? En Mendoza, antes de tu boda, no escatimarán esfuerzos para limpiarte hasta la más mínima mota de polvo de los hombros. Óscar ya es demasiado bueno para ti. Excesivamente bueno... Entiendo que el peso de eso te aplaste, pero...
+
+<p> —...
+
+<p> —Maldita sea, ¿quizás deberíamos haber llamado al médico después de todo? Juana, mira sus ojos. Parece que no me está escuchando.
+
+<p> —...Más que eso. Creo que debería tener cuidado, señor...
+
+<p> —¡Quién es demasiado para quién!
+
+<p> Inés gritó como una loca, apartó las mantas de una patada y se abalanzó sobre su hermano. Luciano, con la garganta aplastada, cayó de espaldas sobre la cama. Incapaz de hablar, miró con los ojos muy abiertos mientras su hermana le golpeaba, lanzando un grito silencioso.
+
+<p> —¡Quién! ¡Quién para quién!
+
+<p> —¡I-Inés!
+
+<p> —¡Señorita!
+
+<p> —¡Repítelo! ¡Mírame a los ojos y repítelo!
+
+<p> Gritó locamente, con las manos agarradas al cuello de Luciano. Incapaz de responder con la garganta aplastada, Luciano fue golpeado aún más ferozmente por el delito de no responder.
+
+<p> La sensación de golpear a alguien mientras está vivo... Esto también era realidad. Esta sensación por sí sola no podía ser falsa. De repente, sonrió significativamente y se bajó del estómago de Luciano.
+
+<p> La escena era tan extraña que Luciano, que tenía la intención de lanzar graves maldiciones a Inés, olvidó momentáneamente qué decir y se limitó a mirarla.
+
+<p> —... ¿Te volviste realmente loca? Dime, Inés. ¿En serio tomaste la medicina de mamá en lugar de la tuya...?
+
+<p> La sensación de golpear a Luciano reflejaba la sensación de golpear salvajemente a Óscar como si fueran gemelos.
+
+<p> Como si el peso del rifle que había sostenido boca abajo antes de morir permaneciera inalterado incluso después de abrir los ojos en los terrenos de caza.
+
+<p> Todo era real. La vida desesperada a los veintiséis años, la vida insensata a los dieciséis años dedicada a soñar con convertirse en la esposa de Óscar... nada de eso era un sueño. Inés lo había confirmado a través de docenas de experimentos.
+
+<p> Era la primavera de su decimosexto año, cuatro meses antes de su matrimonio con Óscar.
+
+<p> Había regresado. De vuelta al momento justo antes de que todas las desgracias de la vida se abatieran sobre ella.
+
+<p> Era tanto una oportunidad como una bendición. La recompensa por la bondad que no hacía daño a nadie, tragándose todo su odio. El valor de la resistencia. Una oportunidad para concluir adecuadamente su vida antes de llegar al cielo. Un destino bendecido por Dios... En ese momento, ella creía que era así.
+
+<p> Cuando sólo conocía una muerte.
+
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+<p> Aunque quedaban cuatro meses para su matrimonio con Óscar, solo faltaban dos semanas para su partida a Mendoza.
+
+<p> Su declaración, “Deseo romper mi compromiso con el Príncipe Heredero”, fue descartada como un simple capricho común de una jóven novia Orteguista. Aunque enviara una carta a su padre, que estaba inspeccionando las minas fronterizas, sabía que cualquier respuesta solo le llegaría en Mendoza.
+
+<p> Su madre, la Duquesa Valeztena, padecía una grave neurosis en aquella época, y hasta la visión de sus hijos le resultaba agotadora. El más mínimo comentario que le desagradaba provocaba que los objetos volaran por los aires.
+
+<p> En consecuencia, tras haber sido golpeada por objetos en el dormitorio de la Duquesa al menos en una docena de ocasiones, Inés se embarcó en un plan no oficial.
+
+<p> Llevaba ya una década comprometida formalmente y, tras una espera tan larga, solo faltaban cuatro meses para la boda, por lo que era natural que la gente desestimara sus sinceras súplicas. ¿Cómo se atrevían, sobre todo tratándose de un matrimonio con la Familia Imperial? Incluso ella lo habría dejado pasar si se hubiera tratado de su hermano Luciano.
+
+<p> Óscar, de veinte años, por desgracia, aún no era un mujeriego notorio. Si había alguien en esa espantosa casa imperial que estuviera por encima de toda crítica, era Óscar en ese momento.
+
+<p> Recordaba cada gramo de malicia, intención asesina, odio, repugnancia y desprecio dirigidos hacia Óscar tan vívidamente como si fuera ayer. De hecho, fue ayer... En cualquier caso, incluso si se vertieran en él todas las emociones más oscuras del mundo, sería casi imposible dejar una mella en el Óscar de hoy.
+
+<p> Tendrían que pasar dos años más antes de que abriera los ojos a los burdeles, las orgías y la sodomía. Por ahora, era el príncipe heredero, que mantenía la castidad con la convicción inquebrantable de que debía ser santo y recto, tener un intelecto frío y pasar la noche de bodas con su novia. Pero ¿quién creería una profecía que decía que, en dos años, se convertiría en un pervertido que contraería todas las enfermedades venéreas del mundo?
+
+<p> Por supuesto, una vez transcurridos esos dos años, ciertas personas que acechaban bajo la superficie recordarían su profecía y se estremecerían. Sin embargo, el mundo siguió sin ser consciente de las repulsivas inclinaciones de Óscar hasta el momento mismo en que ella murió a los veintiséis años.
+
+<p> No había necesidad de desperdiciar esta preciosa oportunidad en una batalla tan solitaria. Sería encarcelada en la torre por el delito de insultar a la realeza y Valeztena sería despojada de su posición como Grande de Ortega.
+
+<p> Cortarse el cuello para cortar el dedo de otro no tenía ningún sentido. Ella era alguien que ya se había volado la cabeza una vez en un ataque de ira.
+
+<p> —... No puedo morir dos veces como un perro, solo por el bien de Óscar.
+
+<p> Sin embargo, volver a casarse era totalmente impensable.
+
+<p> Probablemente estrangularía al inocente y puro Óscar de veinte años en cuanto lo volviera a ver, o tal vez vomitaría incontrolablemente con solo ver su cuerpo desnudo en su noche de bodas.
+
+<p> Entonces, un día, lo castraría mientras dormía y lo enviaría a la guillotina... Inés imaginó todos los peores escenarios posibles.
+
+<p> Y decidió ser más minuciosa.
+<p> ¿Cuál había sido el resultado de llevar una vida respetable según el camino trazado por la Familia Imperial y su familia? ¿Cuál había sido la recompensa para la mujer que se había conformado con un compromiso honorable y se había mantenido fiel solo a su matrimonio? No debía volver a desperdiciar su vida como lo había hecho antes. Esta vez debía ser diferente. Debía ser completamente diferente...
+
+<p> Sin embargo, Inés pasó por alto una cosa más, además de este dudoso retroceso en el tiempo.
+
+<p> —Señorita Valeztena, el pintor y su asistente a cargo de su retrato para la revista semanal enviados por Su Majestad la Emperatriz han llegado. El tiempo apremia; hay que empezar a trabajar lo antes posible. Por favor, baje ahora.
+
+<p> El hecho de que ahora se había convertido “verdaderamente” en una chica de dieciséis años.
+
+<p> Un híbrido de lo más peculiar, que poseía veintiséis años de recuerdos, pero pensaba como una chica de dieciséis...
+
+<p> —¿Señorita?
+
+<p> —...
+
+<p> La chica de dieciséis años se había enamorado al instante del apuesto joven que estaba de pie junto al retratista, con la cabeza inclinada.
+
+<p> Y los recuerdos de la Inés de veintiséis años le recordaron con urgencia que, una vez que se marchara a Mendoza en quince días, no habría posibilidad de volver atrás.
+
+<p> No había tiempo. Concibió un plan, no oficial pero meticuloso, como si le hubiera sido revelado por inspiración divina. Era una oportunidad para vivir sin someterse a las exigencias del mundo, una oportunidad para ser infiel a un matrimonio de conveniencia, una oportunidad para conocer el amor verdadero.
+
+<p> El amor verdadero... Si la Inés de veintiséis años hubiera oído ese pensamiento, añadido apresuradamente al final, se habría dado una bofetada. Pero para la romántica Inés de dieciséis años, era un tema perfectamente plausible. El amor. Sí. El amor, precisamente... Sentía que podría redimir un matrimonio fallido en el que no quedaba más que engaño.
+
+<p> Esa noche, Inés entró completamente desnuda en la vieja habitación donde se alojaba el ayudante del pintor. La idea de que no había tiempo y de que no tenía más remedio que seducirlo rápidamente con su cuerpo era una elección nacida de un cierto realismo.
+
+<p> —¡Señorita Valeztena...!
+
+<p> —Cállate si no quieres que nos descubran.
+
+<p> Era una frase propia de un villano, pero para el hombre hipnotizado por su perfecto cuerpo desnudo, incapaz de apartar la mirada, debió de sonar como una amenaza con voz dulce.
+
+<p> Sin embargo, el joven de dieciocho años, a pesar de su apariencia, no sabía nada de mujeres. Solo podía sollozar: “¿Cómo me atrevería...? ¿Cómo podría...? ¿Cómo me atrevería...? ¿Cómo podría...?”. Y como no se “atrevía” a empujarla con fuerza, finalmente se rindió y se excitó. Ella, que sin saberlo había acumulado diversas experiencias a través de sus numerosos y desagradables encuentros con el Príncipe Heredero, encontró que esta era una batalla a la que nunca podría resistirse desde el principio.
+
+<p> —Es demasiado hermosa. ¿Es usted una diosa? ¿Es realmente un ser humano el que se mueve sobre mí ahora, y no una diosa...?
+
+<p> Inés, una romántica de dieciséis años, encontraba el romanticismo del joven ridículo, rayando en el cliché nauseabundo.
+
+<p> —Sinceramente, lo pensé desde el momento en que la vi por primera vez. Aunque alguien como yo nunca podría aspirar a tocar ni siquiera la punta de su dedo en toda mi vida, no podría evitar amarla.
+
+<p> —...
+
+<p> —Ah, es tan hermosa y noble, tan digna y elegante, tan adorable...
+
+<p> —...
+
+<p> —Su mirada altiva parece devorar mi alma...
+
+<p> Por desgracia, Inés tenía una constitución débil, por lo que se centró principalmente en su rostro. En ese aspecto, él era mucho más guapo que ella.
+
+<p> Parecía que el pintor le había llamado por algún nombre, pero incluso entonces, ella estaba tan absorta en su rostro que solo lo había oído a medias y lo había dejado pasar. No se le ocurría ningún nombre, así que no pudo llamarle y se limitó a abrir la boca en un intento silencioso.
+
+<p> Como si sintiera su frustración, el joven sonrió tímidamente y dijo:
+
+<p> —Mi nombre es Emiliano. Por favor, no lo olvide, señorita.
+
+<p> Era una sonrisa que parecía brillar incluso en la oscuridad. Su corazón se llenó tanto que sintió como si se le hubiera cortado la respiración por un momento. Inés murmuró su nombre en voz baja.
+
+<p> Saber que el amor puede ser cuestión de un solo instante. Absolutamente fugaz.
+
+<p> Ella aprendió el nombre de Emiliano y, al hacerlo, conoció el amor. Y eso no fue nada bueno.
+
+<p> Diez días después, se fugaron juntos de Pérez. Vagaron por todas partes, viviendo cuatro años una vida feliz pero empobrecida, antes de ser capturados por el Duque Valeztena en un pequeño puerto de la costa de Calstera. Emiliano escapó brevemente con la ayuda de alguien que ella conocía, pero finalmente regresó por su propia voluntad y murió a manos de Luciano.
+
+<p> Ante sus propios ojos. Ante los ojos de su hijo recién nacido...
+
+<p> Mientras ella lloraba abrazando el cadáver, los soldados de Valeztena la arrastraron como si fuera un saco de papas y la empujaron dentro de un carruaje. Los Valeztena declararon que pedirían perdón a la Corte Imperial y la encarcelarían de por vida, ya que no podía seguir siendo la mujer del Príncipe Heredero. Ahora era un objeto mancillado. Sin embargo, seguía siendo la noble hija de Valeztena.
+
+<p> La Emperatriz se mostró misericordiosa y consideró apropiado que se convirtiera en la segunda esposa del Conde Almenara. Le concedió su bendición y declaró que, si reconocía sus propios defectos y vivía sirviendo y atendiendo a un marido con más experiencia, eso también podría ser felicidad, un decreto que incluso despertó la admiración del público.
+
+<p> El Conde Almenara había superado con creces los cincuenta años y se acercaba a los sesenta, pero un nuevo marido anciano no suponía ningún problema para Inés. Desde el principio, no importaba si era un hombre espléndido o no.
+
+<p> Si no fuera por Emiliano, no importaría.
+
+<p> Ella accedió a casarse con el Conde Almenara. Y su hijo sería adoptado por un abogado, un pariente lejano de la familia Valeztena. Como para acallar el escándalo que rodeaba a Inés, la familia preparó una gran ceremonia nupcial. Ella hizo todo lo que le ordenaron. Hasta que oyó a su padre decir, a través de la pared, que el destino del niño no sería la casa de dos pisos de un pobre abogado, sino las profundidades de la tierra, en un coto de caza cerrado.
+
+<p> El Duque había dicho que era mejor cortar un brote podrido antes de que creciera más.
+
+<p> Su querido hijo era ahora ese brote podrido. Al igual que ella no era ahora más que un objeto mancillado.
+
+<p> Inés decidió no resistirse. De todos modos, era un mundo sin Emiliano. Un dolor que nunca había conocido.
+
+<p> Si eso era amor, entonces nunca había amado a Óscar ni por un solo segundo.
+
+<p> Inés había amado demasiado a Emiliano. Sin nadie a quien entregar ese amor, no podía respirar. El niño era la prueba de que Emiliano había vivido una vez a su lado. Era el único fragmento. Sin embargo, el mundo que Emiliano le había mostrado era demasiado vasto, y el niño que se le parecía era demasiado pequeño para ser suficiente.
+
+<p> Aun así, como único ser que le quedaba por amar, Inés deseaba al menos que el niño no muriera dolorosamente en un lugar extraño.
+
+<p> Así que lo mató. Con sus propias manos, estranguló al niño, de apenas tres meses de edad.
+
+<p> Era la última noche que se le permitiría estar con el niño. Tan frágil como era, murió muy fácilmente bajo su debilitada fuerza. Miró fijamente al niño muerto durante horas y luego se apuñaló en la garganta antes de que amaneciera.
+
+<p> Tenía veinte años. Era una semana antes de su matrimonio con el Conde Almenara.
+
+<p> —Mi nombre es Emiliano. Por favor, no lo olvide, señorita.
+
+<p> A veces, un nombre cambiaba el mundo. Para Inés, Emiliano era uno de esos nombres. Era el único color en un mundo que había sido completamente blanco y negro. ¿Podría haber un ser más bueno y perfecto que él? ¿Podría haber un ser más adorable y hermoso que él? Si pudiera traer de vuelta a este mundo aunque solo fuera uno de sus dedos, habría ofrecido gustosamente su propio cuello. Emiliano era tan magnífico que incluso su odio hacia Óscar se convirtió en polvo esparcido por el viento. Contempló a Emiliano mientras veía cómo la sangre brotaba del niño.
+
+<p> El mundo había cambiado, pero Emiliano se había ido. En el mundo que Emiliano había transformado, Emiliano ya no existía. Entonces ella también debía desaparecer...
+
+<p> —No lo olvide, señorita.
+
+<p> Había matado al niño que había llevado en su vientre. Una mujer así seguramente caería en el infierno. Sin embargo, ni siquiera en el infierno podría olvidar el nombre de Emiliano.
+
+<p> En su visión parpadeante, Emiliano la abrazaba.
+
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+<p> Y entonces, Inés volvió a abrir los ojos.
+
+<p> Esta vez, desde un recuerdo aún más antiguo.
+
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+<p> Cuando volvió a abrir los ojos en los terrenos de caza a los dieciséis años, pensó que todo aquello no era más que un milagro. Se alegró, creyendo que ni siquiera Dios podía soportar más su miseria. Porque se le había concedido una segunda oportunidad en la vida. Porque no había mayor bendición que la vida misma...
+
+<p> Inés miró fijamente el reflejo de una niña de seis años en el espejo.
+
+<p> —... Es completamente ridículo.
+
+<p> Había pensado que una mujer que mataba a su propio hijo caería en el infierno. Sin embargo, el lugar al que cayó no fue un pozo de fuego insaciable, sino la cómoda cama de una noble dama, rodeada de noble abundancia donde no faltaba nada.
+
+<p> Ridículamente, había regresado. Ahora, mucho antes de que todas las desgracias de la vida pudieran caer sobre ella.
+
+<p> Inés golpeó nerviosamente el espejo, rompiéndolo. Sus diminutos dedos temblaban violentamente. Aquello era el infierno, sin duda. Solo el infierno podía ser así.
+
+<p> Quizás en el momento en que se había metido el cañón en la garganta delante de Óscar, se había decretado su castigo.
+
+<p> No había habido ninguna oportunidad, ninguna bendición, desde el principio.
+
+<p> Aquello era el infierno, repetir la misma vida una y otra vez, solo para volver a ser miserable.
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+<p> Inés Valeztena, de seis años, estaba más tranquila que Inés Valeztena, de dieciséis. Ya no necesitaba maltratarse golpeándose las espinillas contra las esquinas de los muebles o pinchándose las palmas de las manos con puntas de bolígrafo para determinar si aquello era un sueño o la realidad. Eso solo amplificaba una inútil sensación de realidad.
+
+<p> Inés ya no necesitaba la sensación de realidad. La sensación de estar viva era veneno. Como en un sueño, como si fuera algo natural, se comportaba con la tranquilidad de una niña de seis años, pero cuando algo la abrumaba de repente, no podía soportarlo.
+
+<p> Ese niño, tan pequeño. Emiliano y su bebé... Cuando pensaba en haber matado a ese niño con sus propias manos, a veces ni siquiera podía creer el recuerdo, y se quedaba mirando sus pequeñas y temblorosas manos como si fueran de otra persona.
+
+<p> Sus recuerdos se habían detenido a los veinte años, pero su cuerpo había retrocedido aún más. Las manos absurdamente pequeñas de una niña de seis años ahora le proporcionaban alivio en lugar de frustración.
+
+<p> Unas manos tan pequeñas no podían haber hecho algo así. Eran simplemente las manos de una niña indefensa... Sí, ella era solo una niña. Unas manos como esas no podían matar a nadie. Un cuerpo como ese no podía ser el de una esposa o una madre.
+
+<p> Esas cosas... no podían haber sucedido.
+
+<p> En lugar de recurrir a la autolesión para volver a la realidad, Inés fue negando poco a poco el recuerdo.
+
+<p> Quizás realmente había sido un sueño. Un sueño muy malo. Un sueño espantoso y repugnante... Un sueño tan dulce durante un momento tan breve que la hacía llorar de nostalgia. En realidad, no importaba cuál fuera. Incluso si este lado era un sueño soñado en el fugaz momento antes de la muerte, incluso si todo lo que había vivido con Emiliano había sido un sueño de una sola noche...
+
+<p> Porque en cualquiera de los dos sueños, la vida con Emiliano ya no existía.
+
+<p> Inés se fue adaptando poco a poco. Le llevó veinte días de fiebre, seguidos de otros veinte días de náuseas y silencio, pero ella era una niña indefensa y nada podía cambiarse.
+
+<p> La realidad la engullía por completo, se resistiera o no. Inés estaba realmente viva. No solo sobrevivía, sino que simplemente vivía en el pasado. Sin embargo, respiraba y hablaba. Respiraba día tras día entre las personas a las que una vez había amado.
+
+<p> En aquella época, cuando su madre aún se llevaba razonablemente bien con su padre, ella apreciaba a sus hijos como tesoros de la vida. Aquellos fugaces momentos de felicidad de la época en que su madre no odiaba a Luciano y a ella le venían a la mente a diario. Su padre, que había considerado a su yo de veinte años como una alimaña, aún quería a su hija, y Luciano, que había apuntado con un arma a Emiliano, no era más que un niño de nueve años...
+
+<p> ¿Qué podía hacer un niño así? ¿Qué podían lograr esas manitas...? Al igual que había borrado los rastros del asesinato de sus propias manitas, apartó la imagen del odiado asesino del rostro joven e inocente de Luciano. Reprimió el impulso de estrangular al niño mientras este reía alegremente.
+
+<p> Simplemente no parecían la misma persona. El niño de nueve años que sonreía traviesamente a su hermana no podía ser el mismo hombre que había matado a Emiliano y escupido sobre su cadáver.
+
+<p> Sí. Eran seres completamente diferentes. Quizás Luciano nunca había matado a Emiliano... Esas cosas nunca podrían haber sucedido en primer lugar.
+
+<p> —No puede ser.
+
+<p> Inés se miró en el espejo y repitió esa frase como un mantra.
+
+<p> Era el comienzo del verano, cuando tenía seis años.
+
+<p> Los días en Pérez, al sur de Ortega, eran terriblemente largos, y las noches aún más, pero ella se las arreglaba. La niña del espejo parecía tan pequeña que parecía que nunca crecería, pero eso también era manejable.
+
+<p> Cuanto más se sentía arraigada en ese lugar, más lejanos se volvían los recuerdos de Emiliano.
+
+<p> A veces le gustaba que parecieran sueños lejanos. Como sueños vagos de hacía tanto tiempo que no podía recordar la trama, le gustaba que parecieran no tener ningún significado.
+
+<p> Así era como volvía a la vida.
+
+<p> Aunque Emiliano apareciera una noche en algún sueño, como un rostro en un recuerdo descolorido, y ella se despertara llorando desconsoladamente, al mirarse en el espejo sabía que todo era solo un sueño ridículo. No podía ser. Esas cosas no podían haber sucedido... Murmurando eso hasta que las lágrimas cesaban, llegaba una mañana tranquila.
+
+<p> Entonces todo estaba bien. En algún lugar, Emiliano también estaría saludando a la misma mañana.
+
+<p> Pensando en eso, podía volver a respirar.
+
+<p> Al menos en ese momento, Emiliano estaba vivo.
+
+<p> —Inés, ¿estás lista?
+
+<p> —Sí, madre.
+
+<p> Si estás vivo, entonces yo también estoy bien. Solo eso le daba sentido a esta vida una vez más.
+
+<p> Se levantó y siguió a la Duquesa Valeztena. El Príncipe Heredero las estaba esperando.
+
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+
+<p> —Pérez es aún más espléndido en verano. Eres afortunada, Inés. Por tener una ciudad natal como esta...
+
+<p> Óscar contempló con asombro la brillante luz del sol y la vasta llanura que se extendía bajo las colinas durante un largo rato, y luego charló sin cesar. La vasta finca de Valeztena era famosa por sus inviernos cálidos, pero era en verano, cuando la vida concebida por la primavera comenzaba a latir, cuando realmente se revelaba la gran vitalidad de las llanuras de Pérez, y bla bla bla...
+
+<p> Inés escuchaba sin mucho interés, distraída, limitándose a asentir con la cabeza. Óscar la miró fijamente durante un momento y, de repente, clavó sus ojos melancólicos directamente en los de ella.
+
+<p> —Pareces preocupada, Inés.
+
+<p> —En absoluto, Alteza.
+
+<p> —Lo sé. Soy bueno leyendo a las personas.
+
+<p> Tenía buen ojo para seleccionar el linaje más distinguido entre las mujeres que podía elegir.
+
+<p> Eso era algo que cualquier hombre podía hacer, dada la oportunidad. Sin embargo, teniendo en cuenta su primera vida, en la que lo había admirado precisamente por esa razón, ella tenía poco que decir al respecto.
+
+<p> Óscar había sido en su día el hombre más distinguido entre todos los que ella podía elegir. El hombre que la convertiría en la mujer más elegante del imperio.
+
+<p> Hubo un tiempo en el que eso era suficiente. Óscar era perfecto. Por supuesto, de niño, su ligero aire de superioridad era un defecto, pero a medida que crecía, reconoció su propia vergüenza y corrigió incluso eso por sí mismo, convirtiéndose en un hombre irreprochable.
+
+<p> En pocos años, cada palabra que pronunciaba sería humilde.
+
+<p> Entonces, un día, se convertirá en un perfecto montón de mierda.
+
+<p> —Lo sé. Inés. Lo que estás pensando ahora mismo.
+
+<p> —...
+
+<p> Inés lo miró fijamente, con la barbilla apoyada, incapaz de ocultar su expresión de inquietud. Ver los ojos de un niño ingenuo que claramente no sabía nada la agotaba.
+
+<p> Pero, ¿qué podía saber él? Con esa mente pura que perseguía los talones de una joven y ese corazón que soñaba con ser un gobernante virtuoso, ¿podría siquiera imaginar en qué tipo de pervertido se convertiría en solo doce años?
+
+<p> Aun así, una nueva oleada de náuseas la invadió.
+
+<p> Al igual que su padre aún la amaba y el querido Luciano aún no había matado a Emiliano, Óscar tampoco la había traicionado.
+
+<p> Lo sabía intelectualmente, e incluso su corazón lo reconocía. Porque Óscar también era un chico bastante adorable e inofensivo, muy lejos de aquel rostro codicioso de antaño.
+
+<p> Incluso ese parecido con el futuro despertaba en ella odio y repugnancia como un hábito, pero no era particularmente significativo. Si Emiliano era un sueño lejano para ella, entonces los diez años con Óscar no eran más que una pesadilla de mal sabor.
+
+<p> Era un ser infinitamente insignificante comparado con Emiliano. No era que las acciones de Óscar o la sórdida historia de la prostitución fueran ridículas, sino que Emiliano era mucho más grande.
+
+<p> Los recuerdos de su primera vida eran más claros que los de la segunda, pero no se sentía diferente a recordar con precisión la historia de otra persona. Sabía con certeza, solo en su mente, que una vez había vivido a su lado.
+
+<p> Así que, estrictamente hablando, se trataba de una cuestión de pureza.
+
+<p> —La tristeza que llena tu corazón parece un cuadro.
+
+<p> Justo cuando Inés pensó que debía de haber vuelto a oír la palabra “tristeza” y apartó la cabeza de su agarre, la otra mano de Óscar le tocó el hombro. Inés se estremeció.
+
+<p> —Debes de tener muchas preocupaciones... Quizás mi petición te haya parecido demasiado repentina. Convertirse en la Princesa Heredera de una nación conlleva ese tipo de carga.
+
+<p> —...
+
+<p> —Pero puedes manejarlo, ¿verdad? Inés Valeztena, no hay mujer más adecuada para ese puesto que tú.
+
+<p> —...
+
+<p> —Es prácticamente un puesto reservado para ti. Solo tienes que prepararte siendo tú misma.
+
+<p> Esa mano, que ahora estaba limpia, dentro de doce años estaría plagada de todo tipo de enfermedades venéreas. Esa mano que sondeará los anos de diferentes mujeres, agarrará el pelo de los prostitutos que les chupan la polla en los burdeles...
+
+<p> Inés giró la cabeza con todas sus fuerzas, liberando su rostro del agarre de Óscar. Fue el momento en el que mostró la voluntad más fuerte en todas las décadas desde que abrió los ojos a los seis años.
+
+<p> Inés poseía tanto el temperamento apasionado heredado de su padre como el trastorno obsesivo compulsivo heredado de su madre.
+
+<p> El deseo de evitar el contacto con esa futura mano sucia despertó al instante la cabeza que había estado muerta para todo en el mundo.
+
+<p> No debía volver a tocar nunca más esa suciedad. Esto no podía continuar.
+
+<p> —¿Inés?
+
+<p> —Quita tus sucias manos de encima…
+
+<p> Justo cuando Óscar volvió a intentar agarrarla del brazo, ella lo apartó, como si incluso ese contacto fuera impuro.
+
+<p> Él puso una mirada de desconcierto que no era intencionada.
+
+<p> —¿Acaso cometí algún error...?
+
+<p> Lo haría. Durante unos ocho años, a partir de unos doce años más tarde. Hasta que ella finalmente no pudo contener su rabia y se apretó el cañón contra su propia garganta.
+
+<p> Quizás pensar que no importaba en absoluto había sido una ilusión. Olas se agitaron en el corazón que se había hundido en la tristeza.
+
+<p> No era que Emiliano estuviera vivo. Ella no era de las que aguantaban todo con tanta fortaleza desinteresada desde el principio. Huelga decir que tenía una constitución extremadamente débil.
+
+<p> Inés Valeztena, de seis años. Precisamente la edad en la que simplemente no se podía obligar a nadie a hacer nada desagradable, aunque eso significara morir.
+
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+<p> —Prefiero morir antes que volver a comprometerme. Prefiero morir otra vez antes que casarme con este miserable una vez más...
+
+<p> Inés murmuró, mirando con ira el retrato engreído de Óscar colocado sobre el sofá del salón. Era un regalo que él mismo había traído cuando visitó la finca Valeztena esta vez.
+
+<p> Bla, bla, bla sobre cómo su futuro prometido siempre le haría compañía en Pérez para que no se sintiera sola, y bla bla bla...
+
+<p> —... Esa porquería como regalo...
+
+<p> Siempre había pensado que solo se había convertido en un desastre de adulto, pero, mirando atrás, era un loco desde niño. ¿De verdad creía que su rostro era un regalo? Aunque sus rasgos eran innegablemente atractivos, eso no significaba que fuera a convertirse en un gran guapo.
+
+<p> Era un juicio carente tanto de sentido estético como de objetividad. Ella miró con desprecio el retrato del Príncipe Heredero.
+
+<p> El retrato evocaba una sensación aún más repulsiva que el propio Príncipe Heredero.
+
+<p> Un físico tan robusto que era imposible creer que se tratara de un niño de diez años, un rostro que parecía al menos siete años mayor —no, más maduro—, unos hombros ridículamente anchos, un enorme halo y unas alas angelicales que revoloteaban santurronamente como si estuvieran listas para elevarse a los cielos en cualquier momento...
+
+<p> Aunque la obra, propensa en general a la exageración, alcanzaba el colmo del absurdo con esas alas, Inés ni siquiera se burló de ello, sino que miró fijamente el rostro del retrato. El pintor era realmente hábil.
+
+<p> El Óscar del retrato parecía realmente un futuro Príncipe Heredero en todo su esplendor.
+
+<p> Excepto por ese enorme cuerpo, claro está. Óscar siempre había detestado cualquier esfuerzo físico de principio a fin, nunca hacía ejercicio, y mucho menos entrenamiento.
+
+<p> Si le quitábamos sus costosas prendas, lo único que quedaba eran unos brazos que caían rectos y un pecho flácido. Cuando cazaban juntos, era de los que jadeaban y resoplaban, persiguiendo constantemente a su prometida...
+
+<p> Su vida la pasó desperdiciando el físico innato y la decente resistencia que le había legado su padre, el Emperador. Cuando envejeciera, no le quedaría nada. Dada su caótica vida sexual, era dudoso que viviera tanto tiempo.
+
+<p> —Así que, aunque muera, no acabará así.
+
+<p> Inés se burló ligeramente de los sueños alados de un niño de diez años.
+
+<p> En su codiciosa juventud, cegada únicamente por la ambición de convertirse en Princesa Heredera, nunca habría reconocido una disposición tan peculiar.
+
+<p> Y entonces probablemente habría dicho: “Alteza, ¿cómo es que es tan considerado?”, “Ahora, incluso en Pérez, siempre que deseemos ver a Su Alteza, podemos reunirnos con usted cuando queramos. ¡Estoy encantada!”, “La sonrisa de Su Alteza ilumina la finca Valeztena como la luz del sol... Este año, Pérez tendrá sin duda una cosecha abundante. ¡Porque Su Alteza bendice esta tierra!”, etcétera. Habría estado genuinamente encantada, susurrando palabras tan melosas con descaro.
+
+<p> Después de todo, el Príncipe Heredero, de apenas diez años, había desafiado a toda la oposición dentro de la Familia Imperial y había viajado personalmente a la finca del sur solo por ella.
+
+<p> Aunque ese recuerdo no existía en su auténtica juventud, cuando viajaba constantemente entre la capital y el Príncipe Heredero, la niña que era entonces seguramente se habría emocionado hasta el punto de secarse las lágrimas.
+
+<p> La Inés de esta época era precoz a su manera, pero también bastante astuta: disfrutaba burlándose de Óscar precisamente porque le gustaba, y le encantaba la forma en que él se aferraba a ella de vez en cuando y le prestaba toda su atención.
+
+<p> Cada vez que su padre partía hacia la capital, Mendoza, ella se las ingeniaba para convencerlo de que la llevara a la corte, aunque esperaba que Óscar no se diera cuenta de sus esfuerzos. Aunque iba a verlo, solo se aferraba a su hermana, sin siquiera mirarla.
+
+<p> Óscar poseía esa característica de los príncipes herederos: simplemente tenía que poseer lo que no podía tener, por lo que sus esfuerzos daban fruto fácilmente.
+
+<p> Incluso con solo seis años, ella lo entendía. Cuanto más se aferraba él a ella, más aumentaba su propio valor.
+
+<p> Sin embargo, ahora Inés estaba pateando su retrato con el zapato. Incluso dentro de la mansión donde Óscar aún residía.
+
+<p> —... Muere, muere. Solo muere...
+
+<p> Sus ojos, rebosantes de confianza innata, amor propio, seguridad en sí mismo, autoestima, elevada conciencia de sí mismo y orgullo altivo, brillaban implacablemente mientras se enfrentaban a las maldiciones y patadas de Inés, mirándola fijamente.
+
+<p> Como si declarara: “Por mucho que me patees, me amo tal y como soy”
+
+<p> Inés respiró hondo y lo empujó fuera del sofá.
+
+<p> Este grotesco narcisismo era sin duda la manifestación de un deseo sexual pervertido. Para Inés, todo lo relacionado con él le parecía ahora el precursor de una enfermedad venérea.
+
+<p> El lienzo, cubierto con una gruesa capa de pintura al óleo, era resistente y robusto, totalmente imposible de destruir para una niña de seis años. Sin embargo, pisoteó con su bota el rostro caído del Príncipe Heredero, respirando con dificultad.
+
+<p> Pero por mucho que pisoteara ese rostro engreído, su irritación no disminuía.
+
+<p> —Maldita sea, maldito Óscar, maldito...
+
+<p> Era la primera vez que veía a Óscar desde el día en que se había pegado un tiro delante de ella, como para presumir. Había muerto a los veintiséis años, despertado a los dieciséis en los terrenos de caza, vivido cuatro años de ensueño con Emiliano, vuelto a morir y ahora... seis.
+
+<p> ¿El impacto había sido tan profundo porque nunca había vuelto a ver ni un solo mechón de ese pelo rojo en su segunda vida? Inés se quedó mirando el retrato del Príncipe Heredero, ahora ya adulto, como si no pudiera comprenderlo.
+
+<p> Cuando vio a Luciano llorando de nuevo por primera vez a través de su visión borrosa por la fiebre, lo que la atormentaba y la desgarraba era una pena desgarradora y un amor-odio. El hombre que mató a Emiliano, que había sido todo su mundo. Sin embargo, el hermano que la quería más que a nada en el mundo...
+
+<p> Su familia siempre la había dejado tambaleando entre el odio y el afecto. Hacían imposible calibrar sus sentimientos. Pero Óscar...
+
+<p> —... Cómo puede ser tan irritante.
+
+<p> Realmente no era más que irritante. No quedaba ni una pizca de afecto, ni ninguna emoción grandiosa como el deseo de matar o el odio, ni siquiera una mota de polvo. Sin embargo, era un ser humano irritante hasta la exasperación. Con solo mirarlo, su ira hervía, era insoportable. Incluso la forma en que inspiraba y exhalaba le desagradaba.
+
+<p> En lugar de inclinar la cabeza en agradecimiento por recibir tal regalo, preferiría morir... ¿Qué sentido tiene vivir así? Mejor morir ya... Habiendo muerto varias veces antes, la opción de simplemente acabar con todo se le ocurrió sin dificultad. Al igual que había terminado abruptamente su primera vida en un ataque de ira.
+
+<p> Pero Inés cambió rápidamente de opinión. Como si supiera que el tiempo volvería a retroceder.
+
+<p> La muerte nunca era el final. Normalmente lo era, pero no para ella. Quizás esta tragedia se había derivado de su incapacidad para controlar su ira desde el principio. Por lo que ella sabía, ese había sido el punto de partida.
+
+<p> Si no hubiera muerto entonces, habría eliminado primero esa causa fundamental...
+
+<p> “¿Quién demonios le proporcionó esa ira incontrolable?”. El contraargumento surgió contra sus propios pensamientos, pero lo reprimió de nuevo. Ahora tenía que ser realmente cautelosa con todo. Antes de volver a abrir los ojos dentro del útero de su madre.
+
+<p> —Piensa con cuidado. Piensa con cuidado... Piensa con cuidado, Valeztena... Piensa con cuidado.
+
+<p> Se sentó rígida en su escritorio, murmurando para sí misma como si se estuviera lavando el cerebro, golpeando el papel con ansiedad con la punta seca de su bolígrafo. Era una compulsión obsesiva que había tenido a los veintiséis años, cuando el matrimonio asqueroso le había dificultado controlar su ira. 
+
+<p> Inés apretó los dientes y frunció el ceño.
+
+<p> Para que la hipótesis de que “repetir la vida es un infierno” fuera cierta, uno debía haber cometido un pecado original digno de las llamas del infierno.
+
+<p> Miró fijamente el papel, con la pluma bien agarrada en la mano.
+
+<p> Solo en la segunda muerte yacía un pecado innegablemente horrible. Había seducido a un hombre amable e inocente, llevándolo finalmente a la muerte, y había asesinado personalmente a su propio hijo, que ni siquiera había vivido medio año...
+
+<p> La expresión desapareció brevemente del rostro juvenil de Inés. Eso nunca sucedió. Siguió una sugerencia que rayaba en la autodefensa, sin tener en cuenta la lógica y la secuencia. Apartó su segunda vida como si fuera la historia de otra persona y volvió a pensar.
+
+<p> Aquello ya había sido un infierno. El terrible pecado que había cometido seguramente se convertiría en parte de ese infierno.
+
+<p> Si era así, debía de haber habido una primera chispa clara que empujó a Inés a ese infierno. Recordó su primera vida, vívida y detalladamente, y su caótico matrimonio, pieza por pieza.
+
+<p> Y, por primera vez, comenzó a examinar las cosas que había hecho mal en esa vida.
+
+<p> [Arrogancia].
+
+<p> Inés mojó la pluma en tinta, escribió su primera acusación, letra a letra, y luego ladeó la cabeza. Quizás un poco desafortunada, pero difícilmente digna del infierno.
+
+<p> [Vivir de forma extravagante]. Si eso fuera un pecado tan grave, la nobleza de este país nunca moriría. [Utilizar a las personas]. Cada uno nace en una posición diferente; no se puede evitar.
+
+<p> [Preocuparse sólo por los accesorios]. Aunque siento que he desperdiciado mi vida en el tocador, no he hecho mal a nadie. [No leer suficientes libros]. Tonterías. [Ser hipócrita]. ¿Quién no lo es?
+
+<p> [Engañar a mis padres]. [Las mentiras]. Nunca hice nada que mereciera el infierno… [Odiar a mi madre]. Ella fue la primera en odiarme.
+
+<p> [No guardar el secreto del Príncipe Heredero]. Debería haber estado agradecido solo por haberle salvado la vida ese día.
+
+<p> [Caza frecuente]. Esto era un poco... La expresión de Inés se ensombreció. Matar animales inocentes por diversión era claramente un pecado. Sin embargo, esto podía atribuirse en cierta medida a Luciano.
+
+<p> Luciano, en lugar de lamentar la ausencia de un hermano menor, trataba a Inés como si lo fuera, obligando a su única hermana a acompañarle en actividades típicamente reservadas a los hombres. El problema era que todo lo que él le obligaba a hacer encajaba perfectamente con su temperamento...
+
+<p> Inés era una excelente tiradora y disfrutaba de las carreras en las que los caballos corrían a una velocidad vertiginosa. Su temperamento apasionado y su espíritu competitivo estaban tan estrechamente vinculados como la propia sangre. Incluso el hecho de vestirse con elegancia formaba parte de su naturaleza competitiva. Una vez establecido un estándar, tenía que ganar a toda costa. Ser la mejor era lo preferible.
+
+<p> Ahora que lo pienso... [Tratar a los caballos con dureza]. Sin embargo, el semental pelirojo de Inés la quería mucho a pesar de todo. Así que, al menos, parecía poco probable que deseara que ella cayera en las ardientes profundidades del infierno.
+
+<p> [Crueldad]. Si hubiera nacido con una naturaleza lo suficientemente amable como para ser amiga de todos, habría elegido pasar su vida en un convento en lugar de soportar la visión de las almas corruptas de la capital. Mendoza estaba llena de cosas demasiado viles para contemplarlas.
+
+<p> Así, Inés registró las manchas de su primera vida. Ningún observador podía apreciar ningún pecado grave. Sin embargo, junto a la caza que le traspasaba el corazón, escribió el nombre de Luciano.
+
+<p> —... ¿Qué demonios hice tan terriblemente mal entonces?
+
+<p> Indagó en su propio pecado original, con la pluma rozándole la barbilla.
+
+<p> La religión oficial de Ortega enseñaba que “el hombre nace con el pecado original por el simple hecho de existir en este mundo” y que solo arrepintiéndose de ese pecado a lo largo de la vida se podía alcanzar el cielo. Esta doctrina domesticaba y dominaba a la población, pero a ella no le interesaban esos cuentos fundamentalistas.
+
+<p> Si realmente había que pagar un precio por haber nacido, ella creía que lo había pagado en su totalidad con las asombrosas donaciones que le había extorsionado a Óscar y repartido por todas partes.
+
+<p> Así que, por ahora, eso estaba bien.
+
+<p> La pluma volvió a moverse.
+
+<p> [Golpear a Óscar]. ¿Cómo se podía mirar esa cara y no golpearla? [Odiar a Óscar]. ¿Cómo no odiarlo? [Maldecir a Óscar]. ¿Cómo no maldecirlo? [Acusar a Óscar]. ¿Cómo podía ser un pecado simplemente acusarlo, cuando se le podía matar sin acusarlo...?
+
+<p> [Óscar...] Todas las emociones oscuras y los patrones de comportamiento agresivo que había conocido en su primera vida estaban totalmente relacionados con Óscar.
+
+<p> Óscar, Óscar, Óscar. Al ver el nombre ocupando ahora la mitad de la página, la irritación se apoderó de ella. Inés dejó de releer y dejó la pluma.
+
+<p> Si Óscar era la víctima, entonces ninguna mala acción podía considerarse un pecado. Así que, por mucho que lo mirara, no tenía ningún recuerdo de haber cometido realmente un pecado, hasta el momento de su muerte.
+
+<p> Soportó once años de persecución y opresión por parte de la familia real, y aguantó incluso después de sufrir cuatro abortos espontáneos. Se dedicó en cuerpo y alma a un marido plagado de enfermedades venéreas, viviendo la vida de una princesa heredera fiel a su matrimonio hasta su último aliento... ¿Qué demonios había hecho mal? Realmente lo había hecho, hasta ese mismo momento...
+
+<p> —...
+
+<p> Mientras recordaba vagamente el final, de repente palideció y cogió el bolígrafo. El sonido del rasguño le provocó un escalofrío. [Suicidio].
+
+<p> Inés se quedó mirando fijamente durante un rato la única coincidencia entre su primera vida y la segunda.
+
+<p> No estaba simplemente repitiendo la misma vida para volver a ser infeliz. Aunque así lo había pensado en su profunda desesperación, en realidad no era más que una rutina sin sentido y sin objetivo.
+
+<p> —... Eso no tiene sentido. No es suficiente...
+
+<p> Pero si el motivo original era el suicidio. Porque se había suicidado. Si era porque se había atrevido, porque se había matado a sí misma...
+
+<p> ¿No había vuelto la vida, como las olas, cada vez que elegía el suicidio en su desesperación? Como si el suicidio fuera imperdonable.
+
+<p> Sí. Como si se hubiera atrevido a cometer un acto imperdonable.
+
+<p> Cada vez que elegía la muerte, esperando un final, ese mismo final permanecía imposiblemente lejano, como si fuera un privilegio demasiado grande para ser concedido.
+
+<p> A los veintiséis años, se suicidó y volvió a tener dieciséis. A los veinte, se suicidó una vez más, solo para ser castigada aún más, enviada once años atrás desde su yo de dieciséis años.
+
+<p> ¿Y ahora qué? No importaba cuándo ni cómo muriera, ¿siempre acabaría empezando desde los seis años y luego retrocediendo otros once? ¿Se convertiría en un fantasma que vagaba por Pérez, esperando solo a que sus padres la concibieran, para convertirse en un niño en el útero? ¿Tenía que repetir esto hasta que ya no pudiera suicidarse...?
+
+<p> Inés volvió la mirada con exasperación, solo para descubrir el retrato del Príncipe Heredero tirado descuidadamente en el suelo una vez más, y apretó los dientes.
+
+<p> Óscar le había dado un regalo. Una nueva hipótesis concreta que lo convertía en una presencia aún más irritante.
+
+<p> ¿De quién fue la culpa de ese primer suicidio? Primero le robaron la vida, luego le robaron el derecho a morir dignamente...
+
+<p> —¡Inés!
+
+<p> El culpable reapareció ante sus ojos como un fantasma. Ella arrugó el papel a una velocidad asombrosa, dejándolo ilegible, y lo arrojó debajo del escritorio.
+
+<p> Óscar, obligado a relacionarse con Luciano debido a la indiferencia de Inés, la vio en el salón y puso una expresión de inmenso deleite, hasta que se fijó en el retrato tirado en el suelo. Al instante, su rostro se descompuso como un cristal roto.
+
+<p> Como si no fuera el cuadro lo que yacía en el suelo, sino él mismo.
+
+<p> —Inés, ¿por qué está mi retrato aquí tirado así...?
+
+<p> Lejos de responder, quería correr inmediatamente hacia él, estrangularlo y eliminar ese vil brote. Sin embargo, por muchas veces que se repitiera la vida, él seguía siendo el Príncipe Heredero de una nación.
+
+<p> Inés exhaló profundamente, como si estuviera cultivando su espíritu, y luego abrió los ojos.
+
+<p> —No lo sé. Parece que se ha caído por sí solo.
+
+<p> —¿Por sí solo?
+
+<p> —¿Quién se atrevería a tocar el retrato de Su Alteza, ni siquiera con la punta de un dedo? Es tan sagrado como una imagen santa.
+
+<p> —Bueno, eso es cierto... Fue una negligencia del asistente. Tenía la intención de colarlo a escondidas para darte una sorpresa, pensando que podríamos admirar la obra juntos.
+
+<p> Ay, cielos... Óscar vio cómo su noble rostro rodaba por la alfombra, pero se obligó a actuar como un adulto, fingiendo no estar nervioso. Sacudió la cabeza y profirió una exclamación incómoda.
+
+<p> Sin embargo, su mirada vacilante estaba completamente fija en sí mismo, con las alas extendidas sobre la alfombra. Parecía dispuesto a marcharse enfurecido, como si fuera a buscar al sirviente que sin duda había cometido este error...
+
+<p> —No esperaba que lo vieras primero. Quería ver la sorpresa en tu rostro.
+
+<p> —Ver su espléndida forma madura de antemano me llena de profunda emoción. Pensar que está destinado a convertirse en un joven tan espléndido...
+
+<p> El destino era completamente inútil. Sin embargo, con solo ver la sonrisa insincera de Inés, la rígida expresión de Óscar se derritió con alivio.
+
+<p> Detrás de ellos, Luciano frunció el ceño, pero ella no le prestó atención mientras se acercaba a ellos.
+
+<p> —No hay ni una pizca de exageración en ese retrato. Siempre les digo a los pintores: “Detesto los adornos innecesarios”. Un retrato es un registro. Ese tipo de cosas no son un registro fiel de uno mismo, ¿verdad? Me gusta mi yo real. Tal y como soy.
+
+<p> —Así es. Su Alteza es lo suficientemente guapo sin adornos.
+
+<p> Desde su enorme y musculoso cuerpo hasta ese par de alas absurdamente grandiosas, nada en él era real, y sin embargo tenía la osadía de decir eso. Óscar no recordaba que hubiera sido tan tonto antes, pero de repente se puso nervioso y parecía demasiado ocupado tratando de engañar a la chica para salvar la situación.
+	
+<p> Que ella había sufrido recientemente episodios de fiebre que duraban docenas de días y mostraba todo tipo de comportamientos extraños era un secreto que solo conocían unas pocas criadas del castillo de Pérez.
+
+<p> Tal era la perspectiva de Óscar. Inés, que había visitado Mendoza con tanta frecuencia, desapareció de repente sin dejar rastro. Por muchas cartas que le enviara, las respuestas pulcras y adorables que solía enviarle nunca llegaron. Incapaz de soportarlo más, emprendió él mismo el arduo viaje al castillo de Pérez. Sin embargo, lejos de recibirlo con sus habituales ojos brillantes, le dio una fría bienvenida, sin mostrarle apenas hospitalidad. Y entonces llegó esa impactante exigencia: “Quita tus sucias manos de encima…”
+
+<p> ¡Cómo se atrevía a llamarlas manos sucias! Si hubiera sido cualquier otra persona, cortarle las muñecas no le habría bastado. Pero la culpable era Inés. Tenía que haber otra razón. Y él siempre se mantenía las manos limpias... Incluso se las había lavado a fondo una vez más antes de venir aquí. Quizás había causado un malentendido.
+
+<p> Su determinación de tomar a Inés como esposa seguía siendo inquebrantable, por lo que Óscar demostró una madura moderación al no hacer público su sacrilegio. Aunque era humillante haber escuchado esas palabras de su futura esposa, lo que realmente le aterrorizaba no era ese insignificante insulto, sino que se rompiera el compromiso.
+
+<p> Una vez firmado el contrato matrimonial con la Familia Imperial, Inés nunca se atrevería a romperlo, hiciera lo que hiciera. Pero antes de que se formalizara el compromiso, la cosa era diferente. Las altivas hijas de los Grandes de Ortega a veces pisoteaban las palabras de sus padres como si fueran ladridos de perros.
+
+<p> Como Inés era la única hija de la familia Valeztena, la Familia Imperial no insistiría en forzar el asunto. Y el Duque Valeztena no obligaría a su única pequeña hija si ella se negaba.
+
+<p> Después de todo, tenían muchas opciones. Incluso habían manifestado su preferencia por los hijos de la alta nobleza frente al de la realeza como posibles yernos. Y lo habían dicho mirando directamente a los ojos a Óscar.
+
+<p> Por lo tanto, este compromiso en particular dependía por completo de la cabecita de Inés.
+
+<p> —Precisamente por eso, como decía mi padre, hay que asegurárselas mientras son jóvenes y aún no tienen juicio propio...
+
+<p> Sin ella, sus opciones se reducían infinitamente. Tal defecto no tenía cabida en la vida perfecta que había planeado. Lo mejor siempre debe ir acompañado de lo mejor.
+
+<p> Recordando la desacertada enseñanza del Emperador, Óscar volvió a abrir la boca.
+
+<p> —Inés, debo admitir que no me entusiasmaba precisamente escuchar esas palabras de tus labios...
+
+<p> Óscar fingió humildad antes de volverse hacia Luciano y sacudir la cabeza sutilmente, con exasperación.
+
+<p> Ahora que lo pensaba, por aquella época, el comportamiento del Príncipe Heredero, que no era especialmente amable con los chicos de su edad, también había llamado la atención de Inés. Especialmente cuando eran más guapos que él.
+
+<p> Fue a partir de ese momento cuando comenzaron a brotar las semillas de la mezquindad. Mientras Inés observaba su comportamiento con una mirada significativa, Luciano, que era un poco más guapo que Óscar, se dirigió hacia las estanterías contiguas a la sala de recepción.
+
+<p> —Hablando de Pérez. Es realmente hermoso.
+
+<p> Incluso con diez años, el Príncipe Heredero seguía siendo el Príncipe Heredero, y, con toda naturalidad, cambió de tema para refrescar el ambiente.
+
+<p> —Como estabas cansada de dar vueltas en la cama toda la noche, Luciano me llevó a hacer turismo por aquí y por allá en tu lugar.
+
+<p> —Ya veo.
+
+<p> Incapaz de recoger su propio cuadro con sus preciosas manos, ni de llamar inmediatamente a un sirviente para que lo recuperara, pero demasiado avergonzado para dejarlo tirado en el suelo y fingir que no había pasado nada antes de dejarse caer en el sofá, Óscar se sentó en el reposabrazos bajo y continuó.
+
+<p> —Con Pérez siendo tan espléndido, Mendoza debe parecer bastante aburrido. ¿Es por eso que no buscaste a Mendoza en toda la primavera?
+
+<p> —No fue por eso. Y por muy bonito que sea, no se puede comparar con Mendoza, donde reside Su Majestad Imperial.
+
+<p> Cruzó las piernas, como para mostrar lo mucho que habían crecido durante su ausencia.
+
+<p> —Y yo estoy allí, Inés.
+
+<p> —…
+
+<p> —Te esperé toda la primavera. También esperé tus cartas. Me preocupaba que te hubiera pasado algo... ¿Mi petición fue realmente demasiado precipitada? ¿Te resultó una carga? ¿Por eso me evitaste?
+
+<p> —No, Alteza. No es eso. ¿Cómo podría rechazar el honor de verlo?
+
+<p> —Si te resulta una carga, solo tienes que decirlo. Puedo esperar todo el tiempo que...
+
+<p> —Por supuesto que es una carga, sin embargo.
+
+<p> Una respuesta inesperadamente firme. Óscar, que había estado moviendo las piernas tranquilamente, se quedó paralizado en medio del movimiento.
+
+<p> Entonces, como si algo le hubiera golpeado —“¿Cómo no me di cuenta?”—, la miró con una expresión rara, murmurando como hipnotizado.
+
+<p> —... Pareces diferente desde la última vez que nos vimos. Muy diferente.
+
+<p> —Eso no puede ser.
+
+<p> —Tu rostro está pálido, tus ojos están llenos de tristeza... Si todo se debiera a la preocupación, eso podría explicarlo, pero es más que eso...
+
+<p> —...
+
+<p> Tienes ojos, ¿no? Inés puso los ojos en blanco bajo los párpados bajos, con un tono cargado de sarcasmo.
+
+<p> —Y hablas con tanta... madurez. Tu tono se ha vuelto de repente excesivamente digno.
+
+<p> —¿Está Su Alteza insinuando que antes era una mujer frívola e indigna?
+
+<p> —Por supuesto que no. Siempre has sido perfecta, Inés. Pero hay algo en ti ahora que es... más, demasiado más, de repente...
+
+<p> —No, Su Alteza tiene razón. Nunca fui realmente perfecta.
+
+<p> Óscar, desconcertado por el repentino gesto patético de Inés al levantar la cabeza, volvió a titubear. Inés extendió su delicada mano y le agarró del brazo.
+
+<p> —¿Le he dicho antes que el retrato se cayó solo?
+
+<p> —¿Quizás?
+
+<p> —Estaba demasiado alterada para decírselo claramente. Estaba completamente hipnotizada, contemplando el retrato de Su Alteza desde tan cerca, era magnífico. Entonces, de repente, sin que la tierra temblara, el cuadro se estrelló contra el suelo, ¡como si quisiera aplastarme!
+
+<p> —¡Cielos! ¿Te hiciste daño?
+
+<p> —Afortunadamente, no. Pero al esquivarlo, pisé el cuadro. Esa huella que quedó en el noble rostro de Su Alteza…
+
+<p> —Eso es... ¿Una huella?
+
+<p> Óscar, al descubrir tardíamente su propio rostro pisoteado, ladeó lentamente la cabeza con incredulidad. La excusa descaradamente inverosímil de Inés no le convenció a Óscar, cuya atención se centró por completo en el hecho de que “quedara una huella en mi rostro”
+
+<p> Su expresión era de auténtica conmoción, como si realmente le hubieran pisoteado el rostro. Inés, con aire arrepentido, miró hacia el cuadro mientras hablaba.
+
+<p> —Su Alteza crecerá hasta alcanzar una estatura tan espléndida, pero yo soy tan miserable que apenas podría creer que me atreviera a estar a su lado. ¿Cómo podría atreverme a estar al lado de alguien tan magnífico...? El cuadro cayó sobre mí porque fui tan presuntuosa como para codiciarlo. Porque me atreví a codiciar a Su Alteza...
+
+<p> —... Ah, mi cara...
+
+<p> —Y así estuve a punto de recibir mi castigo. La caída del cuadro fue voluntad divina. Lo pasé mal toda la primavera, pero al final, Dios consideró oportuno que cayera sobre mí de esta manera, desde donde yacía a salvo sobre el sofá...
+
+<p> —... Espera, ¿qué?
+
+<p> —Decía que incluso Dios se opone a nuestro compromiso, Alteza.
+
+<p> —Qué tontería.
+
+<p> —¿Sabe lo que significa “presagio”?
+
+<p> Óscar vaciló por un momento. Era un hombre tan vulnerable a su propia ignorancia que, en ocasiones, cuando alguien insinuaba que no sabía algo, su mente se bloqueaba momentáneamente.
+
+<p> Miró boquiabierto a Inés.
+
+<p> —Este es un presagio, Alteza. Un presagio de que nuestro compromiso terminará en ruina.
+
+<p> El presagio, aunque nacido de su desahogo, era un hecho innegable.
+
+<p> —Un cuadro que estaba intacto cayó de repente sobre mí y, sin querer, pisé el rostro de Su Alteza. A pesar del presagio, si hubiera sido digna de estar al lado de Su Alteza, habría preferido morir siendo golpeada por el retrato de Su Alteza en lugar de sobrevivir pisoteando el rostro de Su Alteza. Ahora me siento terriblemente culpable hacia Su Alteza...
+
+<p> Cada palabra era incoherente, pero fluían con tanta fluidez que la mente de Óscar se vio afectada por la ilusión de que todas tenían sentido.
+
+<p> Óscar habló sin expresión.
+
+<p> —En lugar de morir... pisoteando mi rostro...
+
+<p> —Mire esto. Su Alteza es demasiado generoso conmigo.
+
+<p> —No, Inés.
+
+<p> —Por eso no puedo estar con Su Alteza. Yo solo puedo conformarme con Enrique Osorno, Dante Ihar, Cárcel Escalante, Leonardo Helves...
+
+<p> —...
+
+<p> —Esos hombres son más que suficientes.
+
+<p> Los nombres de todos los hijos de las cinco familias más prestigiosas de los Grandes de Ortega, salvo los Valeztena, pasaron como los nombres más vulgares.
+
+<p> Inés, como si esas cosas sin valor fueran precisamente de su nivel, soltó el brazo de Óscar, y su mano se deslizó sin fuerza de su agarre.
+
+<p> —Por lo tanto, por favor, olvide nuestro compromiso.
+
+<p> —...¿Cárcel? ¿Acabas de decir Cárcel Escalante?
+
+<p> Aunque ella había pronunciado cuatro nombres, solo uno pareció registrarse en sus oídos. Su expresión se resquebrajó como una fisura y Óscar preguntó.
+
+<p> Ah. Siempre le disgustaron los hombres más guapos que él.
+
+<p> Entonces no había razón para rechazarlo. En su memoria, no había ningún hombre más perfecto que Cárcel Escalante. Al menos, en cuanto a apariencia.
+
+<p> Inés buscó brevemente en su memoria a Cárcel Escalante. A diferencia de sus recuerdos de palabras, ninguna imagen le venía a la mente con claridad más allá de su forma adulta.
+
+<p> ¿Cómo era de niño, más o menos a esta edad?
+
+<p> Óscar se volvió cada vez más cauteloso a medida que su escultural primo maduraba. Temía que si Inés intercambiaba unas pocas palabras con esa estatua perfecta, se diera cuenta de lo descuidadamente que Dios había creado a su propio prometido. Dudaba, le disgustaba. Más tarde, ni siquiera se atrevió a permanecer a su lado ni un momento...
+
+<p> Óscar era muy consciente de que los cánones de belleza son relativos. Dependiendo de quién estuviera a su lado, podía parecer excepcionalmente guapo o simplemente poseer una belleza normal y corriente. Cárcel Escalante, sin embargo, hacía que cualquiera a su lado pareciera un trozo de arcilla, amasado apresuradamente y abandonado.
+
+<p> Y como ella solía evitar sin dudarlo hacer cosas que a Óscar no le gustaban, era natural que no hubiera ninguna conexión especial entre ellos.
+
+<p> A pesar de ser parientes tan cercanos, ella solo lo recordaba de lejos, vestido con uniforme. Los uniformes de los oficiales navales, y a lo largo de la costa de Calstera...
+
+<p> De repente, recordó un recuerdo desagradable y tragó saliva como si fuera una aguja.
+
+<p> El último recuerdo que le quedaba de Cárcel Escalante se le clavó en la cabeza sin previo aviso, haciéndola doler. Como si cerrar los ojos ahora la devolviera instantáneamente a ese último día en Calstera, como si fuera a ser arrojada de nuevo a ese frío viento marino... Cogida de la mano de Emiliano, corriendo como si estuviera a punto de desplomarse aquella noche. Los llantos del niño en brazos de Emiliano resonaban en sus oídos como una pesadilla.
+
+<p> Lo reprimió con fuerza antes de que la Cárcel de aquel día cobrara vida en el recuerdo, antes incluso de que Emiliano pudiera volver a la vida.
+
+<p> Aunque Emiliano de aquel día reviviera, no viviría ni un solo día más antes de morir de nuevo.
+
+<p> El presente era mejor. Ahora, cuando él estaba vivo, y algo así nunca había sucedido en primer lugar.
+
+<p> Solo Óscar se había vuelto más irritante, así que ella asintió tímidamente.
+
+<p> —Sí, Cárcel Escalante.
+
+<p> —...
+
+<p> —Creo que él sería bastante adecuado para mí.
+
+<p> Como mínimo, serviría como una válvula de escape adecuada. Después de todo, incluso en ese mismo instante, ese chico seguramente no sería más que una pieza.
+<p> ━━━━━━ ◦ ❖ ◦ ━━━━━━
+
+<p> Cárcel Escalante, con quien Inés se reencontró hacia el final de aquel verano, era una auténtica escultura. Incluso más que en sus vagos recuerdos. Inés no pudo ocultar su admiración y la expresó sin reservas.
+
+<p> Era similar a la admiración que se siente al ver un paisaje objetivamente hermoso o un objeto perfectamente formado. Por muy diferente que fuera la perspectiva de cada persona, nadie podía negar que Cárcel Escalante era una creación bien elaborada.
+
+<p> Incluso su propio primo, celoso y mezquino, por supuesto.
+
+<p> —... ¿Estás segura? ¿Estás completamente segura?
+
+<p> —Sí.
+
+<p> —Inés, ¿no ves esos ojos vacíos? ¿Esos ojos sin alma?
+
+<p> —Al contrario, están llenos de una hermosa luz azul. Nunca había visto unos ojos azules tan bonitos.
+
+<p> Murmuró elogios exagerados, como si estuviera deliberadamente encantada, bebiendo su zumo de manzana como si fuera vino.
+
+<p> Óscar entrecerró los ojos, mirando alternativamente a ella y a Cárcel, que estaba a cierta distancia. Luego, inclinando la cabeza cerca de su hombro, le susurró como si compartiera un gran secreto.
+
+<p> —¿Sabes qué? La mitad de los chicos guapos como ese acaban arruinados cuando crecen.
+
+<p> —...
+
+<p> Cuando Inés no respondió, sino que se limitó a resoplar con desdén, Óscar frunció la nariz y añadió:
+
+<p> —¿Crees que miento? Por supuesto, Escalante... Ahora es absolutamente adorable, ¿no?
+
+<p> Se dirigió a su primo por su apellido, fingiendo distancia, y enfatizando deliberadamente la palabra “adorable”. De alguna manera, logró encontrar una palabra más débil que “apuesto” y mucho más trivial que “hermoso”.
+
+<p> —Si hubiera nacido mujer, probablemente tendría a los chicos siguiéndolo tanto como lo hacen ahora las chicas.
+
+<p> Si Cárcel Escalante hubiera sido mujer, todo el tormento que Óscar le había infligido seguramente se lo habría infligido a él. Porque hubiera poseído el mejor linaje y el rostro más exquisito a juego.
+
+<p> Según la firme convicción de Óscar, lo mejor siempre debía emparejarse con lo mejor. Si esos dos hubieran estado juntos, si fueran de diferentes sexos, al menos uno de ellos habría sido el mejor, tal y como Óscar había deseado.
+
+<p> Ella dejó escapar un breve suspiro de pesar. Si hubiera sido así, probablemente ahora estaría viviendo una vida normal, libre de los reveses de la vida, criando hijos y preocupándose por trivialidades como cómo pasar el resto de sus días con un marido con el que no se llevaba bien.
+
+<p> Se habría convertido en la amante de la casa de algún Duque, mostrando exteriormente una influencia considerable mientras por dentro se pudría y se deterioraba, viviendo una vida tranquila como las otras mujeres nobles de la familia Ortega. Aun así, habría encontrado su propia felicidad.
+
+<p> Su naturaleza exigente, reacia a cualquier imperfección, le habría impedido tener un amante apuesto, pero a cambio, Inés disfrutaría de la vida libre de la mansión. Recorrería los cotos de caza, cabalgaría lejos para inspeccionar la finca, viajaría a balnearios por todo el país para descansar y recuperarse...
+
+<p> Entonces, si la fortuna le sonreía, su marido moriría joven y, para entonces, ella tendría un hijo con la edad adecuada para heredar. Se vería formalmente liberada de todas sus obligaciones. Lo que le esperaba no era más que una vida libre, sin ataduras.
+
+<p> Cobraría el alquiler de las tierras que Valeztena había aportado como dote y viviría como terrateniente hasta su muerte, a pesar de ser mujer. Al fin y al cabo, así era como vivían todas las afortunadas ancianas adineradas.
+
+<p> Su marido la engañaría de vez en cuando como un perro, como cualquier noble corriente de Ortega, y tendría aventuras con otras mujeres a sus espaldas, pero ¿qué importaba?
+
+<p> De todos modos, él habría muerto joven por ella; hacía tiempo que lo había decidido en su mente. Además, uno no se convertía en un foco de enfermedades venéreas con el esfuerzo habitual.
+
+<p> Incluso un gran narcisista como Óscar sabría sin duda que su heredero era precioso y no se atrevería a meter su polla enferma en su esposa embarazada...
+
+<p> Inés contempló los rasgos angelicales de Cárcel con una mirada llena de afecto, como para presumir, y de repente volvió sus ojos fríos y los fijó en Óscar. Óscar se estremeció.
+
+<p> —... ¿Por qué? ¿Por qué?
+
+<p> Este pelirrojo se convertiría sin duda en la peor criatura de la tierra. ¿Un hombre al que le gustan las mujeres?
+
+<p> Partiendo de la premisa “si Cárcel Escalante hubiera sido mujer”, e incluso imaginando un hipotético marido que hubiera dejado educadamente un heredero antes de abandonar este mundo, la insistencia de Óscar se volvió aún más irritante.
+
+<p> Los ojos de Inés se volvieron aún más fríos. Quizás molesto por el hecho de que él se hubiera estremecido visiblemente bajo su mirada, carraspeó y continuó con sus calumnias contra Cárcel.
+
+<p> —... Lo que quiero decir es que, si ese chico hubiera sido una chica, no habría pasado nada. Para ser una mujer hermosa, solo se necesita belleza. Pero para un hombre, se requiere mucho más. Un hombre que es perfecto por fuera no se hace solo con una cara bonita como esa...
+
+<p> —También se necesita un buen físico. Sí. Lo sé.
+
+<p> Inés mostró abiertamente su indiferencia, bebiendo a sorbos su zumo de manzana.
+
+<p> La vida, donde uno no puede ver ni un centímetro más allá. Por eso la vida es a veces divertida. Inconsciente de su propio futuro —un cuerpo frágil que crecería sin una pizca de músculo decente— y ajeno a cómo su primo, que actualmente era “simplemente apuesto”, se convertiría algún día en un gigante robusto que lo superaría en altura... .
+
+<p> Al observar a este hombre, Óscar, que vivía sin tener ni idea de lo que le deparaba el futuro, se encontró capaz de esbozar una leve y amarga sonrisa.
+
+<p> —Te das cuenta de que Su Majestad el Emperador es bastante más alto que el Duque Escalante, ¿verdad?
+
+<p> —Sí.
+
+<p> —Y que su frente se está volviendo más ancha.
+
+<p> Esa meticulosidad, movilizando incluso a su tío, que se dejaba seducir por cada una de sus palabras para asegurar el futuro de Cárcel. Esa predicción maldita de que, por muy “guapo” que fuera Cárcel, al final no sería más que un hombre bajito y calvo...
+
+<p> Pero todo eso no tenía sentido.
+
+<p> —El Duque Escalante siempre ha tenido la frente ancha, ¿no?
+
+<p> —No. La línea del cabello del Duque se está retirando lentamente hacía atrás. ¿No te diste cuenta? Pronto estará calvo. A diferencia de la abundancia de Su Majestad. Y los hijos se parecen a sus padres, ¿no?
+
+<p> —Dios mío, qué desgracia tan terrible.
+
+<p> —Pero uno no puede andar con una peluca blanca como se hacía hace cien años. ¿O sí? Si Cárcel se parece a él, la vida de ese chico no será más que un camino hacia la calvicie.
+
+<p> Míralo diciendo tonterías solo porque tiene prisa... Inés miró a Óscar, que exponía con seriedad otra teoría más, completamente atónita.
+
+<p> —Por muy radiante que esté ahora, más adelante solo lo estará porque no tiene pelo. Imagina esa cara bonita, con ese precioso cabello rubio completamente desaparecido. Inés, ¿qué opinas? ¿No es terrible?
+
+<p> —Terrible, sin duda... Pero ¿quién rayos pierde todo el pelo así?
+
+<p> —Es difícil de creer, pero los calvos también son humanos. Existen en algún lugar del mundo... Es realmente terrible. La razón por la que el Lord Ihar nunca sale de sus aposentos es precisamente porque es completamente calvo. Lo vi. No tenía nada en la cabeza...
+
+<p> Se estremeció como si recordara algún recuerdo horrible.
+
+<p> —Solo lo he oído, Alteza. Nunca lo he visto con mis propios ojos. Ni siquiera puedo imaginar a una persona sin pelo... Pero, Alteza.
+
+<p> Cuando Inés le tomó el brazo con cautela, Óscar se sobresaltó y luego se animó como un perro a punto de salir a pasear. Con la certeza de haber lanzado el anzuelo y pescado un pez.
+
+<p> —Da miedo, ¿verdad? Aunque solo sea una posibilidad...
+
+<p> —Alteza, ¿sabía que su frente es idéntica a la de su tío, el Duque Escalante? Siempre lo he pensado.
+
+<p> —...
+
+<p> —Al volver a verlo, realmente lo es. Absolutamente idéntica.
+
+<p> Óscar se llevó la mano a la frente, con expresión de total incredulidad. Era un gesto lleno de desconcierto, ya fuera porque realmente creía que su tío se quedaría calvo o porque simplemente había caído en su propia trampa y se había quedado sin palabras.
+
+<p> En realidad, el Duque Escalante desarrollaría más tarde una cabeza tan delgada que se le veía claramente la coronilla. Aunque no estaba completamente calvo, sí que se le caía un poco el pelo, por lo que había que reconocer que ella tenía una percepción peculiar.
+
+<p> Y se parecía más al Duque que su hijo, Cárcel. Si se mezclara mitad Emperador y mitad Duque, se obtendría precisamente ese resultado. Y además, una mezcla bastante a medias.
+
+<p> Inés sonrió radiante. La idea de Óscar, que probablemente estaría medio calvo cuando ella muriera, la hizo sonreír involuntariamente.
+
+<p> —Yo también. He heredado los dedos de mi tía. A veces se ven parecidos no solo con los padres o los abuelos, sino también con los hermanos de los padres.
+
+<p> —...
+
+<p> —Afortunadamente, Su Alteza el Duque Escalante posee una frente muy hermosa y perfectamente recta. Por eso Su Alteza también tiene una frente tan bonita.
+
+<p> —...
+
+<p> —Pero no me gusta la calvicie.
+
+<p> —...
+
+<p> —Ni siquiera en Su Alteza.
+
+<p> —No. El futuro no se puede decidir tan fácilmente. El hecho de que dos frentes se parezcan no significa que sus destinos vayan a ser idénticos...
+
+<p> —Entonces Cárcel Escalante también estaría bien, supongo.
+
+<p> Óscar era tan vulnerable a los obstáculos repentinos como a su propia ignorancia. Su única respuesta le devolvió la misma expresión de desconcierto que había tenido cuando le golpeó por primera vez.
+
+<p> —No puedo garantizar que no se quede calvo. Pero mira ese rostro tan delicado. Ese chico crecerá sin un solo rasgo masculino. Nadie elogiará jamás a un Escalante adulto por su atractivo físico.
+
+<p> Quizás llamarlo guapo era quedarse corto... Era simplemente demasiado perfecto, de la cabeza a los pies.
+
+<p> —Si hubiera nacido niña, a esa edad crecería razonablemente bonita, aunque nunca tanto como tú, Inés. Tú eres perfecta. Mi elección siempre serás tú.
+
+<p> Inés se limitó a encogerse de hombros con indiferencia.
+
+<p> —Un rostro como el tuyo, perfectamente adecuado, es precisamente el tipo de rostro que realmente brilla en la edad adulta. Prefiero invertir en futuros inciertos. No sé por qué de repente has empezado a llevar solo estos vestidos apagados, pero si te vistieras con ropa bonita y alegre que te quedara tan bien como antes, serías mucho más...
+
+<p> —Incluso Dios se opone a ello, Alteza.
+
+<p> —Ya le he preguntado al obispo de Mendoza sobre eso. Dijo que no había absolutamente ningún fundamento para ello.
+
+<p> —Entonces, ¿supongo que soy un ser humano débil y poco civilizado que se deja llevar por supersticiones infundadas y comete graves errores de juicio?
+
+<p> Por un momento, Óscar, sin comprender la palabra “poco civilizado”, volvió a inclinar la cabeza con expresión inexpresiva antes de captar el matiz negativo y retractarse apresuradamente.
+
+<p> —Eso no es cierto.
+
+<p> —Su Alteza, soy demasiada inculta, ignorante e incompetente para estar en presencia de alguien tan culto y erudito como Su Majestad. Tal como usted dijo.
+
+<p> —…¿Cuándo dije yo algo así?
+
+<p> —La herida es profunda. Así que, por favor, no me haga más daño.
+
+<p> —¿Cuándo te lastimé?
+
+<p> —No hay manera de que nos casemos, Su Majestad.
+
+<p> Inés dejó el vaso vacío sobre la mesa y se alejó dándole la espalda a Óscar.
+
+<p> —No lo has decidido, ¿verdad? ¿Escalante no? Lo dices por decir ¿cierto? Para ponerme a prueba. Para impacientarme.
+
+<p> —Bueno.
+
+<p> —¡Ese tipo sólo le causará problemas a las mujeres durante toda su vida!
+
+<p> También le causará problemas a los hombres, sonrió para sus adentros.
+
+<p> —¡Sin sueños! ¡Sin criterio! ¡Sin nada en tu cabeza! ¡No es lo suficientemente bueno para ti!
+
+<p> —...
+
+<p> —¡Este no es el final, Inés Valeztena!
+
+<p> Esto solo sirvió para avivar la obstinación del joven Príncipe Heredero: cuanto más inalcanzable era algo, más lo deseaba.
+
+<p> Aunque era un poco prematuro, molesto e irritante, pronto necesitaría un prometido.
+
+<p> Para asegurarse de que Óscar se convirtiera realmente en alguien a quien ella nunca podría tener.
+
+<p> —Inés, ¿por qué Su Alteza Real el Príncipe Heredero de repente...?
+
+<p> Mirando por encima del hombro de Inés a Óscar, Enrique Osorno preguntó con cautela, pero se interrumpió, aparentemente intuyendo la situación.
+
+<p> Inés de repente lo miró fijamente. Como un pequeño depredador que había visto una presa fresca.
+
+<p> —... ¿Por qué?
+
+<p> —...
+
+<p> —¿Por qué eres así?
+
+<p> Enrique Osorno. Era cinco años mayor que ella, el único nieto del Duque Osorno.
+
+<p> El chico, con su cabello castaño oscuro y sus rasgos pronunciados, tenía esa calidez característica de la antigua sangre sureña. En el pasado, cada vez que Inés lo veía, sentía ocasionalmente una inexplicable opresión en el pecho.
+
+<p> ¿Era porque no le gustaba su aspecto? E incluso ahora…
+
+<p> ... Sigue siendo igual.
+
+<p> Se sentía igual de agobiada.
+
+<p> En el pasado, tal vez se habría preguntado cómo podría soportar ver ese rostro toda la vida, pero después de haber tocado fondo varias veces, la apariencia de un hombre ya no le importaba mucho. Por lo tanto, sentirse agobiada con solo mirarlo tampoco le importaba.
+
+<p> Inés había decidido no dar mucha importancia a palabras como matrimonio o marido. El hombre solo tenía que ser un bastardo cualquiera de Ortega que no pudiera aplastarla con su estatus.
+
+<p> Siempre y cuando no fuera vergonzoso que la vieran con él y no tuviera ningún rasgo genético que pudiera suponer una carga para su hijo. Cosas como problemas intelectuales, enanismo o calvicie.
+
+<p> La apariencia no era lo más importante, pero sin duda sería vergonzoso que lo vieran con un rostro feo, así que no podía ser feo bajo ningún concepto. Tampoco podía tener un aspecto extraño, ni tener el torso demasiado largo y las piernas demasiado cortas. Ni al revés.
+
+<p> Su cabeza no podía ser demasiado grande, ni tan anormalmente pequeña que hiciera que su rostro pareciera desproporcionadamente grande. La nariz no debía ser pequeña, las cuencas de los ojos demasiado pequeñas, ni el color de los labios pálido y enfermizo…
+
+<p> Siempre que se cumplieran estos aspectos fundamentales, Inés juraba que la apariencia de un hombre realmente importaba poco.
+
+<p> Y si me diera un hijo y muriera en el momento adecuado, sería espléndido.
+
+<p> La frialdad llevada al extremo por una serie de acontecimientos finalmente se manifestaba en ese preciso momento.
+
+<p> Si pudiera evitar el matrimonio desde el principio, nada sería mejor para Inés ahora, pero como hija de Valeztena, eso era imposible.
+
+<p> Además, vivir como virgen toda la vida en Ortega era difícil, a menos que una se encerrara en un convento.
+
+<p> Sería una desgracia para sus padres, una mancha en el nombre de la familia... Dejando de lado esos valores tradicionales, la perspectiva inmediata de ser relegada al fondo de la sociedad, tachada de semillero de todos los vicios y vilipendiada, y que su familia fuera testigo de ello durante el resto de sus vidas, sería muy dolorosa para cualquiera.
+
+<p> Además, una mujer soltera no conserva ninguna autoridad sobre sus bienes personales, ni siquiera en la vejez. Esto lleva a la ironía de que una hija, que hereda los bienes privados de sus padres, no puede gastar ni un solo centavo sin el permiso de su sobrino.
+
+<p> Es cierto que esto es algo que solo haría una persona sin principios, pero tales individuos eran más comunes en el mundo de lo que uno podría imaginar. ¿De qué le sirve la riqueza a una mujer sin hijos? Al final, no sería más que una propiedad compartida de la que podrían disponer los hijos de sus hermanos.
+
+<p> Social y moralmente, podría ser respetada como adulto de la familia. Al menos en la medida en que pareciera mayor. Sin embargo, una mujer considerada “fracasada” por no haberse casado nunca podría convertirse en una persona legalmente independiente en Ortega.
+
+<p> E Inés pensaba que el respeto valía menos que la comida de un perro. El dinero era inútil si no tenía, pero no tenía derecho a manejarlo en absoluto.
+
+<p> Las mujeres en Ortega solo se consideraban adultas de pleno derecho una vez casadas. Incluso entonces, solo como esposas de alguien.
+
+<p> Sin embargo, las leyes de Ortega afirmaban ser progresistas porque todo cambiaba en el momento en que desaparecía el marido.
+
+<p> Ya sea por muerte, divorcio o desaparición.
+
+<p> Ortega era el país con el mayor número de juicios de divorcio entre los países vecinos. También era el único que permitía el “divorcio iniciado por la mujer”, reconociendo ampliamente los motivos atribuibles al marido.
+
+<p> Si una mujer que se divorciaba no tenía culpa alguna, nunca volvía a su estado premarital incompleto. Si había adquirido un título por matrimonio, lo conservaba de por vida y recibía una generosa pensión hasta su muerte para mantener la dignidad propia de ese título.
+
+<p> También poseía derechos independientes sobre la disposición de sus bienes privados. Porque ya no era la hija o la esposa de nadie, sino una persona por derecho propio.
+
+<p> Por muy tonto que fuera un hombre, si vivía tranquilamente hasta los diecisiete años, podía lograr lo que quisiera. Por muy inteligente que fuera una mujer, solo podía lograrlo después de soportar todas las pruebas y tribulaciones del matrimonio, el divorcio y la viudez. Sin embargo, ahora eso era la única puerta de acceso a las oportunidades.
+
+<p> Aunque el estatus más alto que una mujer podía alcanzar como Ortega era la realeza, Inés pensaba de otra manera.
+
+<p> Las mujeres más exitosas del Imperio en la actualidad eran aquellas cuyos maridos habían fallecido, desaparecido o se habían divorciado de ellas. Es decir, mujeres que estaban casadas pero no tenían marido.
+
+<p> El tamaño de sus respectivas fortunas importaba, pero, en esencia, era insignificante. Al fin y al cabo, independientemente de dónde o cómo se hubiera nacido, nacer mujer significaba que no había forma de vivir como un individuo más independiente de lo que eran.
+
+<p> Según los estándares actuales de Inés, cuanto antes muriera su marido o se divorciara de él, mayor sería su éxito. E Inés estaba decidida a alcanzar un gran éxito en esta vida.
+
+<p> Había intentado aceptar dócilmente su destino con el Príncipe Heredero, pero se encontró totalmente incapaz de reprimir su irritación y abandonó la idea de un plumazo. Desde entonces, ese deseo dentro de ella no había hecho más que crecer.
+
+<p> Cuanto más investigaba, más comprendía Inés por qué las mujeres de Ortega mataban a tantos maridos: recordó a Óscar y finalmente lo entendió. Porque matar a ese bastardo lo cambiaría todo.
+
+<p> Sin embargo, aunque su corazón lo entendía, ahora se encontraba en una posición en la que ya no podía cometer pecado.
+
+<p> Y la vida que había pasado acostándose cada noche pensando en cómo, dónde y con qué matar a su marido era suficiente para su primera vida con Óscar.
+
+<p> Prefiero renunciar a una existencia tan sangrienta ahora.
+
+<p> Así que lo único que quedaba era el accidente prematuro o la muerte natural de un marido que había engendrado un heredero, o el divorcio por culpa de la otra parte.
+
+<p> Pero fijándose en Enrique Osorno. Estaba destinado a ser excesivamente saludable, nunca se aventuraba en terrenos peligrosos y, a diferencia de la mayoría de los hombres eruditos, era diligente con el entrenamiento físico. En resumen, los accidentes, las enfermedades y la muerte eran perspectivas lejanas para él.
+
+<p> Inés recordó de su primera vida que Enrique había sido uno de los miembros de la corte que disfrutaba de todo tipo de competiciones con Cárcel. A diferencia de los demás, montaba bien; a diferencia de los demás, cazaba bien. A diferencia de los demás, jugaba bien a la pelota…
+
+<p> ...A diferencia de los demás, es demasiado sano. Robusto.
+
+<p> Por muy impredecibles que sean los asuntos humanos, cuanto mayor es la probabilidad, más segura es la apuesta.
+
+<p> Cuando llegó a este punto en sus pensamientos, Inés se dio cuenta de repente de lo inhumanamente calculadora que estaba siendo, frente a alguien mucho más joven que ella.
+
+<p> Enrique era cinco años mayor que ella, pero a sus ojos, todos los de esa edad parecían niños insignificantes.
+
+<p> ¿Se podía realmente desear que esos niños murieran jóvenes, o lamentarlo si no lo hacían?
+
+<p> Sin embargo, ella ya lo había hecho. Sentía como si hubiera cometido un pecado con solo pensarlo. Pensar en Óscar le había hecho sentir como si hubiera perdido su propia humanidad.
+
+<p> —... Inés, ¿de verdad estás bien? Estás muy pálida. Pareces asustada.
+
+<p> —Estoy bien.
+
+<p> —No he oído lo que ha dicho Su Alteza, pero parecía bastante tumultuoso. ¿Le has dicho algo inapropiado a Su Alteza?
+
+<p> —No. Nada de eso.
+
+<p> —No sé por qué Su Alteza se ha vuelto tan sensible desde la primavera. Especialmente últimamente... todo el mundo está pendiente de cada movimiento de Su Alteza.
+
+<p> —¿Ah, sí?
+
+<p> —Tampoco deberías preocuparte demasiado por eso. Parece que últimamente algo no le ha salido bien a Su Alteza…
+
+<p> La encarnación misma de las cosas que no salían bien para Su Alteza era Inés Valeztena.
+
+<p> Inés asintió vagamente sin mostrar ningún signo de ello.
+
+<p> A pesar de su evidente molestia por la conversación, Enrique siguió mirando a Inés con afecto. Mirando atrás, independientemente de sus sentimientos hacia su apariencia, él siempre había sido una persona decente en la memoria de Inés.
+
+<p> No era un santo, pero era alguien que no haría daño a nadie deliberadamente.
+
+<p> Aun así, desear la muerte de alguien me resulta bastante inquietante…
+
+<p> En última instancia, el mejor resultado sería un divorcio en el que nadie muriera.
+
+<p> Ojalá algún idiota soltara la lengua y revelara sus defectos, facilitaría el reconocimiento del divorcio. Eso sería lo ideal.
+
+<p> Objetivamente hablando, era un tipo decente. Tenía el pelo tan espeso que rivalizaba con el de su anciano abuelo, y había mujeres a las que les gustaba su característico cutis sonrosado. También era bastante perspicaz; en el mundo académico, probablemente se haría un nombre en pocos años.
+
+<p> Además, al haber perdido a su padre prematuramente y ser ya el heredero de su abuelo, tenía muchas más posibilidades de heredar su título antes que cualquiera de los jóvenes aristócratas presentes allí. Así que era natural que muchas mujeres se sintieran atraídas por él…
+
+<p> Inés negó con la cabeza ante Enrique como si fuera un caso perdido.
+
+<p> Buscando en toda su memoria, solo había un rumor en el que Enrique Osorno era el protagonista. Que era un gran amante.
+
+<p> ... ¿Un gran amante? Eso es lo peor.
+
+<p> Un hombre que se casa como se espera y vive solo para su esposa... Si su sueño era pasar la vida protegiendo a su familia, él sería el hombre perfecto para casarse. Pero el éxito con el que soñaba era diferente.
+
+<p> Las mujeres más exitosas del Imperio son aquellas cuyos maridos han muerto, desaparecido o se han divorciado de ellas. Como había descartado las muertes accidentales, su objetivo ahora era solo el divorcio.
+
+<p> La forma más completa de ser humano libre. Una persona capaz de tomar decisiones legales por sí misma. El único camino para convertirse en una entidad independiente…
+
+<p> Una vez que la sombra de Valeztena y la sombra de su marido hubieran desaparecido, tal vez podría volver a enamorarse. O tal vez no importaría si nunca volvía a hacerlo.
+
+<p> Pero daba igual. Porque para entonces, sería un ser perfectamente libre.
+
+<p> —Por cierto, Inés, ¿ha pasado algo en Pérez? Me pregunto por qué solo has llevado negro a las fiestas desde que regresaste a Mendoza…
+
+<p> —...
+
+<p> —No es que no te quede bien, claro. Es solo que... resulta bastante sombrío, un poco lúgubre y bastante triste. Sin embargo, curiosamente, te queda bien…
+
+<p> —...
+
+<p> —Mamá se preocupó bastante cuando de repente empezaste a vestirte así. Se preguntaba si había pasado algo en casa de los Valeztena. Siempre te han gustado los colores vivos. Además, ninguna chica va a una fiesta vestida de negro.
+
+<p> —...
+
+<p> —Eso es lo que dijo mamá. Que una chica vista ropa tan oscura... que parece triste solo con mirarla, solo puede significar que ha sufrido un terrible shock y que su mente se ha vuelto un poco loca, o que alguien ha muerto.
+
+<p> Debía casarse, pero su marido debía desaparecer. Sin embargo, un marido tan meticuloso y cariñoso, que se da cuenta de los cambios en su estado de ánimo, en su ropa, en su pelo, que capta las señales de que su mente está inquieta, no desaparece legalmente del lado de una mujer.
+
+<p> Ella no necesitaba un marido que fuera simplemente aceptable. Necesitaba un hombre que, algún día, desapareciera legalmente de su vida.
+ 
+<p> Las preocupaciones bienintencionadas, aunque prejuiciosas de Enrique fueron totalmente ignoradas, ya que Inés comenzó a examinar a los hijos de los Duques con renovada cautela.
+
+<p> ¿Dante Ihar?
+
+<p> Era un tipo rígido, fiel a las costumbres de su familia. Circulaban algunos rumores triviales, pero no dejaba una impresión duradera. Era un tipo prudente que podía hacer algunas travesuras entre bastidores, pero nunca cruzaría una línea verdaderamente peligrosa, ni siquiera a costa de su vida.
+
+<p> ¿Leonardo Helves?
+
+<p> Apenas tenía un año, dos como mucho. Fuera lo que fuera, seguía siendo un bebé al que había que llevar en brazos. Ella solo tenía seis años, pero a través de unos ojos que veían incluso a los niños de once años como insignificantes, él simplemente no era una pareja plausible. Ni siquiera se le ocurría una vaga imagen de él como adulto.
+
+<p> Su mirada se desvió de Dante Ihar y Leonardo Helves y volvió al hijo mayor de Escalante.
+
+<p> El rostro de la leyenda, destinado a causar el mayor revuelo en la sociedad.
+
+<p> Cárcel Escalante...
+
+<p> Aunque solo había utilizado el nombre a la ligera para burlarse de Óscar, quizá no fuera tan mala idea después de todo.
+
+<p> Inés prestó más atención a las jóvenes nobles que rodeaban a Cárcel que al propio Cárcel, que solo ofrecía respuestas indiferentes y breves.
+
+<p> Seguirían allí de pie, contemplando a Cárcel exactamente de la misma manera dentro de una década. E incluso veinte años después, cuando cada una hubiera encontrado un esposo.
+
+<p> ... No está tan mal.
+
+<p> A la Inés actual le parecía simplemente ridículo, pero, en cualquier caso, las hazañas mujeriegas de Cárcel, tal y como ella las recordaba, eran muy famosas. Tanto es así que en su día había despreciado y desdeñado a los hombres de su calaña.
+
+<p> —... ¿Inés...?
+
+<p> —...
+
+<p> —Tienes un aspecto muy extraño. ¿Te llevo con el Duque Valeztena?
+
+<p> Enrique seguía observando a Inés con preocupación, pero ahora había desaparecido por completo de su atención.
+
+<p> Como si no oyera nada, Inés se limitó a examinar los rasgos finamente cincelados de Cárcel con ojos benévolos.
+
+<p> Esa apariencia perfecta seguramente se convertiría en una ruina a medida que envejecía, pero también era un hombre que simplemente había perseguido una vida de libertad, rechazando cualquier cosa que requiriera responsabilidad.
+
+<p> Un hombre sin remedio que rechazaba ferozmente todas las propuestas de matrimonio que le llegaban, que incluso se negó a casarse cuando falleció su padre, y que finalmente no heredó su título.
+
+<p> Si renunció a su título porque detestaba el matrimonio, o evitó casarse para impedir heredar el título, o ambas cosas... las opiniones estaban divididas sobre la decisión de Cárcel. En cualquier caso, estaba claro que rehuía cualquier cosa que requiriera responsabilidad personal.
+
+<p> ¡Pero qué virtuoso era! Entre las mujeres que se le echaban encima como una marea, él elegía reunirse solo con unas pocas, y a diferencia de otros, nunca tuvo una esposa engañosa.
+
+<p> Su negativa a comprometerse seriamente con ninguna de ellas llevó a algunos a considerar su conducta frívola, pero, por decirlo de otra manera, significaba que no había ninguna mujer que lo traicionara, ni legal ni emocionalmente.
+
+<p> Que ellas acudieran a él sin esfuerzo y que él no se acostara con todas... eso solo ya era digno de elogio, murmuró Inés con compasión.
+
+<p> Mejor un cuerpo que hiciera que las mujeres quisieran desnudarse, aunque él mantuviera la boca cerrada, que un estafador que no ofrecía más que falsa sinceridad mientras codiciaba el cuerpo de una mujer.
+
+<p> Al menos no un estafador.
+
+<p> Después de todo, fue la mujer quien vio su cuerpo primero.
+
+<p> Además, aunque era un mujeriego notorio, no tenía ninguna enfermedad venérea grave como otros; era moderadamente promiscuo, estaba rodeado de mujeres, nunca recurrió a la prostitución, no practicaba la sodomía y tenía relaciones sexuales dentro de los límites de la decencia normal... No podía creer que todo el potencial que necesitaba estuviera contenido en ese niño.
+
+<p> Esa era la garantía de Óscar. Si Cárcel Escalante hubiera contraído una enfermedad venérea, pagado por prostitución o contratado a un prostituto, si hubiera hecho siquiera una de esas cosas, el Príncipe Heredero, enloquecido por los celos, lo habría expuesto ante el mundo hacía mucho tiempo. El mujeriego de Cárcel era tan famoso precisamente porque Óscar no había podido encontrar un defecto mayor que ese.
+
+<p> Inés empezó a sentirse cada vez más segura acerca de Cárcel Escalante. Ella podía concebir un hijo de forma limpia, libre de enredos perversos, y el divorcio le dejaría a él con multitud de manchas evidentes.
+
+<p> Además, qué tranquilizador era lo transparente que era su pasado... Incluso Inés, que tenía poco contacto con Cárcel y ningún interés en él, recordaba mucho de los simples chismes que había oído en las veladas. Porque todas las mujeres con las que se acostaba hablaban de ello.
+
+<p> Para las mujeres de Mendoza, Cárcel era un objetivo que simplemente había que alcanzar al menos una vez en la vida. Un hombre que era un sueño para algunas, una medalla de honor para otras. Incluso la mujer más reservada, la dama más recatada, no podía callarse después de acostarse con Cárcel.
+
+<p> Incluso una aventura de una noche era algo de lo que presumir. Circulaban rumores sobre sus posiciones preferidas bajo las sábanas. Cada uno de ellos acompañado de los mayores elogios: “grande y bueno en eso”. A pesar del gran volumen de chismes que circulaban sobre su vida sexual, a diferencia de otros, sus encuentros eran uniformemente sensatos y poco memorables. Simplemente lujurioso, no pervertido.
+
+<p> El revuelo causado por un hombre corriente que se acuesta con diez mujeres no es comparable al causado por Cárcel Escalante al acostarse con una. Eso no lo hacía menos promiscuo, pero era simplemente muy visible. Su delito era que no sentía la más mínima vergüenza, sino más bien orgullo, por sus aventuras de una noche con mujeres.
+
+<p> En consecuencia, también era el tipo de marido que, una vez casado, esparcía ostentosamente sus defectos por todas partes.
+
+<p> —... Perfecto...
+
+<p> Era tan perfecto que la palabra “perfecto” resultaba insuficiente.
+
+<p> Si se trataba de Cárcel Escalante, ni siquiera la Emperatriz se atrevería a interferir. Aunque deseaba desesperadamente una alianza matrimonial con el Duque Valeztena, nunca le gustó Inés como Princesa Heredera. Decía que cuanto más veía los defectos de Inés, más insoportable le resultaba.
+
+<p> Como muchas madres en Ortega, la madre de Óscar estaba convencida de que su hijo era el mejor del mundo.
+
+<p> Por mucho que Inés fuera aclamada en sociedad, para ella no era más que una alimaña que carcomía la reputación de Óscar. Su opinión sobre Inés no podía ser más diferente de la de una niña de seis años que jugaba infantilmente con su hijo.
+
+<p> Sin embargo, la Emperatriz persiguió el compromiso entre el Príncipe Heredero e Inés con tanta diligencia por una sola razón. Era mucho más terrible que el Duque Ihar, que chocaba constantemente con el Duque Escalante en asuntos políticos, o el Duque Helves, que aún se negaba a apoyar al Príncipe Heredero, se uniera al Duque Valeztena mediante una alianza matrimonial.
+
+<p> Pero si esa molesta carga fuera a recaer voluntariamente no sobre el pelirrojo más brillante del mundo, sino sobre ese sobrino esculpido que persistentemente hacía que su hijo perfectamente sano pareciera una creación defectuosa...
+
+<p> Si pudiera trasladar esa carga insatisfactoria al lado de su hermano y también evitar que los grandes nobles se unieran...
+
+<p> Lejos de obstaculizarme, seguramente me bendeciría y me ayudaría.
+
+<p> ¿Podría haber un hombre más adecuado para el matrimonio? El hecho de que pudiera revolverle las tripas a Óscar era solo una ventaja añadida.
+
+<p> Además, es más inteligente de lo que pensaba.
+
+<p> El hecho de que nunca se hubiera casado lo demuestra. Lo conocía lo suficientemente bien como para reconocer que no poseía ni una pizca de fidelidad, por lo que tomó esa sabia decisión.
+
+<p> Pero ahora, Cárcel Escalante estaba listo para explorar un camino menos sensato.
+
+<p> Y dentro de las limitaciones del matrimonio, perseguiría la libertad que una vez conoció, encontrando su propia libertad en el camino.
+
+<p> Algunos hombres imaginan la vida matrimonial con una mujer tras una sola sonrisa de ella, ¿no es así? Inés fue un paso más allá y ya se imaginaba cómo llevarían a su hijo a las casas del otro cada temporada tras el divorcio.
+
+<p> —Padre, he tomado una decisión.
+
+<p> —¿Hmm?
+
+<p> —Voy a casarme con el hombre más apuesto del mundo.
+
+<p> Inés pronunció estas palabras con una voz rebosante de sueños y esperanza, en total contradicción con la mirada impasible que dirigía a Cárcel. Una niña con recuerdos de adulta era la que mejor entendía el corazón de un adulto.
+
+<p> Cuanto más fantásticamente ingenuas son las palabras, menos puede dudar un adulto de la niña.
+
+<p> —...No estarás hablando de... Cárcel Escalante. ¿Verdad?
+
+<p> El Duque Valeztena desvió la mirada hacia donde señalaba su dedo. Un chico guapo, rodeado por capas y capas de chicas como flores, ladeó la cabeza con confusión, sin entender el gesto de Inés.
+
+<p> Al verlo, el Duque Valeztena inmediatamente frunció el ceño. Sin embargo, no compartió sus pensamientos pesimistas en detalle con su única hija pequeña. Qué tipo de hombre era ese padre, en qué se convertiría ese chico, ya rodeado de tantas chicas, cuando creciera, etc.
+
+<p> El Duque apretó los labios con fuerza, como si estuviera soportando algo, y luego volvió a preguntar con suavidad.
+
+<p> —¿Quieres a un tipo así?
+
+<p> —Sí.
+
+<p> —¿Es esa la única razón? ¿Por qué es guapo?
+
+<p> —Sí.
+
+<p> —Hija mía, realmente juzgas solo por las apariencias...
+
+<p> —Las familias son todas iguales, así que lo único que llama mi atención es esa cara.
+
+<p> El Duque pareció momentáneamente desconcertado por la racional justificación de Inés. Entonces, de repente, una sutil sonrisa se dibujó en sus labios mientras respondía.
+
+<p> —Pero ¿qué hay del Príncipe Heredero? Es guapo y está destinado a ser Emperador, ¿no sería mejor?
+
+<p> —Parece destinado a quedarse calvo, igual que el Duque Escalante.
+
+<p> Ja... Una risa entrecortada escapó de los solemnes labios del Duque Valeztena, sonando decididamente indigna. Era una burla rebosante de desprecio privado y genuino.
+
+<p> En cuanto a él, había sido un amigo íntimo que estudió junto al Duque Escalante desde la infancia. Sin embargo, a lo largo de los años, lejos de construir una amistad genuina, no habían hecho más que enzarzarse en rivalidades infantiles, lo que fomentó un peculiar rechazo mutuo.
+
+<p> —Pero Óscar está destinado a ser Emperador, Inés. ¿No te arrepentirás? Estás rechazando la oportunidad de alcanzar una posición muy alta. Si te casaras con él, incluso tu padre tendría que inclinar la cabeza ante ti.
+
+<p> —No me importa en absoluto que mi padre se incline ante mí... Y no me gusta la cabeza calva de Su Majestad el Emperador.
+
+<p> El Duque contuvo una risita.
+
+<p> —Entonces Cárcel también es peligroso.
+
+<p> —Afortunadamente, Cárcel Escalante no se parece al Duque Escalante. Se parece a la Duquesa, por lo que es probable que la frente de Escalante permanezca intacta.
+
+<p> —... Realmente se parece a Su Alteza.
+	
+<p> No estaba claro si le resultaba especialmente agradable la profecía de que su padre “se parecería al Duque Escalante” y, por lo tanto, se quedaría calvo, o si simplemente le parecía creíble la profecía de que “el Príncipe Heredero algún día se quedaría calvo”.
+
+<p> En cualquier caso, el Duque Valeztena aceptó el capricho trascendental de su hija con buen humor.
+
+<p> —Mi única hija no podría pasar su vida con un hombre calvo…
+
+<p> —Como se esperaba de mi padre.
+
+<p> —Inés Valeztena. Si una cara bonita te importa tanto, deberías casarte con el chico más guapo de todos.
+
+<p> Bueno, al fin y al cabo, los malos hábitos se pueden corregir... El Duque murmuró, colocando una mano sobre el hombro de su hija. Era fácil ver de dónde había heredado Inés su temperamento fogoso.
+
+<p> Por un instante, sintió una punzada de remordimiento hacia Cárcel Escalante.
+
+<p> Pero, ¿es realmente malo que un mujeriego reciba su merecido por adelantado?
+
+            </article>
+
+        </main>
+
+        <div class="controles">
+
+            <select id="fuente" onchange="cambiarFuente(this.value)">
+                <option value="Lora">Lora</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+            </select>
+
+            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
+
+            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
+
+            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
+
+        </div>
+    `;
+}
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+
+document.addEventListener("keydown", function(e) {
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
+    ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+});
+
+let tamano = 18;
+
+function cambiarFuente(fuente) {
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
+    contenido.style.fontFamily = '"' + fuente + '", serif';
+    localStorage.setItem("fuenteLectura", fuente);
+}
+
+function cambiarTamano(valor) {
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
+    tamano += valor;
+
+    if (tamano < 14) tamano = 14;
+    if (tamano > 26) tamano = 26;
+
+    contenido.style.fontSize = tamano + "px";
+    localStorage.setItem("tamanoLectura", tamano);
+}
+
+function modoOscuro() {
+    document.body.classList.toggle("oscuro");
+
+    localStorage.setItem(
+        "modoLectura",
+        document.body.classList.contains("oscuro")
+            ? "oscuro"
+            : "claro"
+    );
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    const contenido = document.getElementById("contenido");
+    const fuente = document.getElementById("fuente");
+
+    if (!contenido || !fuente) return;
+
+    const fuenteGuardada = localStorage.getItem("fuenteLectura");
+    const tamanoGuardado = localStorage.getItem("tamanoLectura");
+    const modoGuardado = localStorage.getItem("modoLectura");
+
+    if (fuenteGuardada) {
+        fuente.value = fuenteGuardada;
+        cambiarFuente(fuenteGuardada);
+    }
+
+    if (tamanoGuardado) {
+        tamano = parseInt(tamanoGuardado);
+        contenido.style.fontSize = tamano + "px";
+    }
+
+    if (modoGuardado === "oscuro") {
+        document.body.classList.add("oscuro");
+    }
+});
+
+</script>
+
+</body>
+</html>
+
