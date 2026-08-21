@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomo 3</title>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+	
+body {
+    margin: 0;
+    background: #f7f4ee;
+    color: #252525;
+    font-family: "Lora", Georgia, "Times New Roman", serif;
+    line-height: 1.85;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: background .3s, color .3s;
+}
+.subtitulo {
+    margin-top: 8px;
+    font-family: "Lora", Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #080808;
+    letter-spacing: 0.5px;
+}
+
+body.oscuro .subtitulo {
+    color: #aaaaaa;
+}
+    
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("noctilume.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.01;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contenedor {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 50px 25px 100px;
+}
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.contenido {
+    font-size: 18px;
+    line-height: 1.85;
+}
+
+.contenido p {
+    margin: 0 0 1.3em;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.separador {
+    text-align: center;
+    text-indent: 0;
+    margin: 0 0 1.8em;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+#acceso-denegado {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f4ee;
+    color: #252525;
+    font-family: Georgia, serif;
+    text-align: center;
+    padding: 30px;
+}
+
+#acceso-denegado div {
+    max-width: 500px;
+}
+
+.controles {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 6px;
+    background: rgba(255,255,255,.92);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.10);
+}
+
+.control {
+    height: 36px;
+    min-width: 40px;
+    padding: 0 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.control:hover {
+    background: #eeeeee;
+}
+
+#fuente {
+    height: 36px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 0 8px;
+    background: white;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+body.oscuro {
+    background: #181818;
+    color: #dddddd;
+}
+
+body.oscuro .controles {
+    background: rgba(35,35,35,.95);
+    border-color: #555;
+
+}
+	
+	{
+body.oscuro .control,
+body.oscuro #fuente {
+    background: #303030;
+    color: #eeeeee;
+    border-color: #555;
+}
+
+@media (max-width: 600px) {
+    .contenedor {
+        padding: 30px 18px 100px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .contenido {
+        font-size: 17px;
+        line-height: 1.78;
+    }
+
+    .separador {
+        font-size: 16px;
+    }
+
+    .controles {
+        right: 10px;
+        bottom: 10px;
+        max-width: calc(100% - 20px);
+        overflow-x: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+const TOKEN_CORRECTO = "M1kPg95fbi";
+
+const parametros = new URLSearchParams(window.location.search);
+const token = parametros.get("access");
+
+if (token !== TOKEN_CORRECTO) {
+
+    document.getElementById("app").innerHTML = `
+        <div id="acceso-denegado">
+            <div>
+                <h1>Acceso denegado</h1>
+                <p>Agrega la clave de acceso luego de “=” para ver.</p>
+            </div>
+        </div>
+    `;
+
+} else {
+
+    document.getElementById("app").innerHTML = `
+
+        <main class="contenedor">
+
+            <header class="encabezado">
+                <h1>Tomo 3</h1>
+                <div class="subtitulo">Traición a la promesa de no traicionar</div>
+            </header>
+
+            <article class="contenido" id="contenido">
+
+
+                <div class="separador">
+                    ━━━━━━ ◦ ❖ ◦ ━━━━━━
+                </div>
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> —Lo siento, pero no puedes vivir sin mí. Inés Valeztena.
+
+<p> Diecisiete años después de que Inés, con seis años, idease su innovador plan para una nueva vida.
+
+<p> Aquí está Inés Valeztena, de veintitrés años, golpeando compulsivamente el suelo con el tacón de su zapato.
+
+<p> La parte superior de su cuerpo, visible por encima de la mesa, parecía completamente serena. Una expresión digna y rígida, una postura perfecta, ojos tranquilos, manos que pasaban suavemente las páginas de un libro…
+
+<p> Si no hubiera dejado de pasar las páginas de repente y arrugado el papel, Inés habría parecido tan tranquila como un cisne en el agua.
+
+<p> Las criadas, que estaban ordenando la habitación, buscaban sin cesar el origen del crujido. Al ver a Inés paralizada, agarrando el papel arrugado, intercambiaron miradas de desconcierto. A pesar de percibirlo, sus pies calzados con zapatos no se detuvieron, continuando con el movimiento compulsivo.
+
+<p> —Me besarás docenas, cientos de veces, y nuestros cuerpos se entrelazarán miles de veces. No rozaré ni con la yema de los dedos a ninguna mujer que no seas tú, y hasta que me des un hijo, y luego otro, e independientemente de los hijos, te satisfaré y haré que me satisfagas.
+
+<p> Cuanto más recordaba Inés aquel día, más nerviosa se ponía. Nerviosa era quedarse corta; se sentía completamente desconcertada.
+
+<p> Ese contacto tan íntimo con un hombre era ahora un recuerdo lejano, lo que la dejaba sin palabras. Sin embargo, lo que realmente atormentaba a Inés ahora no era el beso repentino de Cárcel, ni su cosa, que se había separado en algún momento o por algún motivo desconocido.
+
+<p> Hojeó las páginas del libro que sostenía en la mano como si fuera a arrancarlas, y luego lo dejó caer con irritación. Ese tipo de cosas eran casi soportables.
+
+<p> El beso, breve pero excesivamente explícito... Bueno, era un poco embarazoso, pero podía hacerlo pasar por un saludo bastante intenso de su prometido. Ortega era conocido por su promiscuidad, y ese tipo de cosas se permitían abiertamente en los bailes, aunque solo fuera por un momento de coqueteo... Se podía entender, impulsado por un sentido del deber hacia el futuro.
+
+<p> El deseo crudo que le atravesaba las rodillas también podía descartarse como mera energía juvenil. Al ver ese cuerpo tan grande... era natural que estuviera confundido sobre dónde y cómo canalizar su propia fuerza. Así que esas cosas estaban bien.
+
+<p> Pero.
+
+<p> —No rozaré ni con la yema de los dedos a ninguna mujer que no seas tú.
+
+<p> La conmoción por su declaración de querer entrelazar sus cuerpos mil veces no era nada. En comparación con su afirmación de que no tocaría a otra mujer ni siquiera con la punta de un dedo.
+
+<p> <span style="font-style:italic">No tocar a otra mujer con la punta de un dedo... ¿Podría referirse a todo menos a sus manos?</span> Inés, como negando la realidad, construyó otra hipótesis. <span style="font-style:italic">Pero no usar las manos era demasiado difícil. Era complicado... Entonces, ¿por qué...?</span>
+
+<p> <span style="font-style:italic">¿Por qué demonios?</span>
+
+<p> —Hasta que me des un hijo, y luego otro, e independientemente de los hijos, te satisfaré y haré que me satisfagas.
+
+<p> En un matrimonio aristocrático, ¿tenía sentido “independientemente de los hijos”?
+
+<p> Incluso el sexo marital que Inés se había permitido en esta vida era únicamente con el propósito de concebir. O tal vez realizarlo ceremoniosamente una vez cada ciclo lejano... como prueba de que el vínculo marital no había desaparecido por completo.
+
+<p> Incluso eso se había añadido y resuelto con gran renuencia, simplemente para evitar el estigma de no cumplir con las obligaciones maritales en caso de divorcio.
+
+<p> El abogado de Valeztena había declarado que la negativa persistente a mantener relaciones conyugales constituía motivo de culpa para cualquiera de las partes. “Probablemente, por orden de gravedad, sería la infidelidad de la otra parte, seguida de su negativa a mantener relaciones, luego la agresión, luego qué, quizá la extravagancia. A decir verdad, nada se confunde tan fácilmente como la infidelidad y la negativa a mantener relaciones…”. La incesante charla del abogado sobre el divorcio se desvaneció una vez más.
+
+<p> Diez años antes, guiada por el consejo del abogado, el plan más meticulosamente elaborado de Inés, de trece años, había sido este:
+
+<p> Adulterio y rechazo de la intimidad.
+
+<p> Por supuesto, ambas cosas eran cosas que tendría que hacer el futuro Cárcel Escalante. No ella.
+
+<p> —Nada más funcionaría.
+
+<p> <span style="font-style:italic">Agresión... </span>Ella podría haber golpeado a Cárcel, pero no había posibilidad de que él la golpeara a ella, ni ella quería ser golpeada. Tanto la fortuna de los Escalante como la dote de los Valeztena eran demasiado grandes como para malgastarlas en extravagancias.
+
+<p> Así que no había necesidad de tomar el camino difícil. El camino fácil estaba bien. La infidelidad del mujeriego Cárcel Escalante era inevitable. Debía de haber sido un auténtico sinvergüenza en su vida pasada. Aunque pudiera sentirse algo agraviado por que los rumores fueran tan fuertes en comparación con sus actos reales, desde esta perspectiva, era toda una ventaja…
+
+<p> ¿Qué otra razón podría haber para elegir a un hombre tan despreciable como marido, sabiendo perfectamente sus malos hábitos? Precisamente para hacerle pagar por su atractivo físico. Estuviera casado o no, eso significaba que debía seguir viviendo como siempre había hecho.
+
+<p> Entre las mujeres de Mendoza, que brillaban como estrellas en el cielo nocturno, él siempre había elegido solo a las más bellas. Sus elevados estándares hacían que la Inés de esta vida se quedara muy corta. Esto no era en absoluto humildad, pensar que ella no era lo suficientemente buena; era el resultado de sus propios esfuerzos.
+
+<p> Se había preparado para este momento durante mucho tiempo. Su insistencia en llevar una vida recluida en su tercera existencia se debía en gran parte al cansancio de sus compromisos sociales anteriores, pero todo lo demás era el resultado de un cálculo minucioso y una preparación meticulosa.
+
+<p> Tomemos, por ejemplo, su insistencia durante diecisiete años en vestir solo prendas oscuras y sombrías, del tipo que ninguna mujer se pondría a menos que estuviera muerta, hubiera ingresado en un convento o hubiera perdido la cabeza.
+
+<p> La sociedad mendocina era un lugar bastante ridículo, donde creen que el mundo se acaba si una dama aristocrática viste de negro. E Inés había destrozado su mundo cada vez que aparecía en él.
+
+<p> A eso se sumaba su cabello, recogido con rigidez como el de una institutriz o trenzado rústicamente como el de una chica de rancho; de vez en cuando, para acentuar la sensación asfixiante de su vestido, dejaba caer su liso cabello negro, con la cabeza inclinada y solo sus ojos levantándose ocasionalmente con un brillo siniestro... Con el paso de los años, sus métodos se volvieron más variados y sistemáticos.
+
+<p> Inés mantenía esta apariencia en todas partes. En realidad, el método no era malo. Contemplando su sencillo reflejo en el espejo, a veces añoraba los días en que se adornaba lujosamente y encontraba satisfacción en una apariencia más hermosa. Sin embargo, en el momento en que recordaba adecuadamente aquellos tiempos, la nostalgia desaparecía sin dejar rastro. Las tediosas y largas horas que pasaba ante su tocador, los días en que se agonizaba durante medio día para elegir un solo vestido perfecto…
+
+<p> En aquel entonces, podía descartarlo como ignorancia juvenil, viviendo la vida una sola vez. Pero después de morir y revivir, no tenía ningún deseo de repetir esa tediosa rutina.
+
+<p> Ahora, ni siquiera elige un vestido antes de salir. De todos modos, lo que eligiera sería negro. Si buscaba algún atisbo de color, sería un azul marino muy oscuro, un marrón muy oscuro, un gris muy oscuro y, ocasionalmente, para ocasiones especiales, un color vibrante como un verde tan oscuro que era casi negro. La forma también era siempre la misma. Cada uno de ellos le subía estrictamente el cuello hasta la nuca, envolviendo todo el cuerpo con fuerza.
+
+<p> Llevaba diecisiete años así. Años en los que había abandonado incluso el principio vital de que cualquier cosa que no fueran colores vivos no era color, manteniendo la máxima hostilidad hacia todo el mundo y defendiendo esa postura con un esfuerzo tremendo.
+
+<p> En menos de medio año viviendo así, Inés pasó a ser conocida como “el Cuervo de Valeztena”. Su rostro perpetuamente serio incomodaba a sus compañeras de la corte. La descripción pasó de “una excéntrica desagradable a la vista” a, en algún momento, “una mujer que parece excesivamente devota”. Probablemente era una forma más elaborada de decir “la monja de la capilla”.
+
+<p> La gente susurraba y especulaba que su rostro no mostraba ningún rastro de diversión o alegría. Quizás se había enamorado perdidamente de su apuesto prometido, solo para desesperarse ante la imposibilidad de su unión y encontrar consuelo en la religión.
+
+<p> Pero a Inés no le importaba lo que dijera el mundo. Cuanto más construía una reputación diametralmente opuesta a su glamurosa vida pasada, más se sentía realizada. Mostrarse desaliñada solo delante de Cárcel Escalante no era un método especialmente fiable. Al fin y al cabo, ver solo cosas demasiado bonitas y deslumbrantes podía hacer que a uno se le pusieran los ojos en blanco. Su juicio puramente visual no era suficiente.
+
+<p> El mundo tenía que lavarle el cerebro. “Inés Valeztena está muy por debajo de ti”. Así. Para asegurarse de que no sintiera ni siquiera un interés fugaz por ella. Para que se considerara estúpido y tonto en el momento en que surgiera cualquier interés.
+
+<p> Inés Valeztena conocía muy bien el encanto que ejercía sobre el sexo opuesto. ¿Qué podía hacer él ante un atractivo que no podía ocultar por completo, por mucho que ella insistiera en parecer poco atractiva? ¿Qué podía hacer ante ese rostro, tan bonito incluso sin maquillaje? ¿Qué podía hacer cuando ella se quitaba la ropa, sin dejar nada rústico que ocultar? Con una arrogancia heredada de vidas pasadas, ella pensaba que todo eso era perfectamente natural.
+
+<p> Por muy consumado que fuera Cárcel Escalante, en esta relación enredada hasta el tedio, llegaría un momento en que sucumbiría a ella.
+
+<p> <span style="font-style:italic">Eso era problemático. De ninguna manera.</span>
+
+<p> Ropa cerrada. Relaciones cerradas. Ojos cerrados... Era necesario crear un entorno que lo sofocara con solo pensar en ella. Tenía que repelerlo antes de que pudiera intrigarlo. Eso ya lo había logrado con éxito.
+
+<p> Cuando él la temía intensamente, Inés lo había bombardeado durante años con implacables cartas de amor y todo tipo de regalos, llevándolo al borde del terror. El objetivo era abrumarlo con la carga hasta que instintivamente creara distancia y huyera.
+
+<p> En ese momento, Cárcel no había huido tan fácilmente como ella había previsto, pero estaba claro que había habido cierto grado de éxito. Después de todo, fue ese miedo al matrimonio lo que más tarde lo llevó a dar vueltas y vueltas por la academia militar y el ejército.
+
+<p> Sin embargo, había llegado el momento en que ya no era posible evitarlo. La prometida de Cárcel Escalante, a la que se había referido como “en segundo plano”, finalmente se mudaba a la casa de los Escalante. Era una perspectiva inevitablemente aterradora para él.
+
+<p> Aun así, al principio, estaría demasiado preocupado por vigilar sus pasos como para hacer mucho más. Así que ella decidió aflojar las riendas de antemano. Su intención era hacerle sentir la menor culpa posible. Tenían que casarse y él tenía que tener una aventura.
+
+<p> Tras haber finalmente consumado el matrimonio tan largamente pospuesto, Cárcel Escalante se encontraba bajo tal estrés que, naturalmente, tuvo que buscar consuelo en otra parte. Durante la luna de miel, cumpliría con su inevitable deber como heredero consumando el matrimonio con ella en las pocas fechas predeterminadas, pero la respuesta rígida y poco interesante de ella lo dejó desilusionado. Ver la vestimenta monótona y la actitud irritante de su esposa solo profundizó su cinismo sobre la vida, lo que lo llevó a buscar consuelo en otra aventura amorosa.
+
+<p> Todas esas garantías previas al matrimonio —“vive como te plazca”, “está bien”, “no importa”— habrán sido descartadas a estas alturas. “En realidad, no puedes vivir como te plazca, no estoy bien y sí me importa”. Le mostrará lo que significa decir dos cosas con una sola boca. Entonces se sentirá asfixiado. Asfixiado, solo querrá salir a deambular... Será infiel una y otra vez, y entretanto, cada vez que inevitablemente comparta la cama con su esposa en la noche señalada, sentirá que mil años de pasión se convierten en hielo. Y cuando finalmente logre tener un hijo, se sentirá liberado y comenzará a engañar de nuevo.
+
+<p> Odiaba cualquier cosa que exigiera responsabilidad, así que en ese momento, tendría que usar al niño como arma para exigir responsabilidad y atención.
+
+<p> Entonces volvería a sentirse asfixiado. Debería haber pensado que tener un hijo significaba la liberación. Nunca querría tener otro hijo y decidiría no volver a compartir la cama con esa esposa estricta y sombría... Sería precisamente en esa época cuando fuera crucial que Inés le exigiera compartir la cama. Solo así podría ser rechazada por él.
+
+<p> ¿Qué horrible debía ser tener una esposa que no le gustara, una esposa incómoda, que constantemente exigiera intimidad? Aunque fuera un mujeriego, su naturaleza era amable, por lo que podría ofrecerse unas cuantas veces, pero incluso eso tenía sus límites.
+
+<p> A su regreso, Inés le pediría volver a acostarse con él, Cárcel volvería a negarse, el estrés le llevaría a buscar aventuras de nuevo…
+
+<p> A medida que se acumularan los rechazos y él pudiera llenar una petición con los nombres de las mujeres con las que había pasado la noche, ella se convertiría en una mujer Ortega de éxito.
+
+<p> <span style="font-style:italic">La Duquesa Escalante, que no vive con el Duque Escalante.</span>
+
+<p> Había sido un plan perfecto y meticuloso. Hasta hace dos días, claro…
+
+<p> —No necesito la maldita libertad ni esa vida privada que tanto deseas concederme. En mi definición de matrimonio, tales cosas no existen.
+
+<p> —...
+
+<p> —Puede que sea un maldito bastardo, pero soy más fiel de lo que crees, Inés Valeztena.
+
+<p> Fue el momento en que su gran plan, guardado en secreto sin amigos durante diecisiete largos años, se desmoronó.
+
+<p> —Es por eso que nunca traicionaré a mi familia.
+
+<p> Con su promesa de no traicionarla, Cárcel traicionó sus expectativas.
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> —...¿Qué demonios hice mal? ¿Qué me faltó? ¿Qué error cometí?
+
+<p> —Señorita Inés, no tengo ni idea de cuál es el problema en primer lugar.
+
+<p> Juana ladeó la cabeza como si estuviera completamente desconcertada y luego echó perfume en los pies de Inés.
+
+<p> Inés olvidó lo que estaba diciendo, retrocedió como si sintiera repugnancia y se estremeció violentamente.
+
+<p> —¡Me hace cosquillas...! No lo hagas ahí.
+
+<p> —La Duquesa ordenó que no nos perdiéramos ni el más mínimo espacio.
+
+<p> —Mamá no está mirando, ¿qué más da?
+
+<p> —Dios está mirando.
+
+<p> La devota Juana se santiguó brevemente con la mano empapada en perfume y luego agarró el pie de Inés. Inés se rió entre dientes.
+
+<p> —A Dios le da igual cómo me apliquen aceite perfumado en el cuerpo. Así que, ¡eh, para...!
+
+<p> —¿Le provoca muchas cosquillas?
+
+<p> —Sabes perfectamente lo mucho que detesto que me froten aceite en los pies…
+
+<p> —Es la primera vez que lo aplico así, ¿cómo iba a saberlo? Aunque, claro, a partir de hoy lo sabré muy bien…
+
+<p> Inés se dio cuenta de su descuido y se quedó en silencio por un momento. Era porque en su vida pasada había hecho esas cosas por aburrimiento.
+
+<p> En su tercera vida, Inés se había distanciado de todo lo relacionado con los adornos y, por lo tanto, también de esas cosas. Por mucho que la Duquesa insistiera, ella se negaba. Y por mucho que se negara, su madre persistía en insistir, hasta que Inés se retorcía como si estuviera dispuesta a hacerse daño, aterrorizando a su madre.
+
+<p> En consecuencia, la Duquesa Valeztena solo podía atesorar el recuerdo de la belleza de muñeca de su hija de cinco años, mientras se veía obligada a ver a la Inés actual deambular vestida únicamente con ropas de color negro azabache.
+
+<p> La hija de un gran noble no solo pasaba desapercibida, sin el aroma de las flores, sino que sus manos, que deberían haber brillado con esmalte, a menudo estaban manchadas de tinta o torpemente sucias. Se sentaba sola, inhalando el polvo de las estanterías, sin un solo amigo que la visitara.
+
+<p> —¡Tu cabello ya se parece al de ese maldito padre tuyo! ¡Y ahora también vistes de negro, pretendes insultar a tu madre...!
+
+<p> A partir de entonces, se oían a menudo gritos de irritación como ese. Sin embargo, lo importante era que nunca volvió a ponerle la mano encima a su hija.
+
+<p> —No puede ser posible. No hay forma de que esa niña se haya vuelto loca, así de repente... ¿Cabello negro y vestido negro? ¿Eres una funeraria clandestina, una sepulturera, qué? ¡¿Qué demonios es ese aspecto maldito...?!
+
+<p> La llamaba funeraria, sepulturera o aparición maldita, pero, en realidad, nunca se atrevió a intentar levantar la maldición... Cuando Inés tuvo su última rabieta, negándose incluso al más mínimo adorno, la Duquesa Valeztena debió de horrorizarse más allá del horror, o convencerse verdaderamente de la maldición.
+
+<p> Así que rechinaba los dientes, observando a su hija desde lejos. Sin embargo, en días excepcionalmente emotivos, lloraba mientras buscaba la habitación de su hija, acariciando repetidamente el rostro de Inés y pronunciando palabras, en su mayoría reproches, lástima innecesaria y las mismas frases una y otra vez.
+
+<p> —Debió haber sido esa fiebre de entonces. ¿No? Debí haberte cuidado mejor. Para que no estuvieras así de arruinada... Todo esto es culpa de tu padre. Ese hombre miserable me impidió cuidarte como es debido... Inés, pobrecita. Mira tu cabello negro. Transmitir el cabello negro a una niña... Desde el momento en que naciste, él nunca iba a ser de ninguna ayuda para ti... Y, sin embargo, insistes en llevar un vestido negro aquí... A menos que te hayas vuelto loca... ¿Qué te he hecho para merecer esto...?
+
+<p> La fiebre a los seis. El detonante fue correcto, como dijo su madre. A partir de ese momento, toda su vida cambió, se volvió diferente a como era antes... Que la prueba de que “todo salió mal a partir de entonces” fuera el color de un vestido le parecía ridículo incluso después de haberlo oído durante más de una década, pero, al igual que para todos los demás, era importante para su madre.
+
+<p> Inés también sentía una cierta responsabilidad al respecto.
+
+<p> No acababa de entender el razonamiento, pero, en cualquier caso, su hija no siempre había sido tan sombría…
+
+<p> Y así, en ese preciso momento, yacía completamente desnuda, inmovilizada, con todo su cuerpo atendido, siguiendo las órdenes de su madre.
+
+<p> Todo bajo el repentino pretexto de que su boda era inminente.
+
+<p> —Por muy molesto que le resulte, debe soportarlo ahora, señorita Inés. La Duquesa ha sido paciente durante mucho tiempo. Además, no es que nos quede precisamente mucho tiempo…
+
+<p> <span style="font-style:italic">No quedaba mucho tiempo. No queda mucho tiempo...</span> Inés volvió su rostro fruncido para mirar el retrato que colgaba de la pared del dormitorio. Una pintura de Escalante, de unos diez años, sonriendo alegremente, una imagen que de alguna manera resultaba desagradable…
+
+<p> Para la Duquesa Valeztena, que había visto a su única hija vestir ropa de luto durante diecisiete años, apretando los dientes, un día como hoy había llegado por fin.
+
+<p> Cárcel Escalante, que siempre había ofrecido todo tipo de excusas corteses y justificaciones militares invocando el código de conducta de la Armada Imperial, como si estuviera desesperado por evitar un matrimonio real, finalmente había enviado ayer una carta formal a la Familia Valeztena, solicitando un matrimonio en el menor tiempo posible.
+
+<p> Por fin.
+
+<p> Hace trece años, Cárcel Escalante la contemplaba a ella y a su dormitorio desde el marco. Esa niña problemática, que solo había sido adorable en apariencia.
+
+<p> —...
+
+<p> Sintiéndose inexplicablemente irritada, Inés se quedó mirando el retrato con ira.
+
+<p> En la habitación de Cárcel también colgaba un retrato de Inés de esa misma época. Aunque ambos habían superado la edad adulta hacía tiempo, nunca se habían intercambiado retratos de su juventud, porque al crecer se habían distanciado naturalmente y porque Cárcel se había marchado a la academia militar y había dejado de usar la habitación de Mendoza.
+
+<p> Así que, por mucho que temiera su futuro con esa espina de prometida, nunca podría saber lo que se sentía al despertarse cada mañana y ver ese rostro mirándole fijamente.
+
+<p> —... Por eso precisamente dices esas cosas.
+
+<p> <span style="font-style:italic">Que nunca traicionarás a tu familia, que nunca necesitarás de libertad ni privacidad, que nunca tocarás a otra mujer con un dedo en toda su vida…</span>
+
+<p> —¿Cómo puedes decirle esas cosas a la mujer con la que te vas a casar?
+
+<p> —...Realmente no entiendo cuál es el problema…
+
+<p> Juana acarició la pierna de Inés mientras expresaba su confusión.
+
+<p> —Si se casan, ¿no ese mujeriego por fin sentará cabeza, señorita Inés? Ayer incluso le envió una carta de propuesta de matrimonio. Entonces, ¿cuál es el problema?
+
+<p> —Ese es precisamente el problema, Juana.
+
+<p> —¿...?
+
+<p> —El hecho de que quiera sentar cabeza es el problema.
+
+<p> —...
+
+<p> Juana, que había estado esparciendo perfume por debajo de sus rodillas, detuvo su mano desconcertada y miró a su señora.
+
+<p> —... ¿Qué? No me mires así.
+
+<p> —Señorita Inés, no sé qué extraños pensamientos tenga ahora, pero el capitán Escalante es perfecto.
+
+<p> —Estoy harta de esto... Tú no también.
+
+<p> —Pero lo adoraba tanto cuando era joven.
+
+<p> —Sí. Lo adoraba.
+
+<p> Había interpretado el papel tan perfectamente que ni siquiera su doncella más cercana se había dado cuenta.
+
+<p> —El único defecto de ese hombre perfecto…
+
+<p> —... Soy yo. Soy yo.
+
+<p> Inés lo afirmó con seguridad. Su respuesta irradiaba orgullo por el hecho de que, tras años de esfuerzo, finalmente había alcanzado ese estatus.
+
+<p> Juana frunció el ceño y negó con la cabeza con vehemencia.
+
+<p> —¡No! ¿Cómo sería la señorita Inés un defecto? La señorita Inés es su gloria, su honor, su inmerecida gracia divina…
+
+<p> —Basta. Para ahí, Juana.
+
+<p> —Su único defecto es que tiene demasiadas mujeres.
+
+<p> —Bueno, así es como es Escalante.
+
+<p> —Y dijo que arreglaría eso. ¿No es maravilloso?
+
+<p> —Me gusta Cárcel Escalante tal y como es.
+
+<p> —Realmente tiene gustos peculiares... ¿Seguro que no le parece emocionante verlo coquetear con otras mujeres?
+
+<p> —Quizás sí.
+
+<p> Juana miró a Inés como si fuera una pervertida y luego suspiró profundamente.
+
+<p> —Al prometido de la señorita no le gustan esas cosas. Puede que solo sea adulación antes del matrimonio, pero él no es de los que hablan a la ligera de esos temas…
+
+<p> —¿Pruebas?
+
+<p> —Porque es soldado. Cuando era pequeña, el cura decía que los soldados nunca mentían.
+
+<p> —Por Dios, ingenua Juana... ¿Por dónde empezar? Todo el mundo miente. Los soldados mienten a sus superiores tan a menudo como comen, y los curas mienten ocasionalmente para quedar bien ante Dios.
+
+<p> —¡El padre Jorge nunca haría algo así!
+
+<p> Haciendo frenéticamente la señal de la cruz de nuevo, Juana corrió hacia la cama de Inés y también trazó la señal sobre su cabeza.
+
+<p> —¿En serio? No puede estar sometiéndote a inspección cada vez que le rezas.
+
+<p> —Es demasiado pesimista, señorita Inés.
+
+<p> —Pero has dicho una cosa plausible.
+
+<p> —¿Eh?
+
+<p> —Que al final, todo es una tontería que Escalante soltó al azar para hacerme sentir mejor.
+
+<p> —... Nunca dije que fuera una tontería…
+
+<p> Giró a Inés con expresión renuente. Inés se dio la vuelta como le habían indicado y murmuró.
+
+<p> —Tienes razón. Esa costumbre no va a desaparecer, ¿verdad? Sí, tienes toda la razón. ¿Cómo podría un perro convertirse de repente en humano...? Si alguien dice: “A partir de mañana, debo convertirme en humano”, ¿eso significa que mañana el perro se convertirá en humano? Eso es imposible, ¿no?
+
+<p> —Ahora mismo está hablando sola, señorita Inés.
+
+<p> —Sí. Escalante es un perro.
+
+<p> —... ¿Y por qué se siente aliviada por eso?
+
+<p> —No me equivoqué. Juana.
+
+<p> <span style="font-style:italic">Así que mis esfuerzos nunca serán traicionados... </span>murmuró Inés, como si se estuviera lavando el cerebro a sí misma.
+
+<p> Pero, ¿acaso un prometido pronunciaría alguna vez mentiras tan dulces, destinadas a complacer a su prometida, como si le lanzara un guante a la cara?
+
+<p> Por mucho que lo repitiera, la expresión de Cárcel seguía molestándola. Su actitud ese día también la molestaba. Esa mirada extrañamente irritable y nerviosa en su rostro desconocido…
+
+<p> Y luego, como para apuñalarla por la espalda, había enviado su carta de propuesta de matrimonio a Valeztena.
+
+<p> Sí, fue extraño. Ese día, miraras como lo miraras, fue extraño.
+
+<p> —... Señorita Inés, ¿no debería compartir estos asuntos con amigas más formales? No con una criada como yo.
+
+<p> —No tengo amigas.
+
+<p> Inés respondió de forma sencilla y directa, inquieta, como si le picaran las piernas, empapadas en perfume. En lo que respecta al matrimonio, era perpetuamente pesimista sobre cada pequeño detalle, pero ¿cómo podía estar tan lúcida y alegre sobre esto?
+
+<p> Juana volvió a suspirar, mirando la espalda de su señorita como si observara a una hermana menor problemática.
+
+<p> —¿Y esas damas que asistieron a la lectura con usted la última vez?
+
+<p> —Eran invitadas de mi madre. Señoritas que algún día podrían convertirse en la esposa de Luciano.
+
+<p> —Entonces, ¿no debería empezar a hacer cambios pronto?
+
+<p> —No, no me voy a molestar con asuntos tan problemáticos.
+
+<p> —Se sentirá sola una vez que se case. Todo el mundo lo dice. Y si el capitán Escalante... Por supuesto, él no rompería a la ligera una promesa que él mismo hizo, pero aun así…
+
+<p> —¿Quieres que le ponga una red de vigilancia?
+
+<p> Cuando Inés se lo preguntó sin rodeos, Juana asintió con cautela.
+
+<p> De hecho, nadie cree realmente que un perro pueda convertirse en humano. La mirada sospechosa de Cárcel Escalante se desvaneció momentáneamente. Inés sonrió, aparentemente complacida.
+
+<p> —No pasa nada. Confío en Escalante.
+
+<p> —Fue usted quien dijo que los perros no podían convertirse de repente en humanos…
+
+<p> —Y en cuanto a amigas, tú me bastas.
+
+<p> —...
+
+<p> —No pasa nada. Porque tú estás aquí.
+
+<p> —...
+
+<p> —No me digas que te emocionaste. Hasta el punto de no poder hablar…
+
+<p> —... Sigo deseando que tenga amigas, señorita Inés.
+
+<p> —¿Te soy una molestia?
+
+<p> —No. Solo desearía que los demás supieran lo peculiar que es la señorita Inés... Porque no me creerán si soy la única que lo dice.
+
+<p> Claramente, lo había expresado de la forma más indirecta posible para decir que era extraña. En lugar de resentirse con Juana, Inés esperó hasta que se pronunció la última palabra y luego se dejó caer de espaldas como si lo hubiera estado esperando, con la espalda resbaladiza por el aceite.
+
+<p> En el borde de esa mirada distante, totalmente indiferente a si era peculiar o no, el Escalante de diez años quedó atrapado una vez más.
+
+<p> —Lo siento, pero no puedes vivir sin mí. Inés Valeztena.
+
+<p> A continuación, resonando burlonamente en sus oídos, estaba la voz de Escalante, de veintitrés años, de unos días antes. Inés entrecerró los ojos y luego escupió las palabras con la sensación de descargar su frustración sobre una niña sin motivo alguno.
+
+<p> —... Deshazte de eso ahora mismo.
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> José Almenara entró en la habitación, mirando con recelo hacia la puerta. Solo cuando la puerta se cerró, Cárcel levantó la cabeza, frunciendo el ceño.
+
+<p> —... ¿Qué pasa?
+
+<p> Incluso después de cerrar la puerta, el rostro de José mostraba la expresión de un ladrón pillado in fraganti, nada menos. “Soy culpable, así que, por favor, que nadie sospeche de mí”, esa clase de mirada.
+
+<p> —Lo he averiguado.
+
+<p> En lugar de sentarse frente a Cárcel, José se acercó sigilosamente por detrás de la silla que ocupaba Cárcel. Inclinando su gran cuerpo hacia delante, habló en tono muy confidencial.
+
+<p> Cárcel levantó la cabeza, aún frunciendo el ceño.
+
+<p> —... ¿Por qué está tan desesperado por parecer sospechoso, una cosa tras otra?
+
+<p> —No, es solo la naturaleza del asunto.
+
+<p> —¿Qué tipo de asunto...?
+
+<p> Cárcel chasqueó la lengua y luego hizo un gesto con la mano como si lo retara a continuar. José se inclinó obedientemente aún más y dijo:
+
+<p> —No hay nada.
+
+<p> —¿Qué?
+
+<p> —De verdad, no hay nada.
+
+<p> Aunque el informe salió de la nada, Cárcel pareció entenderlo perfectamente, y sus labios se torcieron ligeramente. Sin captar esa parte, José susurró con voz muy baja y apagada al oído de Cárcel.
+
+<p> —La opinión del gato es que la señorita Valeztena es famosa en todo el castillo de Pérez por su conducta impecable y su modestia, lo que hace imposible que hiciera eso. La opinión del búho que vigila el pasillo es que pasa la mayor parte de sus días sola en el estudio, sin dejar lugar para un amante a menos que sea un fantasma. Y el ratoncito dice: ah, en cuanto a ese ratoncito, puede vigilar a cualquiera que entre o salga por la puerta trasera de la casa de los Valeztena…
+
+<p> —¿Gato? ¿Ratoncito?
+
+<p> —El lenguaje críptico es el alma del espionaje, ya ve.
+
+<p> Era una respuesta de una grandiosidad asombrosa, viniendo de alguien que acababa de regresar tras un torpe intento de investigar a la prometida de su superior. Cárcel sacudió la cabeza como si estuviera desesperado y se presionó la frente con los dedos.
+
+<p> —...Entonces.
+
+<p> La razón por la que se presionó la frente con los dedos y no se atrevía a levantar la cabeza podría haber sido el odio hacia sí mismo por seguir preguntando, a pesar de su curiosidad. O tal vez fuera su patética situación actual, todavía investigando el pasado de la prometida de su superior.
+
+<p> Pero desde que la idea de “definitivamente hay alguien más” había surgido instintivamente, no podía quitársela de la cabeza. No era aversión ni molestia. No eran celos repentinos ni posesividad... Simplemente quería confirmarlo. Si era posible, con sus propios ojos.
+
+<p> ¿Le había sonreído dulcemente a esa persona, con ese rostro que parecía incapaz de derramar una sola gota de sangre? ¿Qué tipo de hombre era esa persona? ¿Qué demonios podría haber persuadido a ese hombre de sangre fría para que uniera a un hombre y una mujer...? La idea que había surgido como simple curiosidad se convirtió en una sed insaciable.
+
+<p> —Como sea, ese tipo afirma que nunca vio a la señorita salir de forma sospechosa ni traer a alguien para una cita secreta. Al parecer, no solo evitaba que la vieran con hombres, sino incluso con su propia familia dentro del castillo... ¿Por qué demonios haría eso?
+
+<p> José se detuvo a mitad de la frase y luego preguntó con expresión inexpresiva, como si de repente le hubiera asaltado la duda.
+
+<p> —¿Me lo preguntas a mí? ¿Cuándo tú llevaste la investigación?
+
+<p> Cárcel le espetó, con un tono tan feroz que parecía que fuera a aplastarle el cráneo al teniente en cualquier momento. José, con el rostro pálido como la cera, se apresuró a explicar.
+
+<p> —Se me ha escapado... Tenía curiosidad…
+
+<p> —¿Qué más?
+
+<p> —Dicen que la señorita está tan limpia como una patena. Tiene un temperamento frío y a veces puede estar un poco fuera de lugar, pero... bueno, desde su conducta hasta su comportamiento, es perfecta…
+
+<p> —... Son solo los subordinados de Valeztena alabando a su señora. Solo están cogiendo el dinero y fingiendo chismear, diciendo cosas como “su temperamento es horrible y a veces puede estar un poco fuera de lugar…” ¿Pero “nuestra señorita es perfecta”? ¿Pagaste para escuchar estas tonterías?
+
+<p> —No, ¿hay algún problema?
+
+<p> —¿Dónde encontrarías sirvientes que hablaran mal de su amo? Para investigar a alguien, se necesita un grupo diverso de informantes, ¿no? ¿Has hecho algo así antes?
+
+<p> —... Es la primera vez. ¿No es la primera vez para usted también, Capitán?
+
+<p> El ayudante de Cárcel, con aspecto de oso, soltó la verdad antes de que pudiera detenerse. Cárcel se quedó mirando en silencio ese rostro aburrido pero honesto durante un momento, y luego soltó otro suspiro tan profundo que parecía que el suelo fuera a tragárselo por completo.
+
+<p> Simplemente no podía reprimir su autodesprecio. Después de todo esto, acabar en un estado tan lamentable…
+
+<p> En realidad, a pesar de toda la grandilocuencia sobre las comprobaciones de antecedentes y los historiales, lo que José estaba soltando era precisamente el tipo de chismes que cualquiera en Mendoza podría haber reunido. Nada nuevo, solo las historias predecibles que todo el mundo podía haber anticipado.
+
+<p> Y luego estaban los testimonios de la lavandera, el sirviente que custodiaba la puerta trasera... Aunque un noble Ortega cualquiera podría haber sacado infinitas historias de tales fuentes, era imposible que la mansión de Inés Valeztena albergara ningún secreto realmente significativo.
+
+<p> E incluso si lo hubiera, ¿qué posibilidades tenía un investigador tan torpe de descubrir algo?
+
+<p> Él también estaba presionando tontamente a su subordinado. Era la primera vez que investigaba a una mujer y, como novato, ni siquiera sabía qué buscar. Durante tres días, no había hecho más que acosar a su subordinado, que parecía un oso. Aunque no era habitual en José Almenara, los resultados llegaron antes de lo esperado, pero seguían siendo totalmente insignificantes.
+
+<p> Sin embargo, para Cárcel, que nunca en su vida había sentido ni siquiera una fugaz curiosidad por el pasado de una mujer, el mero hecho de desplegar a un espía tan inepto le hacía sentir culpa, como si hubiera cometido un grave delito.
+
+<p> Si iba a sufrir esa culpa, debía haber alguna recompensa... Pensando esto, Cárcel entrecerró los ojos y miró a José. José, aparentemente malinterpretando el mensaje, respondió con imperturbable compostura.
+
+<p> —Bueno... y aunque el Capitán no es estrictamente mi amo, naturalmente, sería un gran honor servirle como tal. En ese sentido, si consideráramos al Capitán mi amo y a mí mismo su empleado, soy bastante capaz de…
+
+<p> —¿Qué?
+
+<p> —...
+
+<p> —¿Bastante capaz de qué?
+
+<p> —Estaba pensando que podría ofrecer algunos comentarios sobre el comportamiento caótico del Capitán, si no se daba cuenta.
+
+<p> <span style="font-style:italic">¿Miren a este...?</span> Los ojos de Cárcel se entrecerraron aún más, adquiriendo un brillo amenazador.
+
+<p> —¿Así que estás dispuesto a traicionar a tu superior en cualquier momento?
+
+<p> —Lo que digo es que los testimonios de los sirvientes de la familia Valeztena son bastante... objetivos. ¿Traición? Solo sugiero que esos sirvientes habrían chismeado sobre la señorita Valeztena a cambio de unas pocas monedas de plata si tuvieran algo desagradable que decir. Pero no hay nada de qué chismear. Ah, ¿cómo decirlo? A diferencia del Capitán, que tiene mucho de lo que chismear…
+
+<p> —...
+
+<p> —... ¿Va a golpearme?
+
+<p> —Almenara.
+
+<p> —¿Sí?
+
+<p> —Sería mejor que volvieras con tu madre y aprendieras a hablar antes de enlistarte.
+
+<p> Aunque dijo esto, Cárcel aceptó implícitamente la objetividad de las palabras de José. Sí, si se hubiera levantado polvo, habría dejado escapar al menos algún detalle sobre qué tipo de polvo era y cómo volaba, y tal vez se habría embolsado unas cuantas monedas de plata más.
+
+<p> El hecho de que ni una mota de polvo cayera de Inés Valeztena, por mucho que se la sacudiera, no era de extrañar. Simplemente estaba hecha así y poseía una naturaleza que nunca revelaría una debilidad, ni siquiera en la muerte.
+
+<p> Sentía a la vez decepción y alivio. Por el hecho de que, por ahora, no había nadie más para Inés…
+
+<p> <span style="font-style:italic">... ¿Alivio?</span>
+
+<p> ¿De qué había que sentirse aliviado? ¿Por qué, como si hubiera habido algún otro sentimiento...? En el momento en que la palabra “sentimiento” le vino a la mente, sintió una erupción extendiéndose por todo su cuerpo. Cárcel sacudió la cabeza como para quitarse la suciedad.
+
+<p> —...¿Podría ser que mi prometida sea demasiado meticulosa?
+
+<p> —Todas las criadas resoplaron con desdén. Dicen que mira a los hombres como si fueran alimañas.
+
+<p> Era una historia plausible. Incluso un prometido tan distinguido era a veces considerado como una criatura inferior. Porque había logrado esa difícil tarea... Cárcel asintió con la cabeza, apoyando la barbilla en la mano como si estuviera sumido en sus pensamientos. Entonces, como si intentara compensar su anterior lapsus, José inclinó bruscamente su corpulento cuerpo hacia delante y susurró en tono confidencial.
+
+<p> —A pesar de todas estas indagaciones, no hay temor a despertar sus sospechas. Pues parece que algunas de las mujeres con las que el Capitán se reunió brevemente ocasionalmente realizan investigaciones para encontrar las debilidades de la señorita…
+
+<p> —¿Qué?
+
+<p> —Las reacciones de las criadas me resultaron extrañamente familiares. Dijeron que a menudo vienen visitantes de paso a husmear. Pero Capitán, ¿acaso parezco un visitante de paso? Con una apariencia tan sofisticada, seguro que no…
+
+<p> José, que parecía haberse desviado del tema por un momento, recuperó su expresión de satisfacción.
+
+<p> —En fin, cuando me preguntaron si me había enviado otra de las seguidoras de Lord Escalante, les dije que sí, que era exactamente eso, sin duda... Ocurre tan a menudo que es prácticamente indistinguible de lo normal.
+
+<p> —...
+
+<p> —¿Capitán?
+
+<p> Cárcel miró fijamente el rostro de su ayudante, que parecía preguntarle: “¿No lo he manejado perfectamente?”. Luego, lentamente, se cubrió el rostro con las manos.
+
+<p> <span style="font-style:italic">¿Con qué frecuencia ocurre eso...? </span>Debe saberlo todo. Es imposible que no lo supiera.
+
+<p> Ahora lo entendía. Inés Valeztena simplemente había perdido todo afecto.
+
+<p> Sí, le gustaba tanto...
+
+<p> Lo que nunca se había explicado del todo ahora tenía algo de sentido. Era como si la niebla se hubiera disipado, revelando una vez más la mitad del rostro sospechoso de Inés.
+
+<p> Pero, al mismo tiempo, era como si le hubieran tocado un punto sensible, y el rostro de Inés desapareció al instante. La mente de Cárcel volvió a nublarse.
+
+<p> Quién hubiera pensado que tales cosas se llevaban a cabo en lugares ocultos... Los finales de las citas que recordaba eran en su mayoría sencillos, e incluso cuando no lo eran, nunca había una conclusión tan complicada que justificara hacer algo así en secreto.
+
+<p> <span style="font-style:italic">Definitivamente fue eso.</span>
+
+<p> ¿Acaso sólo habían actuado así delante de él? A sus espaldas, tal vez había estado acechando a su prometida —a quien ni siquiera amaba— en busca de debilidades, con la intención de destrozarla en cuanto encontrara alguna... Y luego, en su presencia, habían fingido indiferencia, manteniendo esa fachada de sencillez.
+
+<p> ¿Quién podría culparla? Esa cara era en sí misma un pecado... Cárcel se restregó la cara varias veces, nervioso.
+
+<p> Pronto, todo eso habría terminado.
+
+<p> —... ¿Le está causando tanto dolor de cabeza? Pero es seguro que ya decidió casarse. Hasta envió una carta al Duque Valeztena... ¿De qué serviría ahora encontrar un punto débil?
+
+<p> —... ¿Qué punto débil?
+
+<p> —Bueno, un punto débil... Tenía intención de aprovecharlo, ¿no? Pensé que tal vez aún deseaba cancelar el matrimonio. Pero luego me enteré de que también había enviado una solicitud de matrimonio a la familia Valeztena…
+
+<p> —¿Por qué haría tal cosa?
+
+<p> Cárcel tenía una expresión de incomprensión. José, al recibir la pregunta de vuelta, no era diferente. Se miraron fijamente durante un rato, incapaces de entenderse.
+
+<p> —¿Qué tipo de debilidad se supone que sería, en primer lugar?
+
+<p> ¿Con cuántas mujeres había estado saliendo todo este tiempo? Afirmar que “como mi prometida parece haber tenido un amante en algún momento, no puedo casarme con una mujer tan promiscua” era ridículo. Especialmente mucho después de la edad prometida de diecisiete años... Sería una suerte que la familia Valeztena no presentara una demanda.
+
+<p> Además.
+
+<p> —Una promesa es una promesa, Almenara. Especialmente un matrimonio, un pacto entre familias. Sería bastante problemático apuñalar por la espalda a alguien de esa manera.
+
+<p> Aunque era un tonto, el obstinado Cárcel nunca había considerado un futuro en el que no sea el marido de Inés Valeztena, desde que era un niño de seis años hasta ahora, un hombre adulto de veintitrés, por mucho que realmente no quisiera este matrimonio. Incluso si ese futuro era espantoso, asfixiante o le hacía sentir como un loco solo de pensarlo…
+
+<p> Por lo tanto, las sospechas cargadas de conspiración de José eran equivalentes a una blasfemia. Como siempre era más fiel de lo que los demás pensaban, le infligió el castigo adecuado dando una patada en la espinilla a José. José soltó un grito silencioso.
+
+<p> —Qué espectáculo das, pensando así.
+
+<p> —No, sólo seguía las órdenes de investigar sus antecedentes. Cuando alguien dice “investiga sus antecedentes”, normalmente significa…
+
+<p> —Por eso eres la basura de Almenara. Eres un tonto que rompe las promesas como si no valieran nada y tienes la mala costumbre de apuñalar a la gente por la espalda. Por eso tu padre te abandonó hace mucho tiempo y te dejó en la Marina.
+
+<p> —¡La Marina es un basurero...!
+
+<p> José, protestando como si le hubieran hecho una injusticia, de repente miró a su superior y al instante puso una expresión de comprensión. La encarnación misma del libertinaje se encontraba ante él. Un pedazo de basura de mente estrecha que, una vez casado, sería ascendido al instante y se burlaría de los demás desde una posición superior... Era imposible que Cárcel no se hubiera dado cuenta de esa deslealtad. José fue pateado en la espinilla otra vez.
+
+<p> —¡Ah...!
+
+<p> —Tú eres muy expresivo, así que o hablas y aceptas el castigo, o dejas de pensar por completo. Almenara.
+
+<p> —¿Cómo puede una persona no pensar...?
+
+<p> —¿Qué me has oído decir? Almenara, tienes una cara tan grande como una puerta.
+
+<p> —... Yo no elegí ser tan grande, ¿sabe?
+
+<p> Habiendo crecido entre hermanos que se burlaban de él llamándole “ese chico con la cabeza del tamaño de un saco”, José soportó años difíciles hasta que su enorme complexión finalmente alcanzó una apariencia de equilibrio.
+
+<p> Cuando José, dolido inesperadamente por el doloroso comentario, respondió con un tono tímido que no encajaba con su corpulencia, Cárcel sonrió suavemente.
+
+<p> —Lo sé. Ser grande significa que eres fácil de ver. Y como eres fácil de ver, cada vez que te veo con esa mirada, me dan ganas de pegarte más fuerte.
+
+<p> —¿Con qué mirada?
+
+<p> —Si lo pensaste, dilo. Si no puedes decirlo, no lo pienses…
+
+<p> La expresión impura permaneció a la vista. Cuando Cárcel fingió darle otra patada en la espinilla, José retrocedió y dijo:
+
+<p> —Bueno... es solo que… es lo que se ve... Usted se ve con mujeres aquí y allá, es promiscuo, tiene sus misterios... así que sospechó que incluso la recatada señorita Valeztena podría tener algo, un hombre quizás... Eso es lo que sospechó, ¿no...?
+
+<p> —... ¿Te atreves a soltar todo eso frente a tu superior? ¿Qué te dije que hicieras sobre lo que pensabas?
+ 
+<p> —Ah, ¿no era así?
+
+<p> José preguntó alegremente, solo para recibir otra patada en la espinilla y gemir.
+
+<p> —¿Sospechar? ¿Yo? ¿De quién? ¿Por qué demonios?
+
+<p> —¿No es así?
+
+<p> <span style="font-style:italic">Si no así no importa</span>, José asintió vagamente, con ese tipo de sentimiento, y sutilmente puso algo de distancia entre él y Cárcel.
+
+<p> —¿Por qué lo haría?
+
+<p> —Si no es así…
+
+<p> —Siempre eres así. Sueltas las cosas sin pensar y luego dices “Si no es así”.
+
+<p> —Usted dijo que si tenía algún pensamiento, debía expresarlo... Así que si no sospechaba de ella, ni trataba de encontrar una debilidad. ¿Cuál es su motivo para entrometerse en los asuntos de la señorita Valeztena?
+
+<p> —... Como si me hubiera entrometido o algo así…
+
+<p> Murmuró, como si estuviera completamente atónito.
+
+<p> —Solo... quería saber.
+
+<p> Cárcel dijo esto, apoyando la barbilla en la mano en ángulo. Su mirada, aparentemente distante aunque sin mucho significado, se desvió hacia la ventana. Su mente ya se había desvanecido a algún lugar lejano en un instante.
+
+<p> José, receloso de la mirada sospechosa de su superior, dudó entre dar un paso atrás o no, antes de armarse finalmente de valor para preguntar.
+
+<p> —... Eh, entonces ¿cuándo es que piensa volver a Calstera? Si sigue prolongando sus vacaciones así, no se quedarán vacaciones de invierno.
+
+<p> Realmente desaparecerían sin dejar rastro. Para José, que aún no había podido volver por culpa de Cárcel y ya había agotado todas sus vacaciones de verano, era una pregunta importante. Cárcel respondió distraídamente, con la mirada aún fija en la ventana.
+
+<p> —Después de casarme.
+
+<p> —¿Eh? ¿Cuándo piensa casarse exactamente?
+
+<p> —En dos semanas.
+
+<p> —... ¿Qué?
+
+<p> —Según Javier, son lo máximo de vacaciones que puedo tomar este verano.
+
+<p> —¿No le dan vacaciones adicionales por casarse?
+
+<p> —Están incluidas.
+
+<p> —... ¿Y yo qué?
+
+<p> —¿No te quedan las vacaciones de invierno?
+
+<p> —Es cierto. Es cierto, pero…
+
+<p> José asintió con la cabeza como si estuviera a punto de llorar. Debe de significar que no quiere volver…
+
+<p> Cárcel, ajeno a la angustia de su ayudante, permaneció perdido en la melancolía, mirando por la ventana. Si eso es melancolía, entonces imaginar cómo rasga el vestido de novia de su prometida en pedazos en el momento en que pronuncie las palabras también debe de ser melancolía.
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> —He oído que últimamente has estado siendo cauteloso.
+
+<p> —¿Eh?
+
+<p> Un silencio elegante pero incómodo flotaba en el aire, solo roto por el ocasional tintineo suave de los cubiertos. Una cena en la que, como por mutuo acuerdo, nadie hablaba... Fue el Duque Valeztena quien lo rompió abruptamente.
+
+<p> Cárcel, que había estado mirando inconscientemente la boca de Inés mientras masticaba la carne, recuperó al instante la compostura y miró al Duque Valeztena.
+
+<p> El Duque, que no había tocado la comida y había estado bebiendo vino como si fuera agua, dejó suavemente la copa de vino sobre la mesa.
+
+<p> —El mujeriego señor Escalante es tan popular, que nosotros mismos hemos oído hablar mucho de ello.
+
+<p> Los ojos azules que habían recuperado su agudeza en un instante se nublaron con la misma rapidez. Esta acusación directa, que llegaba en un momento totalmente inesperado, uno que él pensaba que nunca saldría a la luz…
+
+<p> Miguel, que había estado moviendo diligentemente el tenedor junto a Cárcel, se quedó paralizado.
+
+<p> Habían recibido la invitación para el banquete de la Duquesa Valeztena diez días antes de la boda. Y así, allí estaban ahora, los dos hijos de la familia Escalante sentados en el banquete de los Valeztena.
+
+<p> Ahora, cuando faltaba exactamente una semana para la boda... Cárcel terminó mecánicamente de mover el tenedor suspendido en el aire con imperturbable compostura. Masticó el filete de alta calidad a regañadientes y con dificultad, como si no se atreviera a comerlo.
+
+<p> El Duque Valeztena dio unos ligeros golpecitos en la mesa con los dedos, sonriendo con una expresión que parecía totalmente carente de diversión.
+
+<p> —A decir verdad, ese hábito tuyo es conocido por todos en Mendoza. A menos que uno sea sordo... debe de ser un poco ruidoso, ¿no crees, Luciano?
+
+<p> Luciano lanzó una mirada fría a Cárcel, sentado a su lado, y luego se encogió de hombros.
+
+<p> —Quien sabe…
+
+<p> Era evidente que se estaba mordiendo la lengua, dado que su hermana se casaría en unos días. Al fin y al cabo, ella acabaría casándose con ese tipo de todos modos, y señalar sus defectos solo dañaría su dignidad, debió de pensar.
+
+<p> Pero los ojos nunca mentían.
+
+<p> Cárcel, que solo recordaba la amable sonrisa de Luciano en ocasionales compromisos sociales, se sorprendió momentáneamente por esos ojos feroces.
+
+<p> Instintivamente apartó la mirada, solo para encontrarse con la mirada del Duque directamente cuando se sentó junto a Inés, y esbozó una sonrisa incómoda.
+
+<p> Por supuesto, su rostro era tan perfectamente cincelado que incluso esa sonrisa parecía un cuadro. Sin embargo, el Duque entrecerró los ojos como si estuviera descontento con ese rostro tan perfecto, y luego torció la boca.
+
+<p> —Bueno, habiendo nacido así, no debe de ser fácil estar a la altura de tu aspecto.
+
+<p> La frase “habiendo nacido así” sonaba como si hubiera nacido con alguna carencia o fuera intrínsecamente estúpido. Cárcel mantuvo su sonrisa cortés mientras lo miraba.
+
+<p> —Lo entiendo. Hay cuatro hombres aquí, ¿no? Tu hermano menor también. Cualquier hombre lo entendería. Uno debe disfrutar de lo que puede. ¿No estás de acuerdo?
+
+<p> Contrariamente a sus palabras, la expresión del Duque no mostraba ningún signo de comprensión.
+
+<p> —¿Qué dices?
+
+<p> Las palabras que le instaban a responder rápidamente eran sencillas. Ni siquiera una audiencia privada con un almirante de la marina habría sido tan escalofriantemente tensa.
+
+<p> ¿Era esa pregunta una que tuviera respuesta? ¿Que se revolcaba porque estaba en condiciones de hacerlo? ¿Esa burla insinuaba que eso era precisamente su privilegio...?
+
+<p> Si decía “no”, él le preguntaría “¿entonces por qué vives así?”, o si estaba de mal humor, “no te atreviste a decirme que no, ¿verdad?”. Si decía “sí”, eso sería nada menos que un suicidio.
+
+<p> Mejor que te pillen en un detalle insignificante que suicidarte, pensó Cárcel, negando con la cabeza educadamente.
+
+<p> —No.
+
+<p> —Si no, ¿por qué lo hiciste?
+
+<p> La contrapregunta del Duque Valeztena surgió como si la hubiera sacado de un pincel.
+
+<p> A Cárcel le preocupaba menos esto que Inés, que estaba escuchando toda la conversación.
+
+<p> Sin embargo, ella parecía ajena a todo, con la mirada fija en el suelo mientras consideraba con indiferencia qué comer a continuación. Él volvió a mirar al Duque, con una expresión ligeramente relajada.
+
+<p> —Fui bastante imprudente.
+
+<p> —¿No del todo imprudente?
+
+<p> <span style="font-style:italic">No del todo imprudente. Un poco imprudente. Después de todo, antes del matrimonio, cuando éramos desconocidos, quería saborear mi libertad al máximo...</span> Si comenzaba a divagar así, el Duque seguramente se abalanzaría sobre él, declarando que le concedería la libertad eterna.
+
+<p> Los ojos del Duque ya mostraban un atisbo de intención asesina, por lo que Cárcel admitió rápidamente.
+
+<p> —No del todo.
+
+<p> —Pensaba que solo te faltaba la castidad, pero parece que también te falta la reflexión. Si carecer por completo de cualquier cosa cuenta como talento, entonces eres el orgullo del imperio, un genio sin igual.
+
+<p> Su tormento hacia José Almenara era ridículo. Si esto hubiera sido en el ejército, tal vez lo habría abordado con la mentalidad de aprender para usarlo en el futuro con sus subordinados. Pero se trataba de un banquete celebrado en la casa de su prometida, a solo una semana de la boda.
+
+<p> Realmente sentía que sus pensamientos se le escapaban.
+
+<p> —¿Tú, cuya cabeza es poco más que una decoración, ahora exiges que te devuelva a mi hija como si recuperaras dinero prestado?
+
+<p> Realmente sentía que su cabeza se estaba convirtiendo en un mero adorno.
+
+<p> —Ah, veo que también te llevas el dinero. Aunque nunca le dí nada en Escalante. No son más que una banda de ladrones, de verdad.
+
+<p> —La dote, si es a eso lo que se refiere, sigue siendo propiedad personal de la señorita Valeztena.
+
+<p> —Efectivamente. Propiedad personal de Inés Valeztena. Propiedad destinada a mi querido nieto, nacido con el nombre de Escalante en su frente.
+
+<p> —Eso es cierto, pero ese nieto también será hijo de Valeztena, que llevará su sangre.
+
+<p> —Entonces, ¿por qué no nos lo entregas?
+
+<p> —Porque antes que nada, también será hijo de mi esposa y mío…
+
+<p> —¿Esposa y mío? ¿Acaso crees que mi hija es estúpida? ¿Esposa y mío antes del matrimonio? ¿Acaso ya es tu esposa? ¿Crees que es tan fácil de manejar que ya estás planeando embarazarla?
+
+<p> Y sin embargo, exigía un nieto que ni siquiera existe antes del matrimonio... Sin embargo, Cárcel negó con la cabeza en silencio.
+
+<p> —Nunca me atrevería. Siento el mayor respeto por la señorita Valeztena…
+
+<p> —... Y, sin embargo, muestras tal falta de respeto.
+
+<p> —Espero con impaciencia el día en que me convierta oficialmente en su esposo…
+
+<p> —... Y, sin embargo, muestras tal falta de respeto.
+
+<p> —... Y si me caso oficialmente con la hija de Su Excelencia, me aseguraré de que el Duque y la Duquesa nunca se sientan decepcionados.
+
+<p> —En este momento, incluso tu respiración me decepciona. ¿Qué tal si mueres primero y me ahorras esta decepción?
+
+<p> Cárcel se quedó paralizado, con la sonrisa congelada en el rostro. El Duque se bebió de un trago el vino que le había servido su mayordomo y volvió a dar una orden.
+
+<p> —Te he estado observando toda la noche y, por más que lo intento, no me gusta tu forma de respirar. Así que deja de hacerlo.
+
+<p> —Déjalo, padre.
+
+<p> Inés intercedió con delicadeza. Cárcel, sin apartar la mirada de los ojos despectivos del Duque, la dirigió hacia ella.
+
+<p> En medio de todo esto, Inés parecía vivir en otro mundo. Había terminado de comer y ahora se llevaba el pañuelo a los labios para limpiárselos con elegancia. Como siempre, distante y erguida. Fría.
+
+<p> Ya fuera por la proximidad de su boda, por el ambiente incómodo de la velada o por la exposición pública que su padre había hecho del escandaloso pasado de su prometido, cualquier otra dama noble habría dejado su plato sin tocar y se habría marchado con una mirada de disgusto. Pero ella no hizo ninguna de las dos cosas.
+
+<p> En cambio, Inés decidió terminarse todo lo que tenía delante y permanecer sentada. Hasta que habló.
+
+<p> —Después de haberse tomado la molestia de convocarnos aquí, por favor, no nos presione de esta forma tan mezquina. Es descortés con sus invitados.
+
+<p> —¿Mezquina? ¿Quién?
+
+<p> —Lo sabe perfectamente.
+
+<p> Inés se limitó a encogerse de hombros con indiferencia. El rostro del Duque se retorció en una mueca repentina.
+
+<p> —Podría haberle partido la cara de una patada. Pero no lo hice. Le di de comer en mi mesa. Eso es bastante civilizado. Generoso. Indulgente.
+
+<p> —Y con esa indulgencia, lo dejó hacer lo que quisiera todo este tiempo, aún sabiéndolo perfectamente. Yo estoy bien.
+
+<p> —Eso fue cuando ese bastardo andaba por ahí como si nunca fuera a casarse conti…
+
+<p> —Sí, deambulada, pero al final se casará. Usted también lo sabía. Así que, por favor, deje en paz a mi prometido.
+
+<p> Inés volvió a interrumpir a su padre con una réplica firme. El Duque Valeztena cerró la boca con angustia y se bebió el vino que le quedaba.
+
+<p> Cárcel observó al mismo tiempo que Luciano, a su derecha, continuaba comiendo a regañadientes, y Miguel, a su izquierda, permanecía rígido como una piedra. La Duquesa, sentada entre el Duque e Inés, estaba ahora absorta en beber whisky como si fuera vino... Cárcel lo sospechaba desde hacía tiempo: la Duquesa Valeztena era nada menos que una alcohólica.
+
+<p> En resumen, el ambiente era decididamente desagradable. Aunque Inés había silenciado al Duque, el estado de ánimo ya se había desvanecido como un barco atrapado en corrientes turbulentas, dirigiéndose por un camino irreversible. Además, no había nadie que pudiera calmar el ambiente con palabras amables. La Duquesa, que había sido el rayo de esperanza, ahora estaba completamente borracha sin que nadie se diera cuenta. Y Cárcel era un traidor que no se atrevía a hablar…
+
+<p> Mientras la reunión parecía totalmente desesperada y sin final a la vista, solo Inés permanecía perfectamente serena.
+
+<p> Como alguien detenido en un camino sin salida a la vista, él observaba aturdido su serie de acciones. Mientras los demás no habían probado bocado, solo Inés se afanaba en hacer que los sirvientes retiraran los platos vacíos, trajeran su propio postre y le llenaran la copa de vino hasta el borde con agua.
+
+<p> Luego, como si fuera auténtico vino, hizo girar la copa tranquilamente en su mano y bebió el agua con aire de total indiferencia hacia los demás.
+
+<p> En cuanto a Cárcel, permaneció perfectamente inmóvil, con la misma sonrisa cortés que le había mostrado al Duque.
+
+<p> A pesar de todo lo que sucedía a su alrededor, Inés, con ese temperamento peculiar suyo —imposible saber si era distante o simplemente indiferente—, disfrutaba del ocio que necesitaba. El silencio volvió a reinar.
+
+<p> Y cuando dejó la copa sobre la mesa, el silencio se disipó.
+
+<p> —Parece que nadie está comiendo adecuadamente... ¿He sido la única a la que le ha parecido deliciosa la comida de hoy?
+
+<p> —No, señorita. El banquete ha estado... espléndido.
+
+<p> Miguel respondió sin aliento. Luego, girando bruscamente la cabeza, le preguntó a Cárcel.
+
+<p> —¿Verdad, hermano?
+
+<p> Con una cortesía sin precedentes. Cárcel asintió lentamente con la cabeza, de acuerdo con las palabras de su hermano. Entonces, Inés levantó las comisuras de la boca en una leve sonrisa.
+
+<p> <span style="font-style:italic">¿Sonríe?</span>
+
+<p> —Lord Escalante, ¿se encuentra bien?
+
+<p> Como si solo hubiera pasado un momento, volvió a dirigirse a él como lo había hecho con el asiento vacío. Sin embargo, en algún lugar, no era tan rígida como antes. Quizás un atisbo de amabilidad hacia un harapiento en apuros... Cárcel esbozó una sonrisa con sus hermosos labios.
+
+<p> —Sí, perfectamente.
+
+<p> Ahora que lo pensaba, desde que había comenzado esta incómoda reunión, sentados uno frente al otro todo este tiempo, era la primera vez que Inés se dirigía a él directamente.
+
+<p> Ella siempre había estado muy lejos de ser sociable. Además, Cárcel poseía tanto un rostro atractivo que le hacía sentir poca necesidad de tomar la iniciativa como el temperamento franco e inflexible de un soldado, por lo que la ausencia de conversación entre ellos no era un resultado incómodo.
+
+<p> Sin embargo, era fácil imaginar lo irritante que debía de haber sido para el Duque Valeztena. En una situación en la que ni su aspecto ni su forma de respirar le gustaban…
+
+<p> —Así que por fin ha abierto esa boca tan cara que tiene, ¿no?
+
+<p> <span style="font-style:italic">Eso era bastante obvio.</span>
+
+<p> —Esa boca tan cara que tiene, incapaz de pronunciar un solo halago decente a la mujer con la que está a punto de casarse, a pesar de que pretende que le dé un hijo.
+
+<p> —¿De qué necesita halagarme Lord Escalante?
+
+<p> —Que hoy estás más guapa que nunca, que tu vestido palidece en comparación con tu belleza... Si empezara, no habría fin.
+
+<p> —No soy tan guapa, y el vestido de hoy está desteñido. De verdad, deje de atormentarme.
+
+<p> Inés replicó, con tono irritado. No era tanto humildad como auténtico cansancio y enfado. Los ojos de Cárcel se movían inquietos entre el Duque y su hija.
+
+<p> —... ¿Viste eso? ¿Esa humildad? Desde su modesto atuendo hasta su disposición, ella está en una liga completamente diferente a esta criatura brillante y vacía.
+
+<p> —Padre, basta.
+
+<p> —Y ya me estás diciendo que no te atormente. ¡En una semana, esa basura será tu marido...!
+
+<p> —Padre.
+
+<p> —Si llamar basura a la basura es atormentarte…
+
+<p> —La señorita Valeztena es, por supuesto, extremadamente hermosa…
+
+<p> —¡Cierra la boca!
+
+<p> Cárcel se calló inmediatamente. El Duque Valeztena levantó sus temblorosos dedos para señalar a Cárcel. Se veía tan enfadado que parecía que fuera a morir, disgustado incluso por ver que alguien se callaba cuando se le ordenaba.
+
+<p> —¡Un hombre que vendió su cuerpo por una miseria!
+
+<p> —Padre, Lord Escalante no vende su cuerpo. Y si lo vendiera, no sería por una miseria...
+
+<p> <span style="font-style:italic">¿Es un buen momento para discutir mi precio?</span>
+
+<p> —¡Vende sonrisas!
+
+<p> —Tampoco vende sonrisas.
+
+<p> —Y, sin embargo, dejaste que mi hija envejeciera…
+
+<p> —Solo tengo veintitrés años.
+
+<p> —... ¿Y ahora qué? ¿Vienes querido casarte en dos semanas? ¿Te contagiaste de alguna enfermedad mortal por venderte y ahora tú padre te ha ordenado que te asegures un heredero antes de que estires la pata?
+
+<p> —Padre.
+
+<p> —¿Acaso mi hija es un chiste? Solo porque eres apuesto, ¿crees que puedes menospreciarla así?
+
+<p> Ya no prestaba atención a las reacciones del Duque. El rostro de Inés era el doble de aterrador que el del Duque.
+
+<p> Inés miró fijamente el dedo de su padre como si fuera a romperlo, sin dejar de insistir en las apariencias, y de repente extendió la mano.
+
+<p> Su actitud fue tan feroz que parecía que realmente fuera a hacerle algo al dedo del Duque, pero, contrariamente a lo esperado, lo tomó suavemente con la mano y lo bajó. Luego le dio un golpecito en el dorso de la mano, reprendiéndolo.
+
+<p> —¿Es así como se trata a un invitado?
+
+<p> La voz de una niña de siete años, llamando a su padre aparte durante un banquete para reprenderlo, se superponía al presente. Esta escena extraordinaria, que no había cambiado ni siquiera mucho después de la edad adulta…
+
+<p> Ante la voz de reprimenda de Inés, el Duque Valeztena se detuvo como si entrara en una cámara de reflexión. Sin embargo, al ver de nuevo el rostro alto y apuesto de Cárcel, algo surgió en su interior, distorsionando las comisuras de sus ojos.
+
+<p> —... ¿Invitado? Ese mocoso no es más que un ladrón.
+
+<p> —Lord Escalante es un honorable oficial de la Armada Imperial. Contrariamente a las palabras de padre, no vende su cuerpo ni es un ladrón.
+
+<p> <span style="font-style:italic">¿No podría haber terminado con solo “honorable oficial de la Armada Imperial”?</span> Cuando volvió a surgir la cuestión de vender su cuerpo, Cárcel levantó su copa de vino como si estuviera sediento.
+
+<p> —Escalante es demasiado rico para eso y lo sabe.
+
+<p> —Así que, Inés, incluso tú puedes ver que si ese bastardo, no tuviera dinero y hubiera tenido que vender su cuerpo, hace mucho que ahora ya le estaría sobrando una fortuna. 
+
+<p> —Si yo fuera pobre y poseyera un activo tan valioso, no lo desperdiciaría... Pero atengámonos a los hechos, padre. Por si solo es suficiente mancha.
+
+<p> La actitud de Inés, fingiendo disuadirlo sin negar la verdad, le quitó la vida a Cárcel.
+
+<p> —¡Hmph! Bueno, si hablamos de esa basura llena de manchas…
+
+<p> —Me he expresado mal, padre. Tampoco hables de los hechos.
+
+<p> —Eres demasiado bondadosa para tu propio bien. A menos que creas que todos los demás en el mundo son tan fieles y rectos como tú, ¿por qué insistes en ver sólo lo bueno en las personas...?
+
+<p> <span style="font-style:italic">... ¿Quién? ¿Seguro que no es Inés Valeztena?</span>
+
+<p> Cárcel llamó en silencio a un sirviente para que le llenara una copa vacía con vino, inclinando la cabeza con perplejidad.
+
+<p> La caótica conversación entre padre e hija se había centrado en Cárcel durante todo el tiempo, pero ahora le parecía lejana, como si se tratara de otra persona. Quizás su alma se estaba alejando de este lugar…
+
+<p> —Así que incluso un miserable usado como ese se considera aceptable solo por su aspecto. Tú, siendo una hija de Dios tan amable y recta, siempre logras encontrar lo bueno incluso en las personas más deficientes…
+
+<p> —Diga simplemente que se trata del aspecto.
+
+<p> —Entonces, al final, ¿de verdad insistes en seguir adelante con este matrimonio a pesar de toda esta oposición?
+
+<p> Cárcel se dio cuenta, por el regusto de arrepentimiento que había en la voz del Duque, de que  desde el principio, este matrimonio había enfrentado oposiciones. Era casi un milagro que el compromiso hubiera sobrevivido tanto tiempo.
+
+<p> —Aplaza la boda un poco más.
+
+<p> Su hija estaba envejeciendo sin un propósito, su prometido había dejado de lado su compromiso y vagaba por los mares como una especie de soldado; uno pensaría que estaría furioso por esta situación, ya que claramente estaba evadiendo el matrimonio con su hija. Pero no.
+
+<p> Cuando retrasó el matrimonio con excusas como la academia militar, el alistamiento y todo tipo de razones, el Duque Valeztena no protestó como lo habría hecho cualquier persona razonable por una sencilla razón.
+
+<p> <span style="font-style:italic">...Porque esperaba que este matrimonio se desmoronara.</span>
+
+<p> Cárcel no tenía ni idea de cómo resolver esta situación en la que el Duque Valeztena esperaba que su hija cancelara el matrimonio apenas una semana antes de la boda.
+
+<p> Y luego estaba la cuestión de qué hacer con su parte inferior, que se había vuelto tan inamovible como un bloque de piedra, a menos que fuera Inés Valeztena... Y cómo vivir una vida que si se había vuelto incapaz…
+
+<p> Su alma, que se había alejado de este lugar, se enfrentó de repente a un futuro imprevisto y miserable y regresó instantáneamente aquí. Se encontró ante un precipicio inesperado. Si no podía revertirlo, al menos debía retrasarlo; esa era la ardiente determinación del Duque, que brillaba en sus ojos.
+
+<p> A decir verdad, la edad de Inés había superado hacía tiempo la edad típica de casarse para las mujeres de la familia Ortega. Por lo tanto, aunque fuera un trapo, sería difícil encontrar otro pretendiente con condiciones tan espléndidas como las de Cárcel. Sin embargo, con el nombre de Valeztena, recibir otra propuesta de matrimonio decente no supondría ningún problema.
+
+<p> Si tan solo la otra parte pudiera olvidar que habían pasado diecisiete años desde que se comprometieron... Si tan solo pudieran hacer la vista gorda y hacer oídos sordos al hecho de que su compromiso era tan conocido que anularlo equivaldría a un divorcio más que a una simple ruptura…
+
+<p> —Ya es demasiado tarde para echarse atrás. Usted dijo que ya era demasiado vieja, ¿no?
+
+<p> Inés lanzó una mirada exasperada a su sirvienta. A juzgar por la serenidad de esa mirada, probablemente estaba preguntando: “¿Dónde está mi postre?”, en medio de todo esto.
+
+<p> —Si tú fueras vieja, tu madre y yo ya estaríamos en un ataúd.
+
+<p> —Habla por ti mismo, ¿por qué me metes en esto? Apenas tengo treinta años.
+
+<p> La Duquesa espetó, con la voz pastosa por el alcohol. El Duque hizo una mueca.
+
+<p> —Tienes cuarenta y cinco. ¿Cuántas veces tengo que decírtelo? Lavarle el cerebro a la gente no te hará joven, lo siento, Inés. De todos modos, el matrimonio no es tan fácil y sencillo como imaginabas a los seis años, ni funciona solo con ese rostro esculpido.
+
+<p> —Lord Escalante no es el único que comete tales transgresiones.
+
+<p> —Ojalá hubiera sido cosa de una sola vez. Ojalá hubiera parado mientras iba ganando, se podría haber achacado a la exuberancia juvenil... Pero como todo el mundo es así, no hay mucho que hacer. Me hubiera tocado apretar los dientes y aguantar. Pero ese bastardo, haga lo que haga…
+
+<p> Por lo tanto, el resultado de este prolongado compromiso no estaba únicamente en manos de Cárcel, como suponía el mundo.
+
+<p> El Duque Valeztena estaba siempre dispuesto a disolver el compromiso, y Cárcel proporcionaba constantemente motivos suficientes para su anulación, con la misma naturalidad con la que se respira.
+
+<p> Por supuesto, teniendo en cuenta que los nobles mendocinos eran uniformemente libres de espíritu, disolutos e incluso algo depravados en sus inclinaciones, tales razones rara vez provocaban el fracaso de las conversaciones de compromiso.
+
+<p> Pero la otra parte era el Duque Valeztena, que obstinadamente ponía trabas al Emperador con sus disputas puntillosas incluso en el Senado…
+
+<p> —¿Acaso padre encuentra tan ridículo un pacto sellado en nombre de nuestra familia? Especialmente cuando Valeztena y Escalante no son meras casas nobles, sino familias reconocidas como Grandes de Ortega.
+
+<p> —...
+
+<p> —No pronunciamos una sola palabra a la ligera.
+
+<p> Como una mentira, los ojos obstinados del Duque se nublaron. Como los ojos nublados del Emperador, cuya petición al Senado había bloqueado en su día la creación de una fábrica de municiones por parte del Duque.
+
+<p> El equilibrio de poder se inclinó hacia Inés. “No actuamos así”, y sin embargo, desde que la Duquesa, que no tenía ningún pariente mayor en la familia, hasta Luciano, nadie parecía encontrar sus palabras discordantes.
+
+<p> Cárcel volvió a la realidad. Solo había una razón por la que este matrimonio había durado tanto tiempo. Inés, como mínimo, lo quería a él. Ella afirmaba que no le gustaba ni le importaba, que le daba igual las tonterías que hiciera, pero, a pesar de todo eso, lo quería.
+
+<p> Para él, que había empezado la mañana jadeando por haber tenido otro sueño con ella, era un hecho bienvenido por el momento. Pero, en realidad, no podía evitar sospechar.
+
+<p> Incluso si, como sugería el Duque, su hermoso rostro era todo lo que ella deseaba, ¿por qué entonces su única virtud, su rostro, siempre provocaba una expresión tan exasperada e irritada cada vez que ella lo veía?
+
+<p> —Además, este matrimonio fue arreglado personalmente por Su Majestad la Emperatriz. Como parte de la familia imperial, anular este matrimonio sería insultar a la casa real.
+
+<p> —Su Majestad la Emperatriz seguramente sabe que su preciado sobrino está vendiendo su cuerpo por la ciudad. No puede culparnos.
+
+<p> —Los Escalante tienen más que suficiente. Lord Escalante no vende su cuerpo, y lo sabe.
+
+<p> —¿Cómo es posible que no sepas que los ricos son los peores? ¿Crees que solo venden sus cuerpos o roban? Esos hombres venderían sus almas si pudieran ganar más. ¿Por qué no lo entiendes?
+
+<p> —No parece que lord Escalante obtuviera nada más que placer al conocer a esas mujeres.
+
+<p> Inés respondió, desviando abiertamente su atención hacia el postre, que había llegado mientras tanto. Era una valoración excesivamente objetiva y distante para alguien que estaba hablando del comportamiento disoluto de su prometido. En términos de presencia, probablemente era menos significativa que la única pieza de fruta que había pinchado con el tenedor.
+
+<p> —Después de entregarse a esos placeres a su antojo, ahora está pensando en probar suerte con el robo.
+
+<p> —Últimamente se ha estado conteniendo, lo que me parece bastante considerado. ¿No le parece, Lord Escalante?
+
+<p> —En el segundo en el que diga “acepto”, ese imbécil estará tramando algo con otra mujer en algún lugar.
+
+<p> Antes de que Cárcel pudiera responder, el Duque lo interrumpió con una réplica contundente. Inés se encogió de hombros, masticó un trozo de fruta y dijo:
+
+<p> —A decir verdad, guardar un rostro así para uno mismo sería un desperdicio de recursos. Sería como abandonar una mina de oro o no recolectar sal del mar.
+
+<p> —¿Qué?
+
+<p> —Estoy orgullosa de Lord Escalante, así que no dejaré que se desperdicie.
+
+<p> ¿Qué actitud era esa, como cuidar a un pájaro herido hasta que se recuperara para luego liberarlo? Era casi un cálido estímulo, como si le dijera: “Ahora extiende tus alas y vuela hacia el mundo”. Cárcel solo parpadeó. Una semana antes de su boda, esa sonrisa, animando su encuentro con otra mujer delante de sus propios padres…
+
+<p> —¡Inés, debes de estar loca...! Escalante. ¿Qué es esa expresión? ¿Permiso concedido, entonces? ¿Planeas explotar la cantera con diligencia? ¿O ir a secar sal en las salinas?
+
+<p> De alguna manera, la frase “vender su cuerpo” había comenzado a ser sustituida por esta nueva expresión totalmente extraña que le daba dolor de cabeza. Ahora, no se le ocurría ninguna réplica. ¿Acaso nunca había tenido intención de explotar las minas una vez casado? ¿O se había estropeado las salinas? Cárcel miró fijamente a Inés en medio de las oleadas de desconcierto que lo invadían.
+
+<p> Los labios que habían estado masticando fruta se enderezaron lentamente, y los labios que habían dibujado una línea recta se curvaron con gracia. Los ojos de Cárcel, que la observaban con recelo, se nublaron de repente, como hipnotizados.
+
+<p> —Estoy bien, de verdad. Adoro tanto a Lord Escalante que soy feliz de todos modos.
+
+<p> Cárcel se dió cuenta de una cosa más.
+
+<p> Inés Valeztena sonríe de la forma más hermosa cuando miente.
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> —Ahora bien, Lord Escalante.
+
+<p> A estas alturas, ya debía de haber oído “Ahora bien” al menos diez veces.
+
+<p> Tras el banquete vespertino, mientras todos se dirigían al salón, Cárcel solo pretendía sostener a la Duquesa, que se tambaleaba bajo los efectos del alcohol. Sin embargo, ella lo había agarrado y él se vio obligado a soportar una conversación que le parecía una tortura.
+
+<p> Repitiendo lo que ella había dicho, una y otra vez...
+
+<p> La viva imagen de un borracho. Cárcel, que había estado mirando fijamente a Inés conversando a distancia con Miguel, mientras dejaba que sus palabras le entraran por un oído y le salieran por el otro, de repente frunció el ceño.
+
+<p> <span style="font-style:italic">¿Desde cuándo esos dos se habían vuelto tan íntimos?</span>
+
+<p> —... ¿Está escuchando?
+
+<p> —Por supuesto, Duquesa. Por favor, continúe.
+
+<p> Su preocupada pregunta “¿Por qué demonios se sientan juntos tan cariñosamente?” se desvaneció.
+
+<p> Como si hubiera estado prestando atención todo el tiempo, Cárcel giró la cabeza respetuosamente hacia la Duquesa Valeztena.
+
+<p> —Verá, yo pienso muy diferente a ese Duque estirado. Desde un principio usted me gustó.
+
+<p> —Es un honor, Duquesa Valeztena.
+
+<p> —Siempre se lo digo a Inés también... que usted es demasiado bueno para esa niña. Ah. Inés no es la hija que yo deseaba. Nunca ha hecho nada de lo que yo quería... Es una hija muy decepcionante. Todo lo que hace solo me decepciona.
+
+<p> Como una borracha, probablemente se repetiría sin cansarse... Sin embargo, mientras dejaba que esas palabras lo inundaran, una sensación de alienación se filtró en sus oídos.
+
+<p> Cárcel entrecerró los ojos.
+
+<p> —¿Ha visto cómo me mira esa niña? Ojos que no muestran gratitud por la bendición de su nacimiento... Ojos tan fríos como el hielo. ¿Le pasa lo mismo cuando lo mira a usted?
+
+<p> —...
+
+<p> —No, usted es perfectamente decente y favorable... Pero ella no siempre fue así desde que nació. Hubo un tiempo en que era absolutamente encantadora y adorable... Luego cambió... Probablemente después de sufrir un fuerte episodio de fiebre...
+
+<p> Aunque la Duquesa Valeztena y él se conocían desde hacía mucho tiempo, con Inés como intermediaria, siempre se habían limitado a intercambiar cumplidos superficiales.
+
+<p> A menudo la había visto beber hasta emborracharse. Pero cuando estaba borracha, el Duque se ocupaba de ella de forma rápida y eficaz, por lo que no recordaba haber conversado nunca con ella en ese estado.
+
+<p> Quizás por eso un rostro que siempre había creído conocer bien de repente le resultaba desconocido. Aunque a veces parecía aguda e irritable, en el fondo siempre era elegante y serena. Aunque no era especialmente cariñosa con los demás, al menos con sus propios hijos...
+
+<p> —Desde ese momento, mi vida no ha sido más que recuerdos de esa niña decepcionándome. Solo quería una hija normal y bonita, pero mire a esa criatura parecida a una bruja... ¿Usted podría soportarlo?
+
+<p> —...
+
+<p> —Bueno, precisamente por eso dudaba sobre el matrimonio, ¿no? La idea de compartir la cama con una criatura así debía de ser horrible... ¡Solo con mirarla le debían castañear los dientes!
+
+<p> Así pues, la Duquesa Valeztena era alguien que, al menos, hablaba como si sintiera un afecto desbordante por sus propios hijos. Como cualquier otra persona.
+
+<p> Incluso el noble más severo, que podía golpear a los sirvientes sin piedad, se transformaba en una persona diferente cuando veía a sus hijos, sonriendo. Esto era lo normal entre la aristocracia de Mendoza. No era solo la nobleza; la costumbre predominante en Ortega, que valoraba la familia, era muy similar.
+
+<p> Proyectaban todo el amor del mundo en sus propios hijos. Y gracias a las promiscuas tradiciones familiares, si tenían demasiados hijos, simplemente elegían a uno o dos a los que amar. Su posesividad hacia la descendencia también era considerable; no era raro que las parejas se separaran, peleándose por los hijos a cuchilladas.
+
+<p> La Duquesa Valeztena parecía ser una de esas personas de Ortega. Una noble con esa pizca de humanidad, alguien a quien quizá no le gustara la gente, pero que amaba a sus propios hijos.
+
+<p> —¿Así que ya se rindió? ¿Cómo podría soportar ver ese espectáculo durante el resto de su vida? Por favor, cure a esa niña. Hay que curarla. Es una enfermedad...
+
+<p> El rostro de la Duquesa mientras miraba a Inés no se parecía en nada al de una madre.
+
+<p> Una mirada de repugnante amor-odio, un sentimiento de absoluto cansancio hacia ella y algo parecido al asco, esa expresión cruda y sin filtros.
+
+<p> A decir verdad, nadie en Ortega aceptaría lo que Inés aspiraba habitualmente. Ya fuera su vestimenta, su carácter exclusivo o su expresión totalmente rígida, cosas que hacía tiempo que habían dejado de importarle a Cárcel, ahora todas igualmente insignificantes para él, pero que cualquier padre consideraría sin duda motivos extremos de preocupación.
+
+<p> Estaba claro que sus gustos eran incomprensibles no solo para la aristocracia de Mendoza, sino también para los comerciantes y los campesinos. Al fin y al cabo, el sentido común tiende a ser estrecho de miras.
+
+<p> En consecuencia, los padres se enfadaban, luego se consumían por la preocupación, luego reprendían, luego suplicaban... Tenían que hacer algo. Al fin y al cabo, todo el mundo insistía en que los hijos eran el espejo de sus padres.
+
+<p> Sin embargo, la preocupación no puede superar al amor. El amor de los padres de Ortega era tan inmenso que a veces arriesgaban sus vidas para proteger a una hija que había matado a su marido o a un hijo que había matado a un amigo.
+
+<p> Si el amor de los padres de Ortega podía abarcar incluso a un hijo que se había convertido en asesino, entonces seguramente una hija que siempre aparecía en los banquetes con ropa de luto, por muy irritante que fuera, seguiría siendo amada al final.
+
+<p> —Verla así fuera de casa es como si alguien me estrangulara, maldiciéndome para que muera rápidamente. Simplemente no puedo soportarlo. ¡Es como si se pasara todo el día tramando cómo avergonzarme...!
+
+<p> Así que esto era más que un simple reproche hacia una hija.
+
+<p> Por vestirse como le placía, por ser una hija poco cariñosa... Murmuraba sin cesar, como una niña cansada de un objeto que no se doblegaba a su voluntad.
+
+<p> —Es como si alguien hubiera cambiado el alma de esa niña en aquel entonces. A veces actúa como si estuviera poseída... haciendo cosas completamente malvadas. Algunos días, esa pequeña me amenaza, se autolesiona, se daña su propio cuerpo, todo solo para negarse a escucharme...
+
+<p> —¿Amenaza, dice?
+
+<p> —Solo le prometí que la haría hermosa. Pero ella seguía comportándose así, haciendo cosas incomprensibles, cambiando de actitud, rechazándome... La ahogué en una bañera para darle una lección, para corregir su comportamiento... Le cambié la ropa, le cuidé la piel, le impedí que se metiera cosas en la boca... Todo era por su propio bien.
+
+<p> —...
+
+<p> —Lo ha visto hace un momento, ¿no? A solo una semana de la boda, se estaba metiendo en la boca todo lo que veía.
+
+<p> No había nada excesivo en la comida de Inés. Simplemente masticaba y tragaba con elegancia la ración adecuada asignada a cada persona.
+
+<p> —¿Qué clase de noble es esa...? No se diferencia en nada del ganado con la cabeza metida en el comedero. Vulgar y poco civilizada, se lo digo yo. Si ni siquiera se molesta en maquillarse y tiene ese aspecto, al menos debería cuidar ese bonito cuerpo que tiene. ¿Qué cree que va a conseguir engordando como un cerdo sin preocuparse por nada...?
+
+<p> —...
+
+<p> —Como madre, debería haberla protegido de todo eso. Para asegurarme de que su futuro marido la quisiera, debería haberle impedido hacer cualquier cosa que pudiera perjudicar sus perspectivas... ¡Pero la mirada que tenía en los ojos entonces... era tan aterradora... que me daba demasiado miedo volver a tocar a mi hija! Desde entonces, su rostro ha permanecido igual. Feo y horrible, tal y como es...
+
+<p> —...
+
+<p> —¿Esa cosa es mi hija? Debería haberla encerrado en su habitación. Haberle impedido vagar por ahí…
+
+<p> —... La señorita Valeztena es bastante hermosa, Duquesa.
+
+<p> Cárcel finalmente escupió las palabras, con frialdad, como si expulsara una espina clavada en la garganta. La Duquesa Valeztena sonrió de repente.
+
+<p> —Qué divertido. ¡El padre de esa niña dijo exactamente lo mismo...!
+
+<p> —...
+
+<p> —El Duque dijo que no debíamos estropear la piadosa apariencia de Inés. Que era su elección, solo suya. Dijo que debía tener algún propósito propio. ¿No es realmente ridículo? Por Dios, actúa como si alguien hubiera, y sin embargo se la considera devota simplemente por vestir de negro.
+
+<p> —...
+
+<p> —Sin embargo, ha hecho que su propia madre sea incapaz de levantar la cabeza. Como no confino a esa niña, ahora soy yo la que está prisionera en esta casa... Lord Escalante, usted ha conocido a muchas mujeres de su edad, ¿no es así? ¿Quién demonios se viste así? ¿Ha habido alguna vez una mujer como ella? Hay que corregirla. Es realmente una enfermedad.
+
+<p> Incluso después de soportar aquella cena tan pesada, las últimas fuerzas que le quedaban parecieron agotarse en un instante.
+
+<p> Cárcel apartó los pensamientos que amenazaban con complicarse y buscó al Duque y a Luciano, ansioso por deshacerse de la Duquesa. Sin embargo, por alguna razón, tampoco había rastro de ellos. Cárcel respondió con un suspiro.
+
+<p> —No tengo derecho a corregir a su hija. Me gustaría que lo tuviera en cuenta.
+
+<p> —Usted será su esposo. Su amo, ¿no?
+
+<p> —Solo su esposo.
+
+<p> —Es demasiado suave. ¿Es porque no siente nada especial cuando ve a mi hija? Al fin y al cabo, Lord Escalante ve a muchas mujeres...
+
+<p> —Y a partir de ahora, la única mujer que veré será su hija.
+
+<p> La Duquesa se echó a reír como si hubiera oído algo completamente ridículo. Al oír el sonido, sintió que Inés y Miguel miraban simultáneamente en su dirección desde lejos.
+
+<p> Preocupado por que Inés pudiera oír las palabras de su madre, Cárcel la guió naturalmente hacia la ventana. Con el pretexto de dejarla tomar aire, también abrió amablemente la ventana.
+
+<p> —Hay una cosa que esa chica ha hecho en toda su vida que realmente apruebo.
+
+<p> Sin querer preguntar qué era, ni siquiera por cortesía, Cárcel permaneció en silencio, con la mirada fija fuera de la ventana. Entonces, la Duquesa le dio un ligero golpecito en la mejilla con sus huesudos dedos.
+
+<p> —Y fue cuando se volvió loca, le puso una correa y lo hizo suyo.
+
+<p> —...
+
+<p> —En verdad fue una decisión impecable... Mire al Príncipe Heredero. Dentro de diez años, seguramente estará calvo en la coronilla, como su padre...
+
+<p> —Si me permite interrumpir, ¿cuándo es que “se volvió loca”?
+
+<p> Las palabras de la Duquesa sonaban sugerentes, como si Inés lo hubiera drogado para que aceptara el compromiso. Pero eso no podía ser. Apenas tenían seis años entonces, e Inés simplemente se sonrojó...
+
+<p> —¿No lo recuerda? El día que la Emperatriz lo convocó, dijo que debía casarse con Inés, y lloró todo el día, diciendo que tenía miedo.
+
+<p> Aunque quisiera olvidarlo, era imposible olvidar ese día porque todos se burlaban de él cada vez que lo intentaba. Cárcel esbozó una sonrisa y volvió a preguntar.
+
+<p> —Sí lo recuerdo, pero eso fue cuando no se había vuelto loca...
+
+<p> —Lord Escalante, entonces tenía seis años.
+
+<p> —Sí.
+
+<p> —Nadie está cuerdo a los seis años.
+
+<p> —...
+
+<p> La tensión se disipó al instante.
+
+<p> Si ese es el caso, entonces Inés... Fue solo un momento de reflexión para Cárcel.
+
+<p> —Pero Inés era diferente. Esa niña estaba definitivamente... cuerda en aquel entonces.
+
+<p> —...
+
+<p> —Eso es precisamente lo que la hace un demonio, Lord Escalante.
+
+<p> —...
+
+<p> —Estaba poseída por un demonio.
+
+<p> La Duquesa murmuró significativamente, como si hablara de otra persona muy alejada de la Inés visible. El suspiro que exhaló con una profunda respiración apestaba a alcohol.
+
+<p> Claramente, no eran las palabras de una persona cuerda. Al igual que nadie está cuerdo a los seis años, nadie está sobrio y cuerdo cuando está borracho. Cárcel levantó la mano hacia el Duque, que acababa de entrar en el salón, y le pidió que se llevara a la Duquesa.
+
+<p> —Es como si alguien hubiera cambiado el alma de esa niña en aquel entonces. A veces, es como si estuviera poseída por un demonio...
+
+<p> De alguna manera, ese comentario se le quedó grabado en la mente. En medio de palabras rebosantes de condenas intolerantes hacia su hija, esa única acusación exagerada.
+
+<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+
+<p> El ambiente en la casa de los Valeztena, tras recuperar más o menos la paz, era ahora casi tranquilo. La tormentosa cena parecía una mentira.
+
+<p> Quizás el cambio de ambiente era simplemente demasiado brusco. Cárcel observó a Luciano y Miguel charlando y alejándose, y luego volvió la mirada hacia la callada Inés.
+
+<p> —...
+
+<p> —...
+
+<p> Ella se sentó, llenó su copa de vino con agua como si fuera vino y la bebió en silencio, igual que durante la comida. Como si no le importara que él estuviera sentado a su lado.
+
+<p> Cárcel estaba bastante acostumbrado a ese trato desdeñoso, así que aprovechó el momento para observar a Inés de forma unilateral. Su cabello negro cuidadosamente peinado hacia atrás, su frente y puente nasal redondeados y rectos, sus ojos que parecían tener poco interés en la realidad... Entonces su mirada se posó de nuevo en la mano que sostenía la copa de vino.
+
+<p> La forma en que ocasionalmente hacía girar la copa en la palma de su mano era casi tan hábil como la de un alcohólico, pero, pensándolo bien, rara vez había visto beber a Inés.
+
+<p> Aunque a menudo la había visto beber cosas que no eran alcohol como si lo fueran...
+
+<p> Era solo un pequeño hábito insignificante, pero hay cosas que hacen que uno las observe sin pensar.
+
+<p> Por ejemplo, la mirada altiva de Inés, su expresión indiferente, sus labios que parecían erigir un muro contra todas las sutilezas sociales, la forma constante en que se echaba el pelo hacia atrás, separándolo de la misma manera, el gesto sutil y burlón de mirar a su alrededor como si un perro estuviera ladrando en algún lugar cada vez que alguien decía algo que no le gustaba, el gesto descarado de agitar la mano cuando alguien le resultaba molesto...
+
+<p> De alguna manera, la mayoría de las impresiones que recordaba vívidamente eran totalmente negativas.
+
+<p> Sin embargo, una leve sonrisa se dibujó en sus labios, como si hubiera conjurado en su mente algún animalito adorable, como un conejo o un cachorro de zorro. La sonrisa se volvió rápidamente amarga.
+
+<p> Dejando de lado el hecho de que sin duda estaba loca, recordar a Inés así le hacía temer que pronto podría desnudarla y pisotearla de nuevo en su mente. Cárcel expulsó escrupulosamente ese pensamiento.
+
+<p> Caer en pesadillas tan pervertidas mientras la verdadera Inés estaba ante él ya había sido suficiente en el último concierto.
+
+<p> Muy pronto, ese sueño se haría realidad. Iban a casarse y él superaría esa vergonzosa realidad, como si arrastrara una piedra bajo sus pies. Pronto tendrían sexo legalmente.
+
+<p> Inés, que sin duda sería conservadora incluso en la cama, solo alimentaría más su espíritu competitivo, pero él perdería el interés muy pronto.
+
+<p> Sin embargo, como Inés sería la única mujer legítima con la que podría tener sexo durante el resto de su vida, continuaría con sexo regular, obligatorio y digno... Habiendo disfrutado lo suficiente, una vida tan estática no sería tan mala.
+
+<p> Por encima de todo, una vez que tuviera a la verdadera Inés en sus brazos, esta pesadilla agotadora desaparecería. Ya fuera por perder el interés o por encontrarlo más interesante... Así que no había necesidad de tales delirios vergonzosos. Nunca más. Se reprendió a sí mismo.
+
+<p> Colgando precariamente entre la impotencia y la potencia, el alter ego de Cárcel recuperó su fuerza excesiva, como siempre, con solo imaginar a Inés.
+
+<p> De repente, como un impulso incontrolable, llegaba la ilusión demoníaca y, con ella, ese deseo repentino e incontrolable... Por supuesto, ese mismo hecho era un rayo de esperanza, pero Cárcel nunca había estado tan desesperado como para satisfacer sus propios deseos, y confiar en la imaginación era algo que nunca había imaginado.
+
+<p> Así que, en ese preciso momento, allí, la ilusión de Inés agarrándole la corbata y abalanzándose sobre él, o la ilusión de encontrarse de repente en medio de la familia Valeztena, desnudándola y chupándole el pecho, le resultaba totalmente desagradable.
+
+<p> Era un rayo de esperanza y un caldo de cultivo para el odio hacia sí mismo. Por mucho que se repitiera, la vergüenza y el odio hacia sí mismo nunca desaparecían.
+
+<p> La Inés de sus sueños era Inés, pero no era Inés. ¿Podía una mujer que no existía ser realmente una mujer? Sorprendentemente, lo era...
+
+<p> Aunque sus compañeros de la escuela militar a veces discutían acaloradamente sobre la masturbación, Cárcel se limitaba a mirarlos con desdén, como un sabio iluminado que mira desde arriba a las masas ignorantes, sintiendo solo lástima. Así, cada mañana y cada noche, cada vez que se excitaba con la ilusión de Inés, se encontraba rumiando sobre lo bajo que había caído.
+
+<p> Un comportamiento tan hambriento, desesperado e incluso, en ocasiones, cerdo... del tipo en el que solo ellos se complacían.
+
+<p> Cuanto más observaba a Inés, más aumentaba su sensación de miseria y culpa, por lo que Cárcel decidió romper él mismo esa atmósfera sombría.
+
+<p> Cuando estaba con Inés, el papel de divagar siempre le correspondía a él. A pesar de su naturaleza taciturna.
+
+<p> —... ¿Cuándo se hicieron tan íntimos Miguel y tú?
+
+<p> El comentario imprudente que se le escapó sonó, contrariamente a su intención, como si estuviera buscando pelea.
+
+<p> Al notar el sutil tono de su voz, Inés arqueó una ceja, apartó los labios de la copa y lo miró.
+
+<p> —¿Desde cuándo le interesan tanto esos asuntos a Lord Escalante?
+
+<p> —... Deja eso de “Lord” de una vez.
+
+<p> —Escalante.
+
+<p> —También el “Escalante”. Ahora solo estamos nosotros, ¿no?
+
+<p> El Duque, que lo había estado mirando como si fuera una espina que quería sacar, finalmente se llevó a la Duquesa, completamente borracha, arriba. Luciano y Cárcel, que no tenían absolutamente nada de qué hablar, se separaron automáticamente, dirigiéndose cada uno hacia Miguel e Inés... La distribución de los asientos se había resuelto pacíficamente de esa manera.
+
+<p> Pero la paz no siempre es apacible.
+
+<p> —¿Y eso te hace especial de alguna manera?
+
+<p> La réplica de Inés, pronunciada sin rastro de cortesía, fue igualmente tajante.
+
+<p> Su voz transmitía el peso de un resentimiento que llevaba mucho tiempo gestándose. Contrastaba enormemente con la calma con la que había intentado instruir a su padre en el banquete.
+
+<p> <span style="font-style:italic">Así que sí tienes resentimientos, ¿no?</span> De alguna manera, sintió que había destrozado fácilmente su compostura, y una maliciosa satisfacción brotó dentro de sí.
+
+<p> Cárcel habló, con las comisuras de los labios levantadas en una leve sonrisa.
+
+<p> —Estaré más cómodo. Ya he tenido suficiente con el protocolo en el ejército, así que no tengo ningún deseo de ser diferente contigo también.
+
+<p> —Entonces conviértete en un hombre grosero. Pero no toques mi decoro.
+
+<p> —Qué amable por tu parte.
+
+<p> —Haz lo que te plazca. Te serviré con el mayor cuidado.
+
+<p> —¿Así que me convertirás en un tipo anticuado y grosero que trata a las mujeres con descuido?
+
+<p> —Francamente, eso me da igual. ¿En qué estás pensando?
+
+<p> —Puede que Miguel no lo parezca, pero tiene diecisiete años. Ya ha superado la mayoría de edad y se está hablando de matrimonio...
+
+<p> —No, eso no. Escalante, no estarás vigilándome, ¿verdad?
+
+<p> —...
+
+<p> Desconcertado, Cárcel se quedó en silencio por un momento.
+
+<p> Inés se rió con total incredulidad.
+
+<p> —¿Tú?
+
+<p> —...
+
+<p> —¿A mí?
+
+<p> —Me haces ver como un auténtico bicho raro si lo pones así, pero mi intención simplemente es...
+
+<p> —... ¿Estás en contra de Miguel?
+
+<p> —... ¿Por qué estaría en contra de Miguel? Es Miguel.
+
+<p> Olvidó que le habían interrumpido en mitad de su protesta y le presionó para que le explicara “por qué estaría en contra de Miguel”. Inés ladeó ligeramente la cabeza antes de responder.
+
+<p> —Porque tu hermano es inofensivo y adorable.
+
+<p> —Yo también soy inofensivo.
+
+<p> Por supuesto, su musculoso físico era demasiado grande para considerarse adorable, y desde luego él no aspiraba a serlo...
+
+<p> —Si es inofensivo, es inofensivo; si es peligroso, es peligroso... Pero para mí, sí, es inofensivo.
+
+<p> Inés cambió de repente de actitud y sonrió.
+
+<p> —Y esta cara beneficiará al mundo en general.
+
+<p> —... De repente, desde hace un rato, no paras de hablar de minas, salinas, oro y sal.
+
+<p> Era sospechoso que siguiera haciéndole esos extraños y efusivos cumplidos cuando antes lo había ignorado por completo.
+
+<p> —Lo siento, Cárcel. Tu padre te ha hecho pasar un mal rato hoy, ¿verdad?
+
+<p> Y entonces, de repente, una tierna disculpa. Y por si fuera poco, incluso había utilizado su nombre...
+
+<p> —... Es cierto que tengo muchos defectos.
+
+<p> —Lo siento.
+
+<p> —¿Pero por qué te disculpas?
+
+<p> —Porque lo siento.
+
+<p> —... ¿No sueles evitar disculparte...?
+
+<p> <span style="font-style:italic">En lugar de evitarlo, ¿no es simplemente que no sabe cómo...?</span> Cárcel frunció el ceño en silencio. Al darse cuenta de su duda, Inés sonrió con mayor amabilidad.
+
+<p> —Como dije en la cena, eres un hombre demasiado valioso, demasiado generoso y demasiado perfecto para mí.
+
+<p> Probablemente ni siquiera sabe cómo hacer un cumplido sincero. Extraño. Realmente extraño.
+
+<p> —Así que no te preocupes por la opinión de mi padre, y tampoco pienses en la mía.
+
+<p> —...
+
+<p> —Haz siempre lo que te dicte tu corazón. ¿Entendido?
+
+<p> Su rostro benévolo, como si fuera una santa, se superponía al sofisma que había mostrado en el banquete.
+
+<p> —Estoy orgullosa de Lord Escalante, así que no dejaré que se eche a perder.
+
+<p> En ese momento, se preguntó si simplemente estaba cuerda, pero ahora veía su verdadera sinceridad. Incluso pensó que podría ser una estratagema para hacer que el Duque Valeztena envejeciera rápidamente, pero no, realmente era genuina.
+
+<p> Una completa e incomprensible sinceridad y locura.
+
+<p> —Ya he hecho lo que me place. Es más que suficiente.
+
+<p> —Lo sé. Me di cuenta de eso en el momento en que anunciaste unilateralmente que nos casaríamos en quince días... Gracias a ti, tendré que usar ese anticuado vestido que llevó mi madre hace veintisiete años.
+
+<p> —Pero...
+
+<p> —Puede que seas caprichoso, pero lo que te impulsa es tu sentido de la responsabilidad. Por eso lo acepté, aunque me molestara. Así que, Cárcel, voy a dar crédito a tu sentido de la responsabilidad.
+
+<p> Esas palabras sonaban como una amenaza velada para menospreciar otra cosa. Cárcel entrecerró ligeramente los ojos y la miró.
+
+<p> —Todo lo que quiero es nuestro matrimonio, así que está bien. Siempre te he esperado, te he anhelado, esperando solo a que tomaras esta mano. Así que cuando de repente te apresuras a proponerme matrimonio de esta manera, debo aceptarlo como si lo hubiera estado esperando. No importa lo abrupto que sea. Valió la pena la espera. Es algo por lo que estoy muy agradecida.
+
+<p> A juzgar por el lenguaje exagerado y el tono totalmente desagradecido, estaba claramente enfadada.
+
+<p> —Debes haberte enfadado.
+
+<p> Cárcel respondió en voz baja. Como si dijera: “Así que, después de todo, sangras cuando te pinchan”.
+
+<p> —No. Bueno, claro, fue un poco irritante. Pero, en el fondo, era lo que más deseaba...
+
+<p> —¿Tú?
+
+<p> Las palabras “¿Simplemente casate conmigo?” se le atragantaron en la garganta, y apenas pudo detenerlas. Claro, la elección había sido claramente de Inés Valeztena. No suya.
+
+<p> Ella fue quien insistió, quien lo empujó, quien alteró por completo su destino, quien lo hizo heredar ese título tan pesado... todo porque quería casarse con él...
+
+<p> Aunque eso estaba claro, presentarlo como “todo fue un puro deseo” hacía que el oyente se sintiera profundamente escéptico.
+
+<p> Como si hubiera escuchado una mentira descarada.
+
+<p> —Así que me alegro de que finalmente te hayas decidido, aunque tarde. No debe de haber sido fácil. Más bien debió haber sido difícil. Eres un niño sorprendentemente sincero, a pesar de las apariencias...
+
+<p> La estatura de Inés superaba con creces la media de las mujeres Ortega, pero a Cárcel le parecía absurdamente pequeña. Por lo tanto, a pesar de mirarlo desde una altura dos palmos más baja que la suya, referirse al imponente hombre como “niño” solo servía para hacerlo parecer insignificante en comparación.
+
+<p> Era algo muy poco habitual. Mientras Cárcel permanecía en silencio, deseando saborear un poco más esa sensación bastante desagradable, Inés continuó obedientemente.
+
+<p> —No puedo imaginar lo sofocante que debió de ser pensar en un futuro en el que tendrías que vivir fielmente para estar a la altura de tus fieles creencias. Por eso te esforzaste tanto por evitar nuestro matrimonio, por eso necesitabas una vida libre para respirar, ¿verdad?
+
+<p> —...
+
+<p> —Era absolutamente necesario. Eres un alma demasiado preciosa para estar atado por las convenciones.
+
+<p> —...
+
+<p> —Me encanta verte libre. Incluso cuando tenías seis años, y estabas rodeado de niñas, parecías completamente feliz... No quiero que te marchites, atrapado por las convenciones y el deber.
+
+<p> —... ¿Qué tontería es esa?
+
+<p> —Las flores se marchitan cuando se cortan, ¿no? Así como las dejo en su lugar natural, yo te dejaré a ti.
+
+<p> —Dejando a un lado que me compares con una flor lamentable con este cuerpo que tengo, ¿lo que estás diciendo ahora es lavado de cerebro? ¿Hipnosis?
+
+<p> —¿Lavado de cerebro?
+
+<p> Inés respondió como sorprendida, pero evitó mirarlo a los ojos.
+
+<p> —Suena exactamente a eso. ¿Intentas suavizar las cosas después de lo de la última vez?
+
+<p> —No hay nada que suavizar.
+
+<p> —Te besé.
+
+<p> Entonces, como si se hubiera atragantado, su rostro se retorció de repente con disgusto. Seguramente no estaba recordando ese beso y reaccionando así... No. No podía ser eso. Él besaba bien.
+
+<p> Cárcel se acercó a ella. Inés giró la cabeza y dio un paso atrás.
+
+<p> —Pensé que eso bastaría como respuesta.
+
+<p> —... Eso fue un esfuerzo por tu parte.
+
+<p> —¿Esfuerzo?
+
+<p> Él se quedó atónito. Cárcel replicó:
+
+<p> —Bueno, quería dejarte claro lo fuerte que es tu sentido del deber. Que ahora estás dispuesto a besar incluso a una mujer como yo, que...
+
+<p> —No hay ningún sentido del deber que dejarte claro.
+
+<p> Maldita mujer, incluso su elección de palabras es “dejar claro”... Una imagen fugaz pasó por la mente de Cárcel en la que luchaban, arañándose el uno al otro como si quisieran destrozarse el cráneo. Frunció el ceño como si estuviera defendiéndose de un demonio.
+
+<p> —Dijiste que no querías malgastar energía en un hombre que ni siquiera te gustaba, ¿y sin embargo pensabas en mí con tanta devoción? Bien. Dejemos eso a un lado.
+
+<p> —Es diferente, eso es…
+
+<p> —¿Diferente? ¿Como si ahora compartiéramos una profunda amistad?
+
+<p> —Cárcel.
+
+<p> —Cuando dijiste que te gustaba, dijiste que no te gustaba. Dijiste que no te gustaba, pero ahora actúas así. Mientes con esa cara dulce y gentil sobre el anhelo que sientes por mí, y dices que no quieres malgastar tu energía, pero estás ocupada empujándome por un precipicio.
+
+<p> —... En primer lugar, han pasado más de diez años desde que dije que me gustabas.
+
+<p> Como si preguntara de qué época era eso, Inés puso una expresión de total estupefacción.
+
+<p> —No hables como si cambiaras de historia cada pocos días. Suena extraño.
+
+<p> —Hace más de diez años, ¿de verdad te gustaba entonces?
+
+<p> —...
+
+<p> Ella dudó un momento y luego asintió. Cárcel volvió a dar un paso adelante, acortando la distancia que ella había creado.
+
+<p> —¿Cuándo empezaste a sentir aversión por mí?
+
+<p> Las mujeres que había conocido eran espías infiltradas por la familia Valeztena, o simplemente mujeres que había conocido, o su falta de moderación en su vida privada... Innumerables respuestas surgieron en su mente, pero Cárcel no dio ninguna señal y se limitó a mirarla.
+
+<p> Porque Inés, al menos, parecía no tener nada que ver con nada de eso. Precisamente por eso no lo entendía.
+
+<p> Ella lo miró un momento, como si la conversación le resultara tediosa, y luego suspiró.
+
+<p> —Quiero casarme contigo. Si no me gustaras, no lo haría—
+
+<p> —No te andes con rodeos.
+
+<p> —No me desagradas. Ya te lo he dicho. Es solo que...
+
+<p> —Ah, simplemente no te gusto. Así que no te importo lo suficiente como para molestarte... Pero ¿qué es lo que te gusta de mí? Ah, ¿eso de que las flores se vuelven inservibles cuando las recoges?
+
+<p> Su voz tenía un tono exagerado, probablemente influenciado por el Duque Valeztena.
+
+<p> —No estarás enfadado porque no me gustes, ¿verdad?
+
+<p> Preguntó Inés, entrecerrando los ojos con recelo. La mirada de Cárcel vaciló, como si le hubieran apuñalado en el estómago sin previo aviso.
+
+<p> Afortunadamente, Inés parecía ajena a haber tocado una fibra sensible y continuó con su voz irritantemente dulce.
+
+<p> —Pero qué descaro. Eras tú el que se revolcaba por ahí, así que ¿por qué...?—
+
+<p> —¡Dijiste que te gustaba que lo hiciera! ¡Lo aceptaste con agrado...!
+
+<p> —¡A mi no me gustaba que te revolcaras por ahí! ¡Me gustaba que a ti te gustara!
+
+<p> —¡Maldita sea, ¿qué diablos hay en esa cabecita tuya? Ninguna de las cosas que dices tiene sentido, simplemente no puedo—
+
+<p> —Probablemente porque siempre usas el cuerpo pero nunca la cabeza, ¿eh?
+
+<p> —¿Incluso ahora me tratas como a una idiota con cara bonita?
+
+<p> —Incluso ahora no dejas de mencionar lo bonita que es tu cara. ¿Cómo habrías sobrevivido si no fueras apuesto? ¿Eh?
+
+<p> Era un momento inusualmente tenso entre ellos. En ese momento, no podía dejarse llevar por una provocación tan infantil como cuando eran jóvenes. Cárcel esbozó una sonrisa forzada.
+
+<p> —Estaba siendo modesto. No se trata solo de la belleza, ¿verdad? Es más que eso. Y no estábamos casados. Yo siempre fui al que elegiste en contra de su voluntad...
+
+<p> —Sí, te obligué a comprometerte y, después, a casarte. Así que no tienes ninguna lealtad que mantener hacia mí. Mira, te entiendo perfectamente...
+
+<p> —No estoy tratando de poner excusas, así que no lo tomes así. Solo estoy diciendo que las cosas serán diferentes una vez que nos casemos...
+
+<p> —¿Qué será exactamente diferente? Ah, no lo entiendo, no lo entiendo, retiro lo que he dicho de que lo entiendo todo.
+
+<p> Inés levantó ambas manos en señal de exasperación fingida. Cárcel aprovechó el gesto como si ella le hubiera ofrecido su cintura, rodeándola con un brazo y atrayéndola hacia él. Los labios de Inés se crisparon en silencio.
+
+<p> Su expresión, que revelaba de forma inusual su verdadera y completamente mala naturaleza, se desmoronó.
+
+<p> —... ¿Qué crees que estás haciendo?
+
+<p> —Inés Valeztena, te lo he dicho. Soy un bastardo fiel.
+
+<p> —Para empezar, no entiendo esa parte. ¿Crees que tiene algún sentido?
+
+<p> —Y el matrimonio es sagrado.
+
+<p> —Sí, claro... ¿Quién le da lecciones a quién?
+
+<p> Cárcel solía ser bastante bueno objetivándose a sí mismo, teniendo en cuenta sus circunstancias innatas. ¿Quién le estaba dando lecciones a quién? Estaba totalmente de acuerdo con el sarcasmo de Inés.
+
+<p> ¿No era absurdo que él, el epítome del hombre libertino, le diera lecciones a “esa” Inés Valeztena sobre el matrimonio y la castidad?
+
+<p> Pero, ¿quién había creado exactamente esta situación?
+
+<p> —¿Así que vivías como un perro antes del matrimonio, pero vivirás como un monje santo después? ¿Y esperas que me lo crea?
+
+<p> —Lo creerás en el dormitorio.
+
+<p> —Tendremos habitaciones separadas, Escalante.
+
+<p> La voz que pronunciaba “Escalante”, como distanciándose del cuerpo que sostenía cautivo con su brazo, era firme.
+
+<p> Cárcel sonrió con indiferencia, sin preocuparse.
+
+<p> —De todos modos, dormiremos juntos.
+
+<p> —Soy humana. No duermo con perros.
+
+<p> —Los perros son animales destinados a vivir con los humanos.
+
+<p> —¿Quién es el que dice tonterías ahora?
+
+<p> —Así que no me sueltes cuando quieras.
+
+<p> <span style="font-style:italic">¿Sueltes?…</span> Inés frunció el ceño como si hubiera oído la cosa más absurda. En ese instante, Cárcel bajó la cabeza y le besó los labios.
+
+<p> No en los labios, sino cerca de ellos, un contacto ambiguo, como su saludo habitual. Justo cuando el ceño de Inés amenazaba con fruncirse aún más, su cabeza se echó completamente hacia atrás y sus labios se encontraron de nuevo. La amplia espalda de Cárcel se curvó suavemente. Fue un contacto juguetón, entrelazando las lenguas de forma provocativa antes de separarse, pero esos diecisiete años, con esa historia tan lenta, aquello nunca podría ser un simple juego.
+
+<p> Inés, con el rostro aún arrugado, frunció el ceño, luego puso una expresión de total desconcierto y, a continuación, sus rasgos se difuminaron en confusión... cambiando constantemente de expresión, pero sin apartarlo nunca.
+
+<p> No podía entender qué pensaba al responder tan rápidamente, pero parecía una señal favorable. Con un brazo alrededor de su cintura, acercó a Inés a él, mientras con la otra mano le sostenía la cabeza, que se inclinaba hacia atrás. Cárcel la guió con naturalidad hacia la consola.
+
+<p> Cada vez que su respiración entrecortada escapaba entre sus labios entrelazados, el beso se hacía más profundo. Entonces, justo cuando Inés comenzó a jadear en busca de aire, él le chupó suavemente el labio superior antes de separarse.
+
+<p> —... Aunque sueltes al perro, volverá al lugar donde estaba de todos modos.
+
+<p> —...
+
+<p> —Así que, por una vez, deja de malgastar tu energía. No tengo ni idea de cuál es tu plan, pero...
+
+<p> Inés abrió lentamente los ojos que había mantenido entrecerrados. Sus miradas se cruzaron de nuevo a corta distancia, igual que entonces. Su aliento, aún entrecortado, rozó ligeramente la mandíbula de él.
+
+<p> Aunque era ella quien jadeaba en busca de aire, Cárcel dejó de hablar de repente, como si él mismo estuviera sin aliento, y pensó.
+
+<p> <span style="font-style:italic">Esto era realmente peligroso.</span>
+
+<p> El momento en que sus labios se habían tocado, con esa intención desenfadada de burlarse, parecía haber ocurrido hacía cien años. Incluso mientras la miraba, le parecía una eternidad. Cárcel movió la mano hacia los labios de ella como hipnotizado. Los frotó con el pulgar como para limpiarlos, y su saliva mezclada dejó una película transparente.
+
+<p> Era una sensación totalmente inexplicable. Nunca había sentido nada parecido.
+
+<p> Inés Valeztena siempre era así. Siempre se mostraba distante. Le hacía sentir extraño, le atormentaba sin mucho esfuerzo. De una forma u otra.
+
+<p> Y, sin embargo, no le disgustaba esa sensación de que jugaran con él.
+
+<p> Inés apartó el rostro de su mano. Fue entonces cuando él miró su mano vacía, como si fuera lo más natural del mundo.
+
+<p> —...
+
+<p> Debió de ser un sonido a medio camino entre un “golpe sordo” y un “golpe seco”.
+
+<p> Un ruido agudo y chirriante llenó los oídos de Cárcel. El impacto fue inesperado, pero su cuerpo era demasiado sólido para tambalearse, su centro de gravedad estaba firmemente anclado. Aun así, el dolor no era nada desdeñable.
+
+<p> Por un momento, Cárcel se preguntó si el Duque Valeztena, que observaba desde algún lugar, se había abalanzado sobre él y le había roto el tímpano. Pero el entorno permaneció en silencio y solo Inés estaba delante de él.
+
+<p> —Sí. Te golpeé.
+
+<p> —...
+
+<p> —Te golpeé.
+
+<p> Como si quisiera ayudar a Cárcel, que tardaba en comprender la situación, ella respondió amablemente. Luego volvió a preguntar.
+
+<p> —¿Por qué esa mirada? No puede ser la primera vez que te golpea una mujer.
+
+<p> —Es la primera vez.
+
+<p> La mayoría había intentado dejarle una impresión favorable hasta el final, diciendo cosas como “viviré el resto de mi vida recordando ese día”, “fue breve, pero me sentí en el cielo” o “sea feliz o triste, recordaré esa noche”.
+
+<p> Es más, Inés ni siquiera le había golpeado en la mejilla.
+
+<p> <span style="font-style:italic">Fue en la cabeza...</span>
+
+<p> Cárcel se preguntó si la fuerza con la que le había golpeado toda la cabeza podía realmente corresponder a la de su recatada prometida, que afirmaba que leer los libros de la estantería era su único hobby y que no sabía nada del mundo.
+
+<p> No era la mano de alguien que hubiera golpeado a una persona una o dos veces. Estaba claro que había compensado su falta de técnica con pura fuerza, impulsada por el deseo inquebrantable de hacer daño a la otra parte sin importar nada más...
+
+<p> —¿Soy tu primera vez? Eso fue un poco duro, ¿no?
+
+<p> ¿Y qué era esa frase, que parecía venir de un hombre hastiado?
+
+<p> Al encontrarse con la mirada sorprendida de Cárcel, Inés esbozó una sonrisa pícara antes de que su expresión se volviera fría.
+
+<p> —¿Que un perro sea maleducado significa que quiere que le peguen?
+
+<p> —... ¿Golpeas a los perros?
+
+<p> Cuando Cárcel miró a Inés con una expresión que gritaba “Nunca hubiera imaginado que fueras tan baja”, ella entrecerró ligeramente los ojos.
+
+<p> —¿Por qué golpearía a una cosita tan linda? No los golpeo. Pero si una persona es como un perro y además no tiene modales...
+
+<p> —Inés, realmente me consideras un perro, ¿verdad?
+
+<p> —¿Eso significa que quieres que te golpeen?
+
+<p> —Inés, nadie en el mundo quiere que lo golpeen.
+
+<p> —Sí que lo hay. Gente a la que le ha dado vueltas la cabeza unas cuantas veces. Les excita ese tipo de cosas.
+
+<p> Inés murmuró con aire significativo y luego cruzó los brazos desafiante.
+
+<p> —Así que pensé que tú también eras así. Qué te comportabas tan mal porque querías que te pegaran.
+
+<p> Por mucho que se recogiera el pelo con pulcritud, por mucho que se cubriera todo el cuerpo de negro azabache, manteniendo una apariencia recatada, ¿de qué serviría?
+
+<p> Incluso si fuera por ahí mostrando su escote, no parecería más delincuente que él.
+
+<p> —Y los perros deben correr por ahí fuera. Así es cómo crío a mi perro.
+
+<p> —...
+
+<p> —Nada de entrar al dormitorio de su amo. Y nada de subirse a la cama.
+
+<p> —...
+
+<p> —¿Entendido?
+
+<p> La voz de Inés era lenta y suave, como si estuviera agachada frente a un perro verdaderamente tonto y recitara instrucciones aquí y allá.
+
+<p> Cárcel resopló.
+
+<p> —No me dirás en serio que esas son las reglas.
+
+<p> —Como no paras de parlotear sobre lo que pasará después de casarnos, voy a establecer algunos puntos por mi parte. Escalante. Y la próxima vez, ve al grano.
+
+<p> —...
+
+<p> —Deja de hacer estas payasadas.
+
+<p> Si hubieran estado al aire libre, él habría escupido justo a su lado.
+
+<p> —¿A qué te refieres exactamente con estas payasadas?
+
+<p> —A este tipo de cosas.
+
+<p> Ella trazó un gran círculo en el aire con el dedo, colocándolos a ambos dentro de él. Cárcel se limitó a levantar una ceja.
+
+<p> —¿Este tipo de cosas?
+
+<p> —Sí. Este tipo de cosas. No lo hagas.
+
+<p> —¿Besos?
+
+<p> —Sí.
+
+<p> Ella había estado perfectamente bien cuando se besaron, pero al oír la palabra “beso”, su pequeño rostro se torció como si se le hubiera revolcado el estómago.
+
+<p> Cárcel entrecerró los ojos y preguntó:
+
+<p> —Entonces, sobre eso...
+
+<p> —...
+
+<p> —¿No puedes responder?
+
+<p> —Tendremos estrictamente lo mínimo necesario de—
+
+<p> —¿Sexo?
+
+<p> Él preguntó con sencillez, pero siguió un momento de silencio.
+
+<p> Inés permaneció inmóvil, no tanto por vergüenza como por ser incapaz de comprender momentáneamente el hilo conductor de sus propias acciones. Entonces, de repente, continuó.
+
+<p> —El acto mínimo, quiero decir.
+
+<p> —Entonces, ¿no te gustan los besos, pero no te importa si nos acostamos? ¿Es eso lo que acabas de decir?
+
+<p> —Sí.
+
+<p> —Sáltate esta introducción. Ve al grano.
+
+<p> —Qué sí.
+
+<p> —... Eres una auténtica pervertida.
+
+<p> Cárcel ofreció su breve y objetiva valoración. Inés pareció enfadarse momentáneamente, pero al instante recuperó su habitual expresión tranquila e impasible.
+
+<p> —Eso es innecesario. Demasiado íntimo, demasiado cercano, una pérdida de tiempo. Algo que hacen solo los amantes.
+
+<p> —¿Cuántas veces tengo que decírtelo? Seré tu esposo, Inés Valeztena.
+
+<p> —Precisamente por eso es innecesario. Cárcel, las parejas nobles y dignas de Ortega no se aman. Esta es una forma muy honorable de...
+
+<p> —¿De tener sexo?
+
+<p> —La próxima vez, puede que te dé una bofetada en esa bonita boca tuya, Cárcel.
+
+<p> Inés amenazó en tono ligero. Cárcel continuó con seriedad.
+
+<p> —Lo que describes no tiene dignidad alguna. Seríamos solo animales, quitándose lo necesario de ropa, alineando solo sus partes íntimas y cumpliendo con lo mínimo necesario.
+
+<p> —Es eficiente. Cuanto menos se ata el uno al otro, más pacífica permanece la familia.
+
+<p> —Sinceramente, ni siquiera tiene gracia.
+
+<p> —De todos modos, nuestro matrimonio es motivo de burla. Llevaré un vestido totalmente pasado de moda, fingiendo que es una tradición familiar, para la misa de la boda. Tú, que has estado vagando fuera de Mendoza para evitar a tu prometida, de repente insististe en casarte en dos semanas por alguna razón. Luego, en cuanto nos casemos, volverás a desaparecer fuera de Mendoza. La corte se reirá de esto durante un mes.
+
+<p> —...
+
+<p> —Así que no tenemos por qué reírnos de nosotros mismos.
+
+<p> Cárcel la miró un momento con una expresión peculiar antes de dar un paso atrás, creando distancia.
+
+<p> —Para empezar, nunca fue motivo de burla. Que te convirtieras en mi esposa era el único futuro que había imaginado.
+
+<p> —…
+
+<p> —Por eso te besé. No te amo, pero estás a punto de convertirte en la mujer más importante de mi vida. Pensé tontamente que estaría bien, pero si para ti es tan importante. Lo siento. Fui grosero.
+
+<p> —...
+
+<p> —Yo... no haré cosas que sé que no te gusten. Como no somos amantes, si te hace sentir incómoda, lo respetaré. A menos que sea para aparentar, omitamos los besos a partir de ahora.
+
+<p> —...
+
+<p> —Sea lo que sea, si me dices que no lo haga, no lo haré.
+
+<p> Los ojos de Inés se movieron extrañamente ante esta sincera declaración. También mostraban un atisbo de incomodidad. Como si dijeran: si tú actúas así, ¿qué se supone que debo hacer yo?
+
+<p> La expresión anteriormente pétrea de Cárcel se suavizó.
+
+<p> —Bueno, por ahora, sé que todo está bien excepto los besos.
+
+<p> La gente suele decir que hay que escuchar a alguien para comprenderlo de verdad.
+
+<p> Pero Inés a veces pensaba que había cosas que no se podían comprender incluso después de escucharlas. Antes de que pudiera comprender del todo la clara conclusión a la que había llegado Cárcel, allí de pie con expresión desconcertada, él se dirigió de repente hacia la puerta.
+
+<p> Con largas zancadas, llegó a la puerta del salón en un instante. La abrió y llamó a Juana, que estaba fuera.
+
+<p> —¿Juana?
+
+<p> —¿Sí?
+
+<p> —Dice tu señorita que pases.
+
+<p> Miró una vez por encima del hombro y luego salió de la habitación como si esa mirada hubiera sido su despedida.
+
+            </article>
+
+        </main>
+
+        <div class="controles">
+
+            <select id="fuente" onchange="cambiarFuente(this.value)">
+                <option value="Lora">Lora</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+            </select>
+
+            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
+
+            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
+
+            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
+
+        </div>
+    `;
+}
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+
+document.addEventListener("keydown", function(e) {
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
+    ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+});
+
+let tamano = 18;
+
+function cambiarFuente(fuente) {
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
+    contenido.style.fontFamily = '"' + fuente + '", serif';
+    localStorage.setItem("fuenteLectura", fuente);
+}
+
+function cambiarTamano(valor) {
+    const contenido = document.getElementById("contenido");
+    if (!contenido) return;
+
+    tamano += valor;
+
+    if (tamano < 14) tamano = 14;
+    if (tamano > 26) tamano = 26;
+
+    contenido.style.fontSize = tamano + "px";
+    localStorage.setItem("tamanoLectura", tamano);
+}
+
+function modoOscuro() {
+    document.body.classList.toggle("oscuro");
+
+    localStorage.setItem(
+        "modoLectura",
+        document.body.classList.contains("oscuro")
+            ? "oscuro"
+            : "claro"
+    );
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    const contenido = document.getElementById("contenido");
+    const fuente = document.getElementById("fuente");
+
+    if (!contenido || !fuente) return;
+
+    const fuenteGuardada = localStorage.getItem("fuenteLectura");
+    const tamanoGuardado = localStorage.getItem("tamanoLectura");
+    const modoGuardado = localStorage.getItem("modoLectura");
+
+    if (fuenteGuardada) {
+        fuente.value = fuenteGuardada;
+        cambiarFuente(fuenteGuardada);
+    }
+
+    if (tamanoGuardado) {
+        tamano = parseInt(tamanoGuardado);
+        contenido.style.fontSize = tamano + "px";
+    }
+
+    if (modoGuardado === "oscuro") {
+        document.body.classList.add("oscuro");
+    }
+});
+
+</script>
+
+</body>
+</html>
+
