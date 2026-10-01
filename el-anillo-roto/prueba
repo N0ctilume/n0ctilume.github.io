@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,22 +9,31 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
-	
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     background: #f7f4ee;
     color: #252525;
     font-family: "Lora", Georgia, "Times New Roman", serif;
     line-height: 1.85;
+
+    /* Protección */
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-user-drag: none;
+
     transition: background .3s, color .3s;
 }
+
 .subtitulo {
     margin-top: 8px;
     font-family: "Lora", Georgia, "Times New Roman", serif;
@@ -36,7 +46,7 @@ body {
 body.oscuro .subtitulo {
     color: #aaaaaa;
 }
-    
+
 body::before {
     content: "";
     position: fixed;
@@ -158,10 +168,8 @@ body.oscuro {
 body.oscuro .controles {
     background: rgba(35,35,35,.95);
     border-color: #555;
-
 }
-	
-	{
+
 body.oscuro .control,
 body.oscuro #fuente {
     background: #303030;
@@ -169,7 +177,27 @@ body.oscuro #fuente {
     border-color: #555;
 }
 
+/* =========================================================
+   BLOQUEO DE IMPRESIÓN
+   ========================================================= */
+
+@media print {
+    html,
+    body,
+    body * {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    body::before {
+        display: none !important;
+    }
+}
+
 @media (max-width: 600px) {
+
     .contenedor {
         padding: 30px 18px 100px;
     }
@@ -197,16 +225,27 @@ body.oscuro #fuente {
 </style>
 </head>
 
+
 <body>
 
 <div id="app"></div>
 
+
 <script>
+
+/* =========================================================
+   CLAVE DE ACCESO
+   ========================================================= */
 
 const TOKEN_CORRECTO = "M1kPg95fbi";
 
 const parametros = new URLSearchParams(window.location.search);
 const token = parametros.get("access");
+
+
+/* =========================================================
+   COMPROBAR ACCESO
+   ========================================================= */
 
 if (token !== TOKEN_CORRECTO) {
 
@@ -226,9 +265,15 @@ if (token !== TOKEN_CORRECTO) {
         <main class="contenedor">
 
             <header class="encabezado">
+
                 <h1>prueba</h1>
-                <div class="subtitulo">Punto de vista de Cárcel Escalante</div>
+
+                <div class="subtitulo">
+                    Punto de vista de Cárcel Escalante
+                </div>
+
             </header>
+
 
             <article class="contenido" id="contenido">
 
@@ -237,93 +282,128 @@ if (token !== TOKEN_CORRECTO) {
                     ━━━━━━ ◦ ❖ ◦ ━━━━━━
                 </div>
 
-                <!-- PEGA TU TEXTO AQUÍ --> <!-- NO OLVIDES PONER… --> 
 
-<p>  antes de cada línea para hacer los espacios.
-<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>   para separar escenas.
-<span style="font-style:italic">texto</span>   para poner texto en cursiva.
-<span style="color:#777777">texto</span> para poner texto en color.
-<span style="font-style:italic; color:#777777">texto</span></p> para ambos.
+                <!-- =========================================
+                     PEGA TU TEXTO AQUÍ
+                     ========================================= -->
+
+                <!--
+                <p>Texto de la novela.</p>
+
+                <p>Otra línea de texto.</p>
+
+                <div class="separador">
+                    ━━━━━━ ◦ ❖ ◦ ━━━━━━
+                </div>
+
+                <p>
+                    <span style="font-style:italic">
+                        Texto en cursiva.
+                    </span>
+                </p>
+
+                <p>
+                    <span style="color:#777777">
+                        Texto en color gris.
+                    </span>
+                </p>
+
+                <p>
+                    <span style="font-style:italic; color:#777777">
+                        Texto en cursiva y gris.
+                    </span>
+                </p>
+                -->
 
 
-<div style="text-align:center; margin:200px 0 60px;">
+                <!-- =========================================
+                     BOTÓN DE KO-FI
+                     ========================================= -->
 
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¿Estás disfrutando de El anillo roto: pase lo que pase este matrimonio se irá a pique? 💍💔
-  </p>
+                <div style="text-align:center; margin:200px 0 60px;">
 
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️
-  </p>
+                    <p style="
+                        font-family:'Lora', Georgia, 'Times New Roman', serif;
+                        font-size:16px;
+                        font-style:italic;
+                        color:#777777;
+                        margin:0 0 18px 0;
+                        line-height:1.8;
+                        text-align:center;
+                    ">
+                        ¿Estás disfrutando de El anillo roto:
+                        pase lo que pase este matrimonio se irá a pique? 💍💔
+                    </p>
 
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨
-  </p>
+                    <p style="
+                        font-family:'Lora', Georgia, 'Times New Roman', serif;
+                        font-size:16px;
+                        font-style:italic;
+                        color:#777777;
+                        margin:0 0 18px 0;
+                        line-height:1.8;
+                        text-align:center;
+                    ">
+                        ¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️
+                    </p>
 
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 25px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Gracias por ya formar parte de esta historia. ❤️
-  </p>
+                    <p style="
+                        font-family:'Lora', Georgia, 'Times New Roman', serif;
+                        font-size:16px;
+                        font-style:italic;
+                        color:#777777;
+                        margin:0 0 18px 0;
+                        line-height:1.8;
+                        text-align:center;
+                    ">
+                        Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨
+                    </p>
 
-  <a href="https://ko-fi.com/n0ctilume"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="
-       display:inline-block;
-       padding:11px 25px;
-       border:1px solid #777777;
-       border-radius:5px;
-       background:transparent;
-       color:#777777;
-       text-decoration:none;
-       font-family:'Lora', Georgia, 'Times New Roman', serif;
-       font-size:16px;
-       font-style:italic;
-     ">
-    ☕ Comprar un cafecito ❤️
-  </a>
+                    <p style="
+                        font-family:'Lora', Georgia, 'Times New Roman', serif;
+                        font-size:16px;
+                        font-style:italic;
+                        color:#777777;
+                        margin:0 0 25px 0;
+                        line-height:1.8;
+                        text-align:center;
+                    ">
+                        Gracias por ya formar parte de esta historia. ❤️
+                    </p>
 
-</div> 
-            
+                    <a href="https://ko-fi.com/n0ctilume"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style="
+                           display:inline-block;
+                           padding:11px 25px;
+                           border:1px solid #777777;
+                           border-radius:5px;
+                           background:transparent;
+                           color:#777777;
+                           text-decoration:none;
+                           font-family:'Lora', Georgia, 'Times New Roman', serif;
+                           font-size:16px;
+                           font-style:italic;
+                       ">
+                        ☕ Comprar un cafecito ❤️
+                    </a>
 
-        </article>
+                </div>
+
+            </article>
 
         </main>
+
+
+        <!-- ================================================
+             CONTROLES DE LECTURA
+             ================================================ -->
 
         <div class="controles">
 
             <select id="fuente" onchange="cambiarFuente(this.value)">
+
                 <option value="Lora">Lora</option>
                 <option value="Georgia">Georgia</option>
                 <option value="Garamond">Garamond</option>
@@ -331,93 +411,265 @@ if (token !== TOKEN_CORRECTO) {
                 <option value="Arial">Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Trebuchet MS">Trebuchet MS</option>
+
             </select>
 
-            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
 
-            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
+            <button
+                class="control"
+                onclick="cambiarTamano(-1)"
+                title="Disminuir tamaño">
+                A−
+            </button>
 
-            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
+
+            <button
+                class="control"
+                onclick="cambiarTamano(1)"
+                title="Aumentar tamaño">
+                A+
+            </button>
+
+
+            <button
+                class="control"
+                onclick="modoOscuro()"
+                title="Modo oscuro">
+                ☾
+            </button>
 
         </div>
-
-<script>
-window.addEventListener('beforeprint', function () {
-  document.body.innerHTML = `
-    <div style="
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      font-family:Lora, Georgia, serif;
-      text-align:center;
-      color:#777;
-      font-size:18px;
-    ">
-      La impresión de este contenido está deshabilitada.
-    </div>
-  `;
-});
-
-window.addEventListener('afterprint', function () {
-  location.reload();
-});
-</script>
-
-<style>
-@media print {
-  body {
-    display: none !important;
-  }
-
-  html {
-    display: none !important;
-  }
-}
-</style>
-
     `;
 }
 
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
+
+/* =========================================================
+   BLOQUEAR CLIC DERECHO
+   ========================================================= */
+
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR SELECCIÓN
+   ========================================================= */
+
+document.addEventListener("selectstart", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR ARRASTRAR
+   ========================================================= */
+
+document.addEventListener("dragstart", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR COPIAR
+   ========================================================= */
+
+document.addEventListener("copy", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR CORTAR
+   ========================================================= */
+
+document.addEventListener("cut", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR PEGAR
+   ========================================================= */
+
+document.addEventListener("paste", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR ATAJOS DEL TECLADO
+   ========================================================= */
 
 document.addEventListener("keydown", function(e) {
-    if (
-        (e.ctrlKey || e.metaKey) &&
-        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
-    ) {
+
+    const key = e.key.toLowerCase();
+
+    /* Ctrl + P / Cmd + P → Imprimir */
+    if ((e.ctrlKey || e.metaKey) && key === "p") {
         e.preventDefault();
         e.stopPropagation();
         return false;
     }
+
+    /* Ctrl + C / Cmd + C → Copiar */
+    if ((e.ctrlKey || e.metaKey) && key === "c") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + X / Cmd + X → Cortar */
+    if ((e.ctrlKey || e.metaKey) && key === "x") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + S / Cmd + S → Guardar */
+    if ((e.ctrlKey || e.metaKey) && key === "s") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + U / Cmd + U → Código fuente */
+    if ((e.ctrlKey || e.metaKey) && key === "u") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + A / Cmd + A → Seleccionar todo */
+    if ((e.ctrlKey || e.metaKey) && key === "a") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + Shift + S */
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && key === "s") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + Shift + I → DevTools */
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && key === "i") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* Ctrl + Shift + J → Consola */
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && key === "j") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    /* F12 → DevTools */
+    if (e.key === "F12") {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+}, true);
+
+
+/* =========================================================
+   BLOQUEAR window.print()
+   ========================================================= */
+
+window.print = function() {
+    return false;
+};
+
+
+/* =========================================================
+   BLOQUEO ADICIONAL DE IMPRESIÓN
+   ========================================================= */
+
+window.addEventListener("beforeprint", function() {
+
+    document.documentElement.classList.add("impresion-bloqueada");
+
 });
+
+
+window.addEventListener("afterprint", function() {
+
+    document.documentElement.classList.remove("impresion-bloqueada");
+
+});
+
+
+/* =========================================================
+   CAMBIO DE FUENTE
+   ========================================================= */
 
 let tamano = 18;
 
+
 function cambiarFuente(fuente) {
+
     const contenido = document.getElementById("contenido");
+
     if (!contenido) return;
 
-    contenido.style.fontFamily = '"' + fuente + '", serif';
-    localStorage.setItem("fuenteLectura", fuente);
+    contenido.style.fontFamily =
+        '"' + fuente + '", serif';
+
+    localStorage.setItem(
+        "fuenteLectura",
+        fuente
+    );
 }
 
+
+/* =========================================================
+   CAMBIO DE TAMAÑO
+   ========================================================= */
+
 function cambiarTamano(valor) {
+
     const contenido = document.getElementById("contenido");
+
     if (!contenido) return;
 
     tamano += valor;
 
-    if (tamano < 14) tamano = 14;
-    if (tamano > 26) tamano = 26;
+    if (tamano < 14) {
+        tamano = 14;
+    }
 
-    contenido.style.fontSize = tamano + "px";
-    localStorage.setItem("tamanoLectura", tamano);
+    if (tamano > 26) {
+        tamano = 26;
+    }
+
+    contenido.style.fontSize =
+        tamano + "px";
+
+    localStorage.setItem(
+        "tamanoLectura",
+        tamano
+    );
 }
 
+
+/* =========================================================
+   MODO OSCURO
+   ========================================================= */
+
 function modoOscuro() {
+
     document.body.classList.toggle("oscuro");
 
     localStorage.setItem(
@@ -428,34 +680,64 @@ function modoOscuro() {
     );
 }
 
+
+/* =========================================================
+   RESTAURAR PREFERENCIAS
+   ========================================================= */
+
 window.addEventListener("DOMContentLoaded", function() {
 
-    const contenido = document.getElementById("contenido");
-    const fuente = document.getElementById("fuente");
+    const contenido =
+        document.getElementById("contenido");
+
+    const fuente =
+        document.getElementById("fuente");
 
     if (!contenido || !fuente) return;
 
-    const fuenteGuardada = localStorage.getItem("fuenteLectura");
-    const tamanoGuardado = localStorage.getItem("tamanoLectura");
-    const modoGuardado = localStorage.getItem("modoLectura");
+
+    const fuenteGuardada =
+        localStorage.getItem("fuenteLectura");
+
+    const tamanoGuardado =
+        localStorage.getItem("tamanoLectura");
+
+    const modoGuardado =
+        localStorage.getItem("modoLectura");
+
 
     if (fuenteGuardada) {
-        fuente.value = fuenteGuardada;
-        cambiarFuente(fuenteGuardada);
+
+        fuente.value =
+            fuenteGuardada;
+
+        cambiarFuente(
+            fuenteGuardada
+        );
     }
+
 
     if (tamanoGuardado) {
-        tamano = parseInt(tamanoGuardado);
-        contenido.style.fontSize = tamano + "px";
+
+        tamano =
+            parseInt(tamanoGuardado);
+
+        contenido.style.fontSize =
+            tamano + "px";
     }
 
+
     if (modoGuardado === "oscuro") {
-        document.body.classList.add("oscuro");
+
+        document.body.classList.add(
+            "oscuro"
+        );
     }
+
 });
 
 </script>
 
 </body>
 </html>
-
+```
