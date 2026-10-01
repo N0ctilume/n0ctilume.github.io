@@ -181,6 +181,30 @@ body.oscuro #fuente {
     }
 }
 </style>
+<style>
+@media print {
+    html,
+    body,
+    body * {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+</style>
+
+<script>
+window.addEventListener("beforeprint", function () {
+    document.body.style.display = "none";
+});
+
+window.addEventListener("afterprint", function () {
+    document.body.style.display = "";
+});
+
+window.print = function () {
+    return false;
+};
+</script>
 </head>
 
 <body>
