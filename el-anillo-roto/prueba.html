@@ -44,10 +44,13 @@
       position: fixed;
       inset: 0;
       background: url("noctilume.png") center center / cover no-repeat;
-      opacity: .01;
+      opacity: .035;
       pointer-events: none;
       z-index: 0;
     }
+
+    body.oscuro::before { opacity: .012; }
+    body.sepia::before { opacity: .025; }
 
     .barra-progreso {
       position: fixed;
@@ -97,8 +100,9 @@
     }
 
     .contenido {
+      font-family: var(--fuente-lectura, "Lora", Georgia, serif);
       font-size: 18px;
-      line-height: var(--espaciado, 1.85);
+      line-height: 1.85;
     }
 
     .contenido p {
@@ -150,7 +154,6 @@
       transform: translateY(-1px);
     }
 
-    .seccion-notas,
     .seccion-comentarios {
       margin-top: 48px;
       padding: 25px;
@@ -160,7 +163,6 @@
       box-shadow: var(--sombra);
     }
 
-    .seccion-notas h2,
     .seccion-comentarios h2 {
       margin: 0 0 8px;
       font-family: Georgia, "Times New Roman", serif;
@@ -173,35 +175,6 @@
       color: var(--texto-secundario);
       font-size: 14px;
       line-height: 1.6;
-    }
-
-    #notaPersonal {
-      display: block;
-      width: 100%;
-      min-height: 145px;
-      resize: vertical;
-      padding: 14px 15px;
-      border: 1px solid var(--borde);
-      border-radius: 9px;
-      outline: none;
-      background: var(--fondo);
-      color: var(--texto);
-      font: 15px/1.65 "Lora", Georgia, serif;
-      user-select: text;
-      -webkit-user-select: text;
-    }
-
-    #notaPersonal:focus {
-      border-color: var(--acento);
-      box-shadow: 0 0 0 3px rgba(155,128,98,.12);
-    }
-
-    .estado-nota {
-      min-height: 20px;
-      margin-top: 8px;
-      color: var(--texto-secundario);
-      font: 12px Arial, sans-serif;
-      text-align: right;
     }
 
     .comentarios-ayuda {
@@ -237,8 +210,7 @@
     }
 
     .control,
-    #fuente,
-    #espaciado {
+    #fuente {
       height: 37px;
       min-width: 39px;
       padding: 0 10px;
@@ -251,8 +223,7 @@
     }
 
     .control:hover,
-    #fuente:hover,
-    #espaciado:hover {
+    #fuente:hover {
       border-color: var(--acento);
       background: rgba(155,128,98,.08);
     }
@@ -262,16 +233,7 @@
       background: rgba(155,128,98,.16);
     }
 
-    .etiqueta-control {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--texto-secundario);
-      font: 12px Arial, sans-serif;
-    }
-
-    #fuente { max-width: 125px; }
-    #espaciado { max-width: 105px; }
+    #fuente { max-width: 145px; }
 
     .estado-progreso {
       position: fixed;
@@ -299,7 +261,6 @@
     body.concentracion .controles,
     body.concentracion .estado-progreso,
     body.concentracion .encabezado,
-    body.concentracion .seccion-notas,
     body.concentracion .seccion-comentarios,
     body.concentracion .bloque-kofi {
       display: none !important;
@@ -340,7 +301,7 @@
 
     body.sepia .subtitulo { color: #806e56; }
 
-    textarea, input, select {
+    input, select {
       user-select: text;
       -webkit-user-select: text;
     }
@@ -373,7 +334,7 @@
         gap: 5px;
         max-width: none;
       }
-      .control, #fuente, #espaciado {
+      .control, #fuente {
         height: 35px;
         padding: 0 8px;
       }
@@ -381,7 +342,7 @@
         left: 10px;
         bottom: 76px;
       }
-      .seccion-notas, .seccion-comentarios {
+      .seccion-comentarios {
         padding: 18px;
       }
     }
@@ -424,7 +385,7 @@
       document.getElementById("app").innerHTML = `
         <main class="contenedor">
           <header class="encabezado">
-            <h1>Prueba</h1>
+            <h1>Tomo 1</h1>
             <div class="subtitulo">Punto de vista de Cárcel Escalante</div>
           </header>
 
@@ -453,16 +414,10 @@
             </div>
           </article>
 
-          <section class="seccion-notas" aria-labelledby="tituloNotas">
-            <h2 id="tituloNotas">Mis notas</h2>
-            <p class="descripcion-seccion">Tus apuntes son privados y se guardan únicamente en este navegador para este capítulo.</p>
-            <textarea id="notaPersonal" placeholder="Escribe aquí tus teorías, citas favoritas o recordatorios..."></textarea>
-            <div class="estado-nota" id="estadoNota" aria-live="polite">Se guarda automáticamente.</div>
-          </section>
 
           <section class="seccion-comentarios" aria-labelledby="tituloComentarios">
             <h2 id="tituloComentarios">Comentarios</h2>
-            <p class="descripcion-seccion">Comparte tus impresiones y conversa con otros lectores.</p>
+            <p class="descripcion-seccion">Comparte tus impresiones, responde a otros lectores y reacciona con emojis.</p>
             <div id="giscus-container">
               <div class="comentarios-ayuda" id="avisoGiscus">
                 Para activar los comentarios, completa los datos de configuración de Giscus en el código, indicados más abajo.
@@ -476,26 +431,14 @@
         <div class="controles" id="controlesLectura">
           <select id="fuente" aria-label="Tipo de letra" onchange="cambiarFuente(this.value)">
             <option value="Lora">Lora</option>
-            <option value="Georgia">Georgia</option>
             <option value="Garamond">Garamond</option>
             <option value="Times New Roman">Times New Roman</option>
             <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
           </select>
 
           <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
           <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
 
-          <label class="etiqueta-control">
-            <select id="espaciado" aria-label="Espaciado entre líneas" onchange="cambiarEspaciado(this.value)">
-              <option value="1.5">Líneas 1.5</option>
-              <option value="1.7">Líneas 1.7</option>
-              <option value="1.85" selected>Líneas 1.85</option>
-              <option value="2">Líneas 2</option>
-              <option value="2.2">Líneas 2.2</option>
-            </select>
-          </label>
 
           <button class="control" id="botonTema" onclick="cambiarTema()" title="Cambiar tema">☾</button>
           <button class="control" id="botonConcentracion" onclick="alternarConcentracion()" title="Modo concentración">◎</button>
@@ -516,7 +459,18 @@
     function cambiarFuente(fuente) {
       const contenido = document.getElementById("contenido");
       if (!contenido) return;
-      contenido.style.fontFamily = '"' + fuente + '", serif';
+
+      const familias = {
+        "Lora": '"Lora", Georgia, serif',
+        "Garamond": 'Garamond, "Times New Roman", serif',
+        "Times New Roman": '"Times New Roman", Times, serif',
+        "Arial": 'Arial, Helvetica, sans-serif'
+      };
+
+      contenido.style.setProperty(
+        "--fuente-lectura",
+        familias[fuente] || familias["Lora"]
+      );
       localStorage.setItem("fuenteLectura", fuente);
     }
 
@@ -528,12 +482,6 @@
       localStorage.setItem("tamanoLectura", tamano);
     }
 
-    function cambiarEspaciado(valor) {
-      const contenido = document.getElementById("contenido");
-      if (!contenido) return;
-      contenido.style.setProperty("--espaciado", valor);
-      localStorage.setItem("espaciadoLectura", valor);
-    }
 
     function cambiarTema() {
       const body = document.body;
@@ -582,7 +530,6 @@
        Se guarda una posición diferente para cada archivo/capítulo.
        ========================================================== */
     const clavePosicion = "ultimaLectura_" + rutaCapitulo;
-    const claveNota = "notaPersonal_" + rutaCapitulo;
     let temporizadorPosicion;
 
     function actualizarProgreso() {
@@ -609,26 +556,6 @@
       }
     }
 
-    /* ==========================================================
-       NOTAS PERSONALES POR CAPÍTULO
-       ========================================================== */
-    function iniciarNotas() {
-      const campo = document.getElementById("notaPersonal");
-      const estado = document.getElementById("estadoNota");
-      if (!campo) return;
-
-      campo.value = localStorage.getItem(claveNota) || "";
-      let temporizadorNota;
-
-      campo.addEventListener("input", () => {
-        estado.textContent = "Guardando…";
-        clearTimeout(temporizadorNota);
-        temporizadorNota = setTimeout(() => {
-          localStorage.setItem(claveNota, campo.value);
-          estado.textContent = "Guardado en este dispositivo";
-        }, 350);
-      });
-    }
 
     /* ==========================================================
        GISCUS: COMENTARIOS SEPARADOS POR URL/CAPÍTULO
@@ -665,7 +592,7 @@
       script.setAttribute("data-category-id", config.categoryId);
       script.setAttribute("data-mapping", "pathname");
       script.setAttribute("data-strict", "1");
-      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-reactions-enabled", "1"); // Reacciones con emojis de GitHub activadas.
       script.setAttribute("data-emit-metadata", "0");
       script.setAttribute("data-input-position", "top");
       script.setAttribute("data-theme", obtenerTemaGiscus());
@@ -698,12 +625,15 @@
       const fuenteGuardada = localStorage.getItem("fuenteLectura");
       const tamanoGuardado = localStorage.getItem("tamanoLectura");
       const modoGuardado = localStorage.getItem("modoLectura");
-      const espaciadoGuardado = localStorage.getItem("espaciadoLectura");
       const concentracionGuardada = localStorage.getItem("modoConcentracion");
 
-      if (fuenteGuardada && fuente) {
+      if (fuenteGuardada && fuente &&
+          Array.from(fuente.options).some(opcion => opcion.value === fuenteGuardada)) {
         fuente.value = fuenteGuardada;
         cambiarFuente(fuenteGuardada);
+      } else if (fuente) {
+        fuente.value = "Lora";
+        cambiarFuente("Lora");
       }
 
       if (tamanoGuardado) {
@@ -715,18 +645,12 @@
         document.body.classList.add(modoGuardado);
       }
 
-      if (espaciadoGuardado) {
-        const selector = document.getElementById("espaciado");
-        if (selector) selector.value = espaciadoGuardado;
-        cambiarEspaciado(espaciadoGuardado);
-      }
 
       if (concentracionGuardada === "si") {
         document.body.classList.add("concentracion");
       }
 
       actualizarBotonTema();
-      iniciarNotas();
       iniciarGiscus();
       actualizarProgreso();
 
@@ -754,15 +678,15 @@
 
     /* ==========================================================
        PROTECCIONES QUE YA TENÍAS
-       Se permiten selección y clic derecho dentro del campo de notas.
+       Los controles del formulario siguen siendo utilizables.
        ========================================================== */
     document.addEventListener("contextmenu", e => {
-      if (e.target.closest("textarea, input")) return;
+      if (e.target.closest("input, select")) return;
       e.preventDefault();
     });
 
     document.addEventListener("selectstart", e => {
-      if (e.target.closest("textarea, input")) return;
+      if (e.target.closest("input, select")) return;
       e.preventDefault();
     });
 
@@ -772,7 +696,7 @@
       if ((e.ctrlKey || e.metaKey) &&
           ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())) {
         // No interferir con la escritura en las notas personales.
-        if (e.target.closest("textarea, input")) return;
+        if (e.target.closest("input, select")) return;
         e.preventDefault();
         e.stopPropagation();
         return false;
