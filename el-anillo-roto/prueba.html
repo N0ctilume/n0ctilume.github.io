@@ -44,13 +44,13 @@
       position: fixed;
       inset: 0;
       background: url("noctilume.png") center center / cover no-repeat;
-      opacity: .035;
+      opacity: .025;
       pointer-events: none;
       z-index: 0;
     }
 
     body.oscuro::before { opacity: .012; }
-    body.sepia::before { opacity: .025; }
+    body.sepia::before { opacity: .018; }
 
     .barra-progreso {
       position: fixed;
@@ -572,9 +572,10 @@
     function iniciarGiscus() {
       const config = GISCUS_CONFIG;
       const faltanDatos =
-        config.repo.includes("N0ctilume/n0ctilume.github.io") ||
-        config.repoId.includes("R_kgDOT3n8DA") ||
-        config.categoryId.includes("DIC_kwDOT3n8DM4DLETn");
+        !config.repo || !config.repoId || !config.category || !config.categoryId ||
+        config.repo.includes("TU_USUARIO") ||
+        config.repoId.includes("PEGA_AQUI") ||
+        config.categoryId.includes("PEGA_AQUI");
 
       if (faltanDatos) return;
 
@@ -591,10 +592,10 @@
       script.setAttribute("data-category", config.category);
       script.setAttribute("data-category-id", config.categoryId);
       script.setAttribute("data-mapping", "pathname");
-      script.setAttribute("data-strict", "1");
+      script.setAttribute("data-strict", "0");
       script.setAttribute("data-reactions-enabled", "1"); // Reacciones con emojis de GitHub activadas.
       script.setAttribute("data-emit-metadata", "0");
-      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-input-position", "bottom");
       script.setAttribute("data-theme", obtenerTemaGiscus());
       script.setAttribute("data-lang", "es");
       script.setAttribute("data-loading", "lazy");
@@ -677,8 +678,11 @@
     }
 
     /* ==========================================================
-       PROTECCIONES QUE YA TENÍAS
-       Los controles del formulario siguen siendo utilizables.
+       MEDIDAS PARA DIFICULTAR LA COPIA CASUAL
+       El clic izquierdo se bloquea sobre el texto de lectura;
+       enlaces, controles y el bloque de Ko-fi siguen funcionando.
+       Los atajos se interceptan en los navegadores que permiten
+       que una página web capture esos eventos.
        ========================================================== */
     document.addEventListener("contextmenu", e => {
       if (e.target.closest("input, select")) return;
