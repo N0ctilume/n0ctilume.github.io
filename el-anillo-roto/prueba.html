@@ -44,13 +44,13 @@
       position: fixed;
       inset: 0;
       background: url("noctilume.png") center center / cover no-repeat;
-      opacity: .025;
+      opacity: .035;
       pointer-events: none;
       z-index: 0;
     }
 
     body.oscuro::before { opacity: .012; }
-    body.sepia::before { opacity: .018; }
+    body.sepia::before { opacity: .025; }
 
     .barra-progreso {
       position: fixed;
@@ -420,7 +420,7 @@
             <p class="descripcion-seccion">Comparte tus impresiones, responde a otros lectores y reacciona con emojis.</p>
             <div id="giscus-container">
               <div class="comentarios-ayuda" id="avisoGiscus">
-                Para activar los comentarios, completa los datos de configuración de Giscus en el código, indicados más abajo.
+                Los comentarios se están cargando. Si no aparecen, comprueba que Discussions esté activado en GitHub y que Giscus tenga acceso al repositorio.
               </div>
             </div>
           </section>
@@ -572,10 +572,10 @@
     function iniciarGiscus() {
       const config = GISCUS_CONFIG;
       const faltanDatos =
-        !config.repo || !config.repoId || !config.category || !config.categoryId ||
-        config.repo.includes("TU_USUARIO") ||
-        config.repoId.includes("PEGA_AQUI") ||
-        config.categoryId.includes("PEGA_AQUI");
+        !config.repo ||
+        !config.repoId ||
+        !config.category ||
+        !config.categoryId;
 
       if (faltanDatos) return;
 
@@ -678,11 +678,8 @@
     }
 
     /* ==========================================================
-       MEDIDAS PARA DIFICULTAR LA COPIA CASUAL
-       El clic izquierdo se bloquea sobre el texto de lectura;
-       enlaces, controles y el bloque de Ko-fi siguen funcionando.
-       Los atajos se interceptan en los navegadores que permiten
-       que una página web capture esos eventos.
+       PROTECCIONES QUE YA TENÍAS
+       Los controles del formulario siguen siendo utilizables.
        ========================================================== */
     document.addEventListener("contextmenu", e => {
       if (e.target.closest("input, select")) return;
