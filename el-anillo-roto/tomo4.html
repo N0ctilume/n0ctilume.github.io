@@ -5,197 +5,472 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomo 4</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+/* =====================================
+   CONFIGURACIÓN GENERAL
+===================================== */
 
-* { box-sizing: border-box; }
+:root {
+    --fondo: #f8f6f1;
+    --texto: #302e2a;
+    --secundario: #777168;
+    --control: #efede7;
+    --borde: #ded9ce;
+    --acento: #9b8465;
+    --marca: 0.055;
+    --interlineado: 1.9;
+}
 
-html { scroll-behavior: smooth; }
-	
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    background: #f7f4ee;
-    color: #252525;
-    font-family: "Lora", Georgia, "Times New Roman", serif;
-    line-height: 1.85;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Lora", Georgia, serif;
     transition: background .3s, color .3s;
-}
-.subtitulo {
-    margin-top: 8px;
-    font-family: "Lora", Georgia, "Times New Roman", serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #080808;
-    letter-spacing: 0.5px;
+    min-height: 100vh;
 }
 
-body.oscuro .subtitulo {
-    color: #aaaaaa;
-}
-    
+/* =====================================
+   LOGO DE FONDO
+===================================== */
+
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100%;
     background-image: url("noctilume.png");
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.01;
+    background-size: min(1400px, 85vw);
+    opacity: var(--marca);
     pointer-events: none;
     z-index: 0;
 }
 
+/* =====================================
+   TEMAS
+===================================== */
+
+body.sepia {
+    --fondo: #eee4d2;
+    --texto: #4b3d2d;
+    --secundario: #796b59;
+    --control: #e5d8c1;
+    --borde: #d1c1a6;
+    --acento: #947653;
+    --marca: 0.055;
+}
+
+body.oscuro {
+    --fondo: #1c1c1c;
+    --texto: #dedbd5;
+    --secundario: #aaa49a;
+    --control: #292929;
+    --borde: #414141;
+    --acento: #c0a47c;
+    --marca: 0.035;
+}
+
+/* =====================================
+   BARRA DE PROGRESO
+===================================== */
+
+#barra-progreso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--acento);
+    z-index: 20000;
+    transition: width .1s linear;
+}
+
+/* =====================================
+   CONTENEDOR DE LECTURA
+===================================== */
+
 .contenedor {
     position: relative;
     z-index: 1;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 50px 25px 100px;
+    max-width: 800px;
+    margin: auto;
+    padding: 65px 25px 70px;
 }
 
-.encabezado {
+/* =====================================
+   TÍTULO Y SUBTÍTULO
+===================================== */
+
+.encabezado-tomo {
     text-align: center;
-    margin-bottom: 45px;
+    margin-bottom: 55px;
 }
 
-h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 30px;
-    font-weight: normal;
+.encabezado-tomo h2 {
+    font-size: 27px;
+    font-weight: 400;
     letter-spacing: 1px;
     margin: 0;
 }
 
+.subtitulo {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--secundario);
+    letter-spacing: .4px;
+    margin: 10px 0 0;
+}
+
+/* =====================================
+   ESTILO EDITORIAL DE NOVELA
+===================================== */
+
 .contenido {
     font-size: 18px;
-    line-height: 1.85;
+    line-height: var(--interlineado);
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    font-weight: 400;
+    letter-spacing: 0;
 }
+
+/* PÁRRAFOS CON SANGRÍA */
 
 .contenido p {
-    margin: 0 0 1.3em;
-    text-align: justify;
-    text-indent: 2em;
+    text-indent: 1.5em;
+    margin: 0 0 17px;
+    line-height: var(--interlineado);
+}
+/* SANGRÍA EN TODOS LOS PÁRRAFOS */
+
+.contenido p {
+    text-indent: 1.5em !important;
+    margin: 0 0 18px;
+    line-height: var(--interlineado);
 }
 
-.separador {
+/* DESPUÉS DE UN SEPARADOR */
+
+.contenido .separador + p {
+    text-indent: 0;
+}
+
+/* TÍTULOS */
+
+.contenido h3 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 40px 0 25px;
+    text-indent: 0;
+}
+
+/* SEPARADORES DE ESCENA */
+
+.contenido .separador {
     text-align: center;
     text-indent: 0;
-    margin: 0 0 1.8em;
-    font-size: 18px;
-    line-height: 1.4;
+    color: var(--secundario);
+    margin: 30px 0;
+    letter-spacing: 1px;
 }
 
-#acceso-denegado {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f7f4ee;
-    color: #252525;
-    font-family: Georgia, serif;
-    text-align: center;
-    padding: 30px;
+/* LECTURA EN MÓVILES */
+
+@media (max-width: 600px) {
+    .contenido {
+        text-align: justify;
+        font-size: 18px;
+    }
 }
 
-#acceso-denegado div {
-    max-width: 500px;
-}
+/* =====================================
+   MENÚ FLOTANTE
+===================================== */
 
-.controles {
+.boton-flotante {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1000;
+    right: 22px;
+    bottom: 22px;
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    background: var(--acento);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10002;
+    box-shadow: 0 3px 12px #0002;
     display: flex;
-    gap: 6px;
-    background: rgba(255,255,255,.92);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.10);
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s, opacity .2s;
 }
 
-.control {
-    height: 36px;
-    min-width: 40px;
-    padding: 0 8px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background: white;
-    color: #333;
+.boton-flotante:hover {
+    transform: scale(1.05);
+}
+
+.panel-flotante {
+    position: fixed;
+    right: 22px;
+    bottom: 85px;
+    width: 270px;
+    max-width: calc(100vw - 35px);
+    padding: 18px;
+    background: var(--fondo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    box-shadow: 0 5px 25px #0002;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.panel-flotante.oculto {
+    display: none;
+}
+
+.panel-titulo {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: .5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.grupo-control {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.etiqueta-control {
+    font-size: 11px;
+    color: var(--secundario);
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.fila-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.panel-flotante button,
+.panel-flotante select {
+    background: var(--control);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    padding: 9px 10px;
+    font-family: inherit;
+    font-size: 12px;
     cursor: pointer;
+}
+
+.panel-flotante button:hover,
+.panel-flotante select:hover {
+    border-color: var(--acento);
+}
+
+.panel-flotante select {
+    width: 100%;
+}
+
+.panel-flotante .boton-ancho {
+    flex: 1;
+}
+
+/* =====================================
+   NAVEGACIÓN
+===================================== */
+
+.navegacion {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 45px 0;
+}
+
+.navegacion button {
+    background: var(--control);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    padding: 10px 16px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* =====================================
+   DONACIONES KO-FI
+===================================== */
+
+.donacion {
+    text-align: center;
+    margin: 100px 0 65px;
+    color: var(--secundario);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.donacion p {
+    margin: 8px 0;
+}
+
+.kofi {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 11px 25px;
+    background: #ff5e5b;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
     font-family: Arial, sans-serif;
     font-size: 14px;
+    font-weight: bold;
+    transition: opacity .2s;
 }
 
-.control:hover {
-    background: #eeeeee;
+.kofi:hover {
+    opacity: .85;
 }
 
-#fuente {
-    height: 36px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    padding: 0 8px;
-    background: white;
-    color: #333;
-    font-size: 13px;
-    cursor: pointer;
+/* =====================================
+   COMENTARIOS
+===================================== */
+
+.comentarios {
+    margin-top: 65px;
+    padding-top: 30px;
+    border-top: 1px solid var(--borde);
 }
 
-body.oscuro {
-    background: #181818;
-    color: #dddddd;
+.comentarios h3 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 21px;
+    margin: 0 0 30px;
 }
 
-body.oscuro .controles {
-    background: rgba(35,35,35,.95);
-    border-color: #555;
+/* =====================================
+   MODO CONCENTRACIÓN
+===================================== */
 
+body.concentracion .donacion,
+body.concentracion .comentarios,
+body.concentracion .navegacion {
+    display: none;
 }
-	
-	{
-body.oscuro .control,
-body.oscuro #fuente {
-    background: #303030;
-    color: #eeeeee;
-    border-color: #555;
+
+body.concentracion .contenedor {
+    max-width: 760px;
+    padding-top: 65px;
 }
+
+body.concentracion .contenido {
+    line-height: var(--interlineado);
+}
+
+body.concentracion .encabezado-tomo {
+    margin-bottom: 45px;
+}
+
+/* =====================================
+   PANTALLAS PEQUEÑAS
+===================================== */
 
 @media (max-width: 600px) {
     .contenedor {
-        padding: 30px 18px 100px;
+        padding: 45px 19px 50px;
     }
 
-    h1 {
-        font-size: 26px;
+    body::before {
+        background-size: 85vw;
+    }
+
+    .encabezado-tomo {
+        margin-bottom: 40px;
+    }
+
+    .encabezado-tomo h2 {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 15px;
     }
 
     .contenido {
-        font-size: 17px;
-        line-height: 1.78;
+        font-size: 18px;
+        text-align: left;
     }
 
-    .separador {
-        font-size: 16px;
+    .panel-flotante {
+        right: 14px;
+        bottom: 80px;
     }
 
-    .controles {
-        right: 10px;
-        bottom: 10px;
-        max-width: calc(100% - 20px);
-        overflow-x: auto;
+    .boton-flotante {
+        right: 15px;
+        bottom: 15px;
     }
 }
-</style>
-<style>
+
+/* =====================================
+   IMPRESIÓN
+===================================== */
+
+@media print {
+    body {
+        display: none !important;
+    }
+}
+
+/* =====================================
+   PROTECCIÓN DEL CONTENIDO
+===================================== */
+
+/* Impedir selección de texto */
+
+#contenido,
+#contenido * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
+/* Impedir arrastrar elementos */
+
+#contenido img,
+#contenido * {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+}
+
+/* Ocultar todo al imprimir */
+
 @media print {
     html,
     body,
@@ -203,58 +478,60 @@ body.oscuro #fuente {
         display: none !important;
         visibility: hidden !important;
     }
+
+    body::before {
+        display: none !important;
+    }
 }
+
 </style>
-
-<script>
-window.addEventListener("beforeprint", function () {
-    document.body.style.display = "none";
-});
-
-window.addEventListener("afterprint", function () {
-    document.body.style.display = "";
-});
-
-window.print = function () {
-    return false;
-};
-</script>
 </head>
 
 <body>
 
-<div id="app"></div>
+<div id="barra-progreso"></div>
 
-<script>
+<!-- ==================================
+     PANTALLA DE ACCESO
+================================== -->
 
-const TOKEN_CORRECTO = "rnoÑX9v6C1";
+<div id="pantalla-acceso" style="
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    position:relative;
+    z-index:1;
+">
+    <div>
+        <h2 style="font-weight:400;">Acceso restringido</h2>
+        <p>Esta lectura requiere una clave de acceso.</p>
+        <p id="mensaje-acceso">Verificando acceso...</p>
+    </div>
+</div>
 
-const parametros = new URLSearchParams(window.location.search);
-const token = parametros.get("access");
+<!-- ==================================
+     LECTOR
+================================== -->
 
-if (token !== TOKEN_CORRECTO) {
+<div id="lector" style="display:none;">
 
-    document.getElementById("app").innerHTML = `
-        <div id="acceso-denegado">
-            <div>
-                <h1>Acceso denegado</h1>
-                <p>Agrega la clave de acceso luego de “=” en el link para ver.</p>
-            </div>
-        </div>
-    `;
+    <div class="contenedor">
 
-} else {
+        <!-- TÍTULO Y SUBTÍTULO -->
 
-    document.getElementById("app").innerHTML = `
+        <header class="encabezado-tomo">
+            <h2>Tomo 4</h2>
+            <p class="subtitulo">Nada sale según lo planeado</p>
+        </header>
 
-        <main class="contenedor">
+        <!-- ==================================
+             TEXTO DE LA NOVELA
+        ================================== -->
 
-            <header class="encabezado">
-                <h1>Tomo 4</h1>
-                <div class="subtitulo">Nada sale según lo planeado</div>
-            </header>
-
-            <article class="contenido" id="contenido">
+        <main id="contenido" class="contenido">
 
 <div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
 
@@ -1622,174 +1899,459 @@ if (token !== TOKEN_CORRECTO) {
 
 <p>La retorcida satisfacción que una vez lo había embriagado se hizo añicos bajo sus pies.</p>
 
-<div style="text-align:center; margin:200px 0 60px;">
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¿Estás disfrutando de El anillo roto: pase lo que pase este matrimonio se irá a pique? 💍💔
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 25px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Gracias por ya formar parte de esta historia. ❤️
-  </p>
-
-  <a href="https://ko-fi.com/n0ctilume"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="
-       display:inline-block;
-       padding:11px 25px;
-       border:1px solid #777777;
-       border-radius:5px;
-       background:transparent;
-       color:#777777;
-       text-decoration:none;
-       font-family:'Lora', Georgia, 'Times New Roman', serif;
-       font-size:16px;
-       font-style:italic;
-     ">
-    ☕ Comprar un cafecito ❤️
-  </a>
-
-</div> 
-			</article>
-
         </main>
 
-        <div class="controles">
+        <!-- NAVEGACIÓN -->
 
-            <select id="fuente" onchange="cambiarFuente(this.value)">
-                <option value="Lora">Lora</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Arial">Arial</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-            </select>
-
-            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
-
-            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
-
-            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
-
+        <div class="navegacion">
+            <button onclick="irPrincipio()">↑ Principio</button>
+            <button onclick="irFinal()">↓ Final</button>
         </div>
-    `;
+
+        <!-- ==================================
+             DONACIONES
+        ================================== -->
+
+        <section class="donacion">
+
+            <p>
+                ¿Estás disfrutando de
+                <em>El anillo roto: pase lo que pase este matrimonio se irá a pique</em>?
+                💍💔
+            </p>
+
+            <p>
+                ¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️
+            </p>
+
+            <p>
+                Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨
+            </p>
+
+            <p>
+                Gracias por ya formar parte de esta historia. ❤️
+            </p>
+
+            <a class="kofi"
+               href="https://ko-fi.com/n0ctilume"
+               target="_blank"
+               rel="noopener noreferrer">
+                ☕ Invítame un café
+            </a>
+
+        </section>
+
+        <!-- ==================================
+             COMENTARIOS DISQUS
+        ================================== -->
+
+        <section class="comentarios">
+            <h3>Comentarios</h3>
+            <div id="disqus_thread"></div>
+        </section>
+
+    </div>
+</div>
+
+<!-- ==================================
+     BOTÓN FLOTANTE
+================================== -->
+
+<button
+    class="boton-flotante"
+    id="boton-menu"
+    onclick="alternarMenu()"
+    aria-label="Abrir controles de lectura"
+    aria-expanded="false">
+    ☰
+</button>
+
+<!-- ==================================
+     PANEL DE CONTROLES
+================================== -->
+
+<div class="panel-flotante oculto" id="panel-controles">
+
+    <div class="panel-titulo">
+        Controles de lectura
+    </div>
+
+    <div class="grupo-control">
+        <span class="etiqueta-control">Apariencia</span>
+        <select id="tema" onchange="cambiarTema(this.value)">
+            <option value="claro">Modo claro</option>
+            <option value="sepia">Modo sepia</option>
+            <option value="oscuro">Modo oscuro</option>
+        </select>
+    </div>
+
+    <div class="grupo-control">
+        <span class="etiqueta-control">Tipografía</span>
+        <select id="fuente" onchange="cambiarFuente(this.value)">
+            <option value="Lora">Lora</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Arial">Arial</option>
+        </select>
+    </div>
+
+    <div class="grupo-control">
+        <span class="etiqueta-control">Tamaño de letra</span>
+        <div class="fila-control">
+            <button class="boton-ancho" onclick="cambiarTamano(-1)">A−</button>
+            <button class="boton-ancho" onclick="cambiarTamano(1)">A+</button>
+        </div>
+    </div>
+
+    <div class="grupo-control">
+        <span class="etiqueta-control">Interlineado</span>
+        <select id="interlineado" onchange="cambiarInterlineado(this.value)">
+            <option value="1.5">Compacto</option>
+            <option value="1.7">Reducido</option>
+            <option value="1.9" selected>Normal</option>
+            <option value="2.1">Amplio</option>
+            <option value="2.3">Muy amplio</option>
+        </select>
+    </div>
+
+    <div class="grupo-control">
+        <span class="etiqueta-control">Navegación</span>
+        <div class="fila-control">
+            <button class="boton-ancho" onclick="irPrincipio()">↑ Principio</button>
+            <button class="boton-ancho" onclick="irFinal()">↓ Final</button>
+        </div>
+    </div>
+
+    <div class="grupo-control">
+        <button onclick="alternarConcentracion()" style="width:100%;">
+            ◉ Modo concentración
+        </button>
+    </div>
+
+</div>
+
+<script>
+/* =====================================
+   ACCESO
+===================================== */
+
+const CLAVE_ACCESO = "rnoC391X9v6C1";
+
+const parametros = new URLSearchParams(window.location.search);
+const claveRecibida = parametros.get("access");
+
+const pantallaAcceso = document.getElementById("pantalla-acceso");
+const lector = document.getElementById("lector");
+
+const accesoCorrecto = claveRecibida === CLAVE_ACCESO;
+
+if (accesoCorrecto) {
+    pantallaAcceso.style.display = "none";
+    lector.style.display = "block";
+} else {
+    pantallaAcceso.style.display = "flex";
+    document.getElementById("mensaje-acceso").textContent =
+        "Acceso denegado. La clave no es válida.";
+
+    document.getElementById("boton-menu").style.display = "none";
 }
 
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
+/* =====================================
+   IDENTIFICADOR DE LA LECTURA
+===================================== */
 
-document.addEventListener("keydown", function(e) {
-    if (
-        (e.ctrlKey || e.metaKey) &&
-        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
-    ) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-});
+/* CAMBIA ESTE IDENTIFICADOR EN CADA CAPÍTULO */
+
+const ID_LECTURA = "tomo-4";
+
+const CLAVE_SCROLL = "posicion_" + ID_LECTURA;
+
+/* =====================================
+   PREFERENCIAS DE LECTURA
+===================================== */
 
 let tamano = 18;
 
-function cambiarFuente(fuente) {
-    const contenido = document.getElementById("contenido");
-    if (!contenido) return;
+function cambiarTema(tema) {
+    document.body.classList.remove("sepia", "oscuro");
 
-    contenido.style.fontFamily = '"' + fuente + '", serif';
-    localStorage.setItem("fuenteLectura", fuente);
+    if (tema !== "claro") {
+        document.body.classList.add(tema);
+    }
+
+    localStorage.setItem("tema_lectura", tema);
+}
+
+function cambiarFuente(fuente) {
+    document.getElementById("contenido").style.fontFamily =
+        '"' + fuente + '", Georgia, serif';
+
+    localStorage.setItem("fuente_lectura", fuente);
 }
 
 function cambiarTamano(valor) {
-    const contenido = document.getElementById("contenido");
-    if (!contenido) return;
-
     tamano += valor;
 
     if (tamano < 14) tamano = 14;
-    if (tamano > 26) tamano = 26;
+    if (tamano > 28) tamano = 28;
 
-    contenido.style.fontSize = tamano + "px";
-    localStorage.setItem("tamanoLectura", tamano);
+    document.getElementById("contenido").style.fontSize =
+        tamano + "px";
+
+    localStorage.setItem("tamano_lectura", tamano);
 }
 
-function modoOscuro() {
-    document.body.classList.toggle("oscuro");
-
-    localStorage.setItem(
-        "modoLectura",
-        document.body.classList.contains("oscuro")
-            ? "oscuro"
-            : "claro"
+function cambiarInterlineado(valor) {
+    document.documentElement.style.setProperty(
+        "--interlineado",
+        valor
     );
+
+    localStorage.setItem("interlineado_lectura", valor);
 }
 
-window.addEventListener("DOMContentLoaded", function() {
+/* =====================================
+   RESTAURAR PREFERENCIAS
+===================================== */
 
-    const contenido = document.getElementById("contenido");
-    const fuente = document.getElementById("fuente");
+const temaGuardado =
+    localStorage.getItem("tema_lectura") || "claro";
 
-    if (!contenido || !fuente) return;
+const fuenteGuardada =
+    localStorage.getItem("fuente_lectura") || "Lora";
 
-    const fuenteGuardada = localStorage.getItem("fuenteLectura");
-    const tamanoGuardado = localStorage.getItem("tamanoLectura");
-    const modoGuardado = localStorage.getItem("modoLectura");
+const tamanoGuardado =
+    Number(localStorage.getItem("tamano_lectura")) || 18;
 
-    if (fuenteGuardada) {
-        fuente.value = fuenteGuardada;
-        cambiarFuente(fuenteGuardada);
+const interlineadoGuardado =
+    localStorage.getItem("interlineado_lectura") || "1.9";
+
+tamano = tamanoGuardado;
+
+document.getElementById("tema").value = temaGuardado;
+document.getElementById("fuente").value = fuenteGuardada;
+document.getElementById("interlineado").value = interlineadoGuardado;
+
+cambiarTema(temaGuardado);
+cambiarFuente(fuenteGuardada);
+cambiarInterlineado(interlineadoGuardado);
+
+document.getElementById("contenido").style.fontSize =
+    tamano + "px";
+
+/* =====================================
+   MENÚ FLOTANTE
+===================================== */
+
+function alternarMenu() {
+    const panel = document.getElementById("panel-controles");
+    const boton = document.getElementById("boton-menu");
+
+    panel.classList.toggle("oculto");
+
+    const abierto = !panel.classList.contains("oculto");
+
+    boton.textContent = abierto ? "×" : "☰";
+    boton.setAttribute("aria-expanded", abierto);
+}
+
+/* =====================================
+   BARRA DE PROGRESO
+===================================== */
+
+function actualizarProgreso() {
+    const altoDocumento =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const progreso = altoDocumento > 0
+        ? (window.scrollY / altoDocumento) * 100
+        : 0;
+
+    document.getElementById("barra-progreso").style.width =
+        progreso + "%";
+}
+
+window.addEventListener("scroll", actualizarProgreso);
+window.addEventListener("resize", actualizarProgreso);
+
+/* =====================================
+   GUARDADO AUTOMÁTICO
+===================================== */
+
+let restaurando = true;
+
+window.addEventListener("load", function() {
+    if (!accesoCorrecto) return;
+
+    const posicionGuardada = localStorage.getItem(CLAVE_SCROLL);
+
+    if (posicionGuardada !== null) {
+        window.scrollTo(0, Number(posicionGuardada));
     }
 
-    if (tamanoGuardado) {
-        tamano = parseInt(tamanoGuardado);
-        contenido.style.fontSize = tamano + "px";
+    actualizarProgreso();
+
+    setTimeout(function() {
+        restaurando = false;
+    }, 1200);
+});
+
+window.addEventListener("scroll", function() {
+    if (!accesoCorrecto || restaurando) return;
+
+    localStorage.setItem(CLAVE_SCROLL, window.scrollY);
+});
+
+/* =====================================
+   NAVEGACIÓN
+===================================== */
+
+function irPrincipio() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function irFinal() {
+    window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+/* =====================================
+   MODO CONCENTRACIÓN
+===================================== */
+
+function alternarConcentracion() {
+    document.body.classList.toggle("concentracion");
+
+    const activo =
+        document.body.classList.contains("concentracion");
+
+    const boton = document.querySelector(
+        '#panel-controles button[onclick="alternarConcentracion()"]'
+    );
+
+    if (boton) {
+        boton.textContent = activo
+            ? "✕ Salir del modo concentración"
+            : "◉ Modo concentración";
+    }
+}
+
+/* =====================================
+   DISQUS
+===================================== */
+
+if (accesoCorrecto) {
+
+    var disqus_config = function () {
+        this.page.url = "https://n0ctilume.github.io/el-anillo-roto/tomo4.html?access=rnoC391X9v6C1";
+        this.page.identifier = "tomo-4";
+    };
+
+    (function() {
+        var d = document;
+        var s = d.createElement("script");
+
+        s.src = "https://noctilume.disqus.com/embed.js";
+        s.setAttribute("data-timestamp", +new Date());
+
+        (d.head || d.body).appendChild(s);
+    })();
+
+}
+
+/* =====================================
+   BLOQUEO DE COPIA Y ACCIONES
+===================================== */
+
+// Bloquear clic derecho y menú contextual.
+document.addEventListener("contextmenu", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear selección de texto.
+document.addEventListener("selectstart", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear copiar texto de la novela.
+document.addEventListener("copy", function(e) {
+    const seleccion = window.getSelection();
+    const nodo = seleccion && seleccion.anchorNode;
+    const elemento = nodo && (
+        nodo.nodeType === 1 ? nodo : nodo.parentElement
+    );
+
+    if (elemento && elemento.closest &&
+        elemento.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear cortar texto.
+document.addEventListener("cut", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear arrastrar texto e imágenes.
+document.addEventListener("dragstart", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear atajos habituales.
+document.addEventListener("keydown", function(e) {
+
+    const tecla = e.key.toLowerCase();
+    const modificador = e.ctrlKey || e.metaKey;
+
+    // Copiar, cortar, seleccionar todo, imprimir, guardar y ver código fuente.
+    if (modificador &&
+        ["c", "x", "a", "p", "s", "u"].includes(tecla)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
     }
 
-    if (modoGuardado === "oscuro") {
-        document.body.classList.add("oscuro");
+    // Herramientas de desarrollador y menú contextual.
+    if (
+        e.key === "F12" ||
+        (modificador && e.shiftKey &&
+        ["i", "j", "c"].includes(tecla)) ||
+        e.key === "ContextMenu" ||
+        (e.shiftKey && e.key === "F10")
+    ) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
     }
+
+}, true);
+
+// Ocultar el contenido cuando se inicia la impresión.
+window.addEventListener("beforeprint", function() {
+    document.body.style.visibility = "hidden";
+});
+
+window.addEventListener("afterprint", function() {
+    document.body.style.visibility = "";
 });
 
 </script>
