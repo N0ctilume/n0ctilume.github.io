@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -133,6 +132,7 @@ body.oscuro {
     letter-spacing: .4px;
     margin: 10px 0 0;
 }
+
 /* =====================================
    ESTILO EDITORIAL DE NOVELA
 ===================================== */
@@ -152,7 +152,7 @@ body.oscuro {
 
 .contenido p {
     text-indent: 1.5em;
-    margin: 0 0 18px;
+    margin: 0 0 17px;
     line-height: var(--interlineado);
 }
 
@@ -444,6 +444,45 @@ body.concentracion .encabezado-tomo {
         display: none !important;
     }
 }
+
+/* =====================================
+   PROTECCIÓN DEL CONTENIDO
+===================================== */
+
+/* Impedir selección de texto */
+
+#contenido,
+#contenido * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
+/* Impedir arrastrar elementos */
+
+#contenido img,
+#contenido * {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+}
+
+/* Ocultar todo al imprimir */
+
+@media print {
+    html,
+    body,
+    body * {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    body::before {
+        display: none !important;
+    }
+}
+
 </style>
 </head>
 
@@ -3354,6 +3393,96 @@ if (accesoCorrecto) {
     })();
 
 }
+
+/* =====================================
+   BLOQUEO DE COPIA Y ACCIONES
+===================================== */
+
+// Bloquear clic derecho y menú contextual.
+document.addEventListener("contextmenu", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear selección de texto.
+document.addEventListener("selectstart", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear copiar texto de la novela.
+document.addEventListener("copy", function(e) {
+    const seleccion = window.getSelection();
+    const nodo = seleccion && seleccion.anchorNode;
+    const elemento = nodo && (
+        nodo.nodeType === 1 ? nodo : nodo.parentElement
+    );
+
+    if (elemento && elemento.closest &&
+        elemento.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear cortar texto.
+document.addEventListener("cut", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear arrastrar texto e imágenes.
+document.addEventListener("dragstart", function(e) {
+    if (e.target.closest && e.target.closest("#contenido")) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+
+// Bloquear atajos habituales.
+document.addEventListener("keydown", function(e) {
+
+    const tecla = e.key.toLowerCase();
+    const modificador = e.ctrlKey || e.metaKey;
+
+    // Copiar, cortar, seleccionar todo, imprimir, guardar y ver código fuente.
+    if (modificador &&
+        ["c", "x", "a", "p", "s", "u"].includes(tecla)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
+    }
+
+    // Herramientas de desarrollador y menú contextual.
+    if (
+        e.key === "F12" ||
+        (modificador && e.shiftKey &&
+        ["i", "j", "c"].includes(tecla)) ||
+        e.key === "ContextMenu" ||
+        (e.shiftKey && e.key === "F10")
+    ) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
+    }
+
+}, true);
+
+// Ocultar el contenido cuando se inicia la impresión.
+window.addEventListener("beforeprint", function() {
+    document.body.style.visibility = "hidden";
+});
+
+window.addEventListener("afterprint", function() {
+    document.body.style.visibility = "";
+});
+
 </script>
 
 </body>
