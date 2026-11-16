@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,259 +6,290 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tomo 1</title>
 
+<!-- FUENTES -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+    --fondo: #f7f4ee;
+    --texto: #252525;
+    --control: #e8e2d8;
+    --borde: #d5cec2;
+    --marca: 0.035;
+}
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
-	
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    background: #f7f4ee;
-    color: #252525;
-    font-family: "Lora", Georgia, "Times New Roman", serif;
-    line-height: 1.85;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Lora", Georgia, serif;
     transition: background .3s, color .3s;
 }
-.subtitulo {
-    margin-top: 8px;
-    font-family: "Lora", Georgia, "Times New Roman", serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #080808;
-    letter-spacing: 0.5px;
-}
 
-body.oscuro .subtitulo {
-    color: #aaaaaa;
-}
-    
+/* MARCA DE AGUA */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100%;
     background-image: url("noctilume.png");
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.01;
+    background-size: 420px;
+    opacity: var(--marca);
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
 }
 
+/* TEMAS */
+body.sepia {
+    --fondo: #eee2cc;
+    --texto: #493b2b;
+    --control: #dfd0b7;
+    --borde: #c7b596;
+    --marca: 0.035;
+}
+
+body.oscuro {
+    --fondo: #191919;
+    --texto: #dedbd5;
+    --control: #292929;
+    --borde: #444;
+    --marca: 0.025;
+}
+
+/* BARRA DE PROGRESO */
+#barra-progreso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: #a58b65;
+    z-index: 9999;
+}
+
+/* CONTENEDOR */
 .contenedor {
-    position: relative;
-    z-index: 1;
     max-width: 820px;
-    margin: 0 auto;
-    padding: 50px 25px 100px;
+    margin: auto;
+    padding: 35px 22px 60px;
 }
 
-.encabezado {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 30px;
-    font-weight: normal;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-.contenido {
-    font-size: 18px;
-    line-height: 1.85;
-}
-
-.contenido p {
-    margin: 0 0 1.3em;
-    text-align: justify;
-    text-indent: 2em;
-}
-
-.separador {
-    text-align: center;
-    text-indent: 0;
-    margin: 0 0 1.8em;
-    font-size: 18px;
-    line-height: 1.4;
-}
-
-#acceso-denegado {
-    min-height: 100vh;
+/* CONTROLES */
+.controles {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background: #f7f4ee;
-    color: #252525;
-    font-family: Georgia, serif;
-    text-align: center;
-    padding: 30px;
+    gap: 9px;
+    margin-bottom: 35px;
 }
 
-#acceso-denegado div {
-    max-width: 500px;
-}
-
-.controles {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1000;
-    display: flex;
-    gap: 6px;
-    background: rgba(255,255,255,.92);
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.10);
-}
-
-.control {
-    height: 36px;
-    min-width: 40px;
-    padding: 0 8px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background: white;
-    color: #333;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-}
-
-.control:hover {
-    background: #eeeeee;
-}
-
-#fuente {
-    height: 36px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    padding: 0 8px;
-    background: white;
-    color: #333;
+button, select {
+    background: var(--control);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: inherit;
     font-size: 13px;
     cursor: pointer;
 }
 
-body.oscuro {
-    background: #181818;
-    color: #dddddd;
+button:hover, select:hover {
+    opacity: .8;
 }
 
-body.oscuro .controles {
-    background: rgba(35,35,35,.95);
-    border-color: #555;
-
-}
-	
-	{
-body.oscuro .control,
-body.oscuro #fuente {
-    background: #303030;
-    color: #eeeeee;
-    border-color: #555;
+/* CONTENIDO */
+.contenido {
+    font-size: 18px;
+    line-height: 1.9;
+    text-align: justify;
+    overflow-wrap: break-word;
 }
 
+.contenido p {
+    margin: 0 0 18px;
+}
+
+.separador {
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* BOTONES DE NAVEGACIÓN */
+.navegacion {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 35px 0;
+}
+
+/* DONACIONES */
+.donacion {
+    text-align: center;
+    margin: 100px 0 55px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--texto);
+}
+
+.donacion p {
+    margin: 8px 0;
+}
+
+.kofi {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 22px;
+    background: #ff5e5b;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* COMENTARIOS */
+.comentarios {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid var(--borde);
+}
+
+.comentarios h3 {
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 25px;
+}
+
+/* BOTÓN CONCENTRACIÓN */
+#boton-concentracion {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000;
+    border-radius: 50px;
+    box-shadow: 0 2px 8px #0002;
+}
+
+/* MODO CONCENTRACIÓN */
+body.concentracion .controles,
+body.concentracion .donacion,
+body.concentracion .comentarios,
+body.concentracion .navegacion {
+    display: none;
+}
+
+body.concentracion .contenedor {
+    max-width: 760px;
+    padding-top: 55px;
+}
+
+body.concentracion .contenido {
+    line-height: 2;
+}
+
+/* PANTALLAS PEQUEÑAS */
 @media (max-width: 600px) {
     .contenedor {
-        padding: 30px 18px 100px;
-    }
-
-    h1 {
-        font-size: 26px;
+        padding: 25px 17px 45px;
     }
 
     .contenido {
-        font-size: 17px;
-        line-height: 1.78;
-    }
-
-    .separador {
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 1.85;
     }
 
     .controles {
-        right: 10px;
-        bottom: 10px;
-        max-width: calc(100% - 20px);
-        overflow-x: auto;
+        gap: 7px;
+    }
+
+    button, select {
+        padding: 8px 9px;
+        font-size: 12px;
     }
 }
-</style>
-<style>
+
+/* IMPRESIÓN */
 @media print {
-    html,
-    body,
-    body * {
+    body {
         display: none !important;
-        visibility: hidden !important;
     }
 }
 </style>
-
-<script>
-window.addEventListener("beforeprint", function () {
-    document.body.style.display = "none";
-});
-
-window.addEventListener("afterprint", function () {
-    document.body.style.display = "";
-});
-
-window.print = function () {
-    return false;
-};
-</script>
 </head>
 
 <body>
 
-<div id="app"></div>
+<div id="barra-progreso"></div>
 
-<script>
+<!-- PANTALLA DE ACCESO -->
+<div id="pantalla-acceso" style="
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+">
+    <div>
+        <h2>Acceso restringido</h2>
+        <p>Esta lectura requiere una clave de acceso.</p>
+        <p id="mensaje-acceso">Verificando acceso...</p>
+    </div>
+</div>
 
-const TOKEN_CORRECTO = "M1kPg95fbi";
+<!-- LECTOR -->
+<div id="lector" style="display:none;">
 
-const parametros = new URLSearchParams(window.location.search);
-const token = parametros.get("access");
+    <div class="contenedor">
 
-if (token !== TOKEN_CORRECTO) {
+        <!-- CONTROLES -->
+        <div class="controles">
 
-    document.getElementById("app").innerHTML = `
-        <div id="acceso-denegado">
-            <div>
-                <h1>Acceso denegado</h1>
-                <p>Agrega la clave de acceso luego de “=” en el link para ver.</p>
-            </div>
+            <select id="tema" onchange="cambiarTema(this.value)">
+                <option value="claro">Modo claro</option>
+                <option value="sepia">Modo sepia</option>
+                <option value="oscuro">Modo oscuro</option>
+            </select>
+
+            <select id="fuente" onchange="cambiarFuente(this.value)">
+                <option value="Lora">Lora</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+            </select>
+
+            <button onclick="cambiarTamano(-1)">A−</button>
+            <button onclick="cambiarTamano(1)">A+</button>
+
+            <button onclick="irPrincipio()">Principio</button>
+            <button onclick="irFinal()">Final</button>
+
         </div>
-    `;
 
-} else {
+        <!-- TEXTO DE LA NOVELA -->
+        <main id="contenido" class="contenido">
 
-    document.getElementById("app").innerHTML = `
+            <h2 style="text-align:center; font-weight:normal;">
+                Tomo 1
+            </h2>
 
-        <main class="contenedor">
+            <!-- PEGA AQUÍ EL TEXTO DE TU NOVELA -->
 
-            <header class="encabezado">
-                <h1>Tomo 1</h1>
-                <div class="subtitulo">Punto de vista de Cárcel Escalante</div>
-            </header>
+            <p>Escribe aquí el contenido del capítulo.</p>
 
-            <article class="contenido" id="contenido">
-
-
-<div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
+            <!-- EJEMPLO DE SEPARADOR -->
+            <div class="separador">━━━━━━ ◦ ❖ ◦ ━━━━━━</div>
 
 <p>Así que quizá todo estuviera mal desde el principio.
 
@@ -2753,180 +2785,235 @@ if (token !== TOKEN_CORRECTO) {
 
 <p>—Puede que sea un maldito bastardo, pero soy más fiel de lo que crees, Inés Valeztena.
 
-<div style="text-align:center; margin:200px 0 60px;">
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¿Estás disfrutando de El anillo roto: pase lo que pase este matrimonio se irá a pique? 💍💔
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    ¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 18px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨
-  </p>
-
-  <p style="
-    font-family:'Lora', Georgia, 'Times New Roman', serif;
-    font-size:16px;
-    font-style:italic;
-    color:#777777;
-    margin:0 0 25px 0;
-    line-height:1.8;
-    text-align:center;
-  ">
-    Gracias por ya formar parte de esta historia. ❤️
-  </p>
-
-  <a href="https://ko-fi.com/n0ctilume"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="
-       display:inline-block;
-       padding:11px 25px;
-       border:1px solid #777777;
-       border-radius:5px;
-       background:transparent;
-       color:#777777;
-       text-decoration:none;
-       font-family:'Lora', Georgia, 'Times New Roman', serif;
-       font-size:16px;
-       font-style:italic;
-     ">
-    ☕ Comprar un cafecito ❤️
-  </a>
-
-</div> 
-
-			
-			</article>
-
         </main>
 
-        <div class="controles">
-
-            <select id="fuente" onchange="cambiarFuente(this.value)">
-                <option value="Lora">Lora</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Arial">Arial</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-            </select>
-
-            <button class="control" onclick="cambiarTamano(-1)" title="Disminuir tamaño">A−</button>
-
-            <button class="control" onclick="cambiarTamano(1)" title="Aumentar tamaño">A+</button>
-
-            <button class="control" onclick="modoOscuro()" title="Modo oscuro">☾</button>
-
+        <!-- NAVEGACIÓN -->
+        <div class="navegacion">
+            <button onclick="irPrincipio()">↑ Ir al principio</button>
+            <button onclick="irFinal()">↓ Ir al final</button>
         </div>
-    `;
+
+        <!-- DONACIONES -->
+        <section class="donacion">
+
+            <p>¿Estás disfrutando de <em>El anillo roto: pase lo que pase este matrimonio se irá a pique</em>? 💍💔</p>
+
+            <p>¡Si es así, puedo traerte muchas historias más parecidas! 📚‼️</p>
+
+            <p>Invitándome un cafecito, puedes apoyar este y otros proyectos. ☕✨</p>
+
+            <p>Gracias por ya formar parte de esta historia. ❤️</p>
+
+            <a class="kofi"
+               href="https://ko-fi.com/n0ctilume"
+               target="_blank"
+               rel="noopener noreferrer">
+                ☕ Invítame un café
+            </a>
+
+        </section>
+
+        <!-- COMENTARIOS DISQUS -->
+        <section class="comentarios">
+            <h3>Comentarios</h3>
+
+            <div id="disqus_thread"></div>
+
+        </section>
+
+    </div>
+</div>
+
+<!-- BOTÓN DE CONCENTRACIÓN -->
+<button id="boton-concentracion" onclick="alternarConcentracion()">
+    ◉ Concentración
+</button>
+
+<script>
+/* ==================================
+   CONFIGURACIÓN DE ACCESO
+================================== */
+
+const CLAVE_ACCESO = "M1kPg95fbi";
+
+const parametros = new URLSearchParams(window.location.search);
+const claveRecibida = parametros.get("access");
+
+const pantallaAcceso = document.getElementById("pantalla-acceso");
+const lector = document.getElementById("lector");
+
+if (claveRecibida === CLAVE_ACCESO) {
+    pantallaAcceso.style.display = "none";
+    lector.style.display = "block";
+} else {
+    pantallaAcceso.style.display = "flex";
+    document.getElementById("mensaje-acceso").textContent =
+        "Acceso denegado. La clave no es válida.";
 }
 
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
+/* ==================================
+   IDENTIFICADOR DE ESTA LECTURA
+================================== */
 
-document.addEventListener("keydown", function(e) {
-    if (
-        (e.ctrlKey || e.metaKey) &&
-        ["c", "x", "s", "u", "p"].includes(e.key.toLowerCase())
-    ) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-});
+/* Cambia este identificador en cada capítulo */
+const ID_LECTURA = "tomo-1";
+
+const CLAVE_SCROLL = "posicion_" + ID_LECTURA;
+
+/* ==================================
+   TEMAS Y FUENTES
+================================== */
 
 let tamano = 18;
 
-function cambiarFuente(fuente) {
-    const contenido = document.getElementById("contenido");
-    if (!contenido) return;
+function cambiarTema(tema) {
+    document.body.classList.remove("sepia", "oscuro");
 
-    contenido.style.fontFamily = '"' + fuente + '", serif';
-    localStorage.setItem("fuenteLectura", fuente);
+    if (tema !== "claro") {
+        document.body.classList.add(tema);
+    }
+
+    localStorage.setItem("tema_lectura", tema);
+}
+
+function cambiarFuente(fuente) {
+    document.getElementById("contenido").style.fontFamily =
+        '"' + fuente + '", Georgia, serif';
+
+    localStorage.setItem("fuente_lectura", fuente);
 }
 
 function cambiarTamano(valor) {
-    const contenido = document.getElementById("contenido");
-    if (!contenido) return;
-
     tamano += valor;
 
     if (tamano < 14) tamano = 14;
     if (tamano > 26) tamano = 26;
 
-    contenido.style.fontSize = tamano + "px";
-    localStorage.setItem("tamanoLectura", tamano);
+    document.getElementById("contenido").style.fontSize =
+        tamano + "px";
+
+    localStorage.setItem("tamano_lectura", tamano);
 }
 
-function modoOscuro() {
-    document.body.classList.toggle("oscuro");
+/* RESTAURAR PREFERENCIAS */
+const temaGuardado = localStorage.getItem("tema_lectura") || "claro";
+const fuenteGuardada = localStorage.getItem("fuente_lectura") || "Lora";
+const tamanoGuardado = Number(localStorage.getItem("tamano_lectura")) || 18;
 
-    localStorage.setItem(
-        "modoLectura",
-        document.body.classList.contains("oscuro")
-            ? "oscuro"
-            : "claro"
-    );
+tamano = tamanoGuardado;
+
+document.getElementById("tema").value = temaGuardado;
+document.getElementById("fuente").value = fuenteGuardada;
+
+cambiarTema(temaGuardado);
+cambiarFuente(fuenteGuardada);
+
+document.getElementById("contenido").style.fontSize =
+    tamano + "px";
+
+/* ==================================
+   BARRA DE PROGRESO
+================================== */
+
+function actualizarProgreso() {
+    const altoDocumento =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const progreso = altoDocumento > 0
+        ? (window.scrollY / altoDocumento) * 100
+        : 0;
+
+    document.getElementById("barra-progreso").style.width =
+        progreso + "%";
 }
 
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("scroll", actualizarProgreso);
+window.addEventListener("resize", actualizarProgreso);
 
-    const contenido = document.getElementById("contenido");
-    const fuente = document.getElementById("fuente");
+/* ==================================
+   GUARDADO AUTOMÁTICO DE LECTURA
+================================== */
 
-    if (!contenido || !fuente) return;
+let restaurando = true;
 
-    const fuenteGuardada = localStorage.getItem("fuenteLectura");
-    const tamanoGuardado = localStorage.getItem("tamanoLectura");
-    const modoGuardado = localStorage.getItem("modoLectura");
+window.addEventListener("load", function() {
+    if (claveRecibida !== CLAVE_ACCESO) return;
 
-    if (fuenteGuardada) {
-        fuente.value = fuenteGuardada;
-        cambiarFuente(fuenteGuardada);
+    const posicionGuardada = localStorage.getItem(CLAVE_SCROLL);
+
+    if (posicionGuardada !== null) {
+        window.scrollTo(0, Number(posicionGuardada));
     }
 
-    if (tamanoGuardado) {
-        tamano = parseInt(tamanoGuardado);
-        contenido.style.fontSize = tamano + "px";
-    }
+    actualizarProgreso();
 
-    if (modoGuardado === "oscuro") {
-        document.body.classList.add("oscuro");
-    }
+    setTimeout(function() {
+        restaurando = false;
+    }, 1000);
 });
 
+window.addEventListener("scroll", function() {
+    if (restaurando || claveRecibida !== CLAVE_ACCESO) return;
+
+    localStorage.setItem(CLAVE_SCROLL, window.scrollY);
+});
+
+/* ==================================
+   BOTONES DE NAVEGACIÓN
+================================== */
+
+function irPrincipio() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function irFinal() {
+    window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+/* ==================================
+   MODO CONCENTRACIÓN
+================================== */
+
+function alternarConcentracion() {
+    document.body.classList.toggle("concentracion");
+
+    const activo =
+        document.body.classList.contains("concentracion");
+
+    document.getElementById("boton-concentracion").textContent =
+        activo ? "✕ Salir de concentración" : "◉ Concentración";
+}
+
+/* ==================================
+   DISQUS
+================================== */
+
+if (claveRecibida === CLAVE_ACCESO) {
+
+    var disqus_config = function () {
+        this.page.url = "https://n0ctilume.github.io/el-anillo-roto/tomo1.html?access=M1kPg95fbi";
+        this.page.identifier = "tomo-1";
+    };
+
+    (function() {
+        var d = document;
+        var s = d.createElement("script");
+
+        s.src = "https://noctilume.disqus.com/embed.js";
+        s.setAttribute("data-timestamp", +new Date());
+
+        (d.head || d.body).appendChild(s);
+    })();
+
+}
 </script>
 
 </body>
 </html>
-
